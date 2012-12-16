@@ -10,37 +10,37 @@ echo "     with kloxo-custom.repo inside '/etc/yum.repos.d'"
 
 echo "[kloxo-release-public-core]
 name=kloxo-release-public-core
-baseurl=http://raw.github.com/mustafaramadhan/kloxo/rpms/release/kloxo/noarch/
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/kloxo/noarch/
 enabled=1
 gpgcheck=0
 
 [kloxo-release-public-noarch]
 name=kloxo-release-public-noarch
-baseurl=http://raw.github.com/mustafaramadhan/kloxo/rpms/release/centos$releasever/noarch/
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos$releasever/noarch/
 enabled=1
 gpgcheck=0
 
 [kloxo-release-public-arch]
 name=kloxo-release-public-\$basearch
-baseurl=http://raw.github.com/mustafaramadhan/kloxo/rpms/release/centos$releasever/\$basearch/
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos$releasever/\$basearch/
 enabled=1
 gpgcheck=0
 
 [kloxo-testing-public-core]
 name=kloxo-testing-public-core
-baseurl=http://raw.github.com/mustafaramadhan/kloxo/rpms/testing/kloxo/noarch/
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/kloxo/noarch/
 enabled=0
 gpgcheck=0
 
 [kloxo-testing-public-noarch]
 name=kloxo-testing-public-noarch
-baseurl=http://raw.github.com/mustafaramadhan/kloxo/rpms/testing/centos$releasever/noarch/
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/centos$releasever/noarch/
 enabled=0
 gpgcheck=0
 
 [kloxo-testing-public-arch]
 name=kloxo-testing-public-\$basearch
-baseurl=http://raw.github.com/mustafaramadhan/kloxo/rpms/testing/centos$releasever/\$basearch/
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/centos$releasever/\$basearch/
 enabled=0
 gpgcheck=0
 
