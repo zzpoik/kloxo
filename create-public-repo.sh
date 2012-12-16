@@ -16,13 +16,13 @@ gpgcheck=0
 
 [kloxo-release-public-noarch]
 name=kloxo-release-public-noarch
-baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos$releasever/noarch/
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos\$releasever/noarch/
 enabled=1
 gpgcheck=0
 
 [kloxo-release-public-arch]
 name=kloxo-release-public-\$basearch
-baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos$releasever/\$basearch/
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos\$releasever/\$basearch/
 enabled=1
 gpgcheck=0
 
@@ -34,13 +34,13 @@ gpgcheck=0
 
 [kloxo-testing-public-noarch]
 name=kloxo-testing-public-noarch
-baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/centos$releasever/noarch/
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/centos\$releasever/noarch/
 enabled=0
 gpgcheck=0
 
 [kloxo-testing-public-arch]
 name=kloxo-testing-public-\$basearch
-baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/centos$releasever/\$basearch/
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/centos\$releasever/\$basearch/
 enabled=0
 gpgcheck=0
 
@@ -48,7 +48,7 @@ gpgcheck=0
 
 [kloxo-centalt]
 name=kloxo-centalt - \$basearch
-baseurl=http://centos.alt.ru/repository/centos/$releasever/\$basearch/
+baseurl=http://centos.alt.ru/repository/centos/\$releasever/\$basearch/
 enabled=1
 gpgcheck=0
 exclude=openssh*
@@ -56,17 +56,17 @@ exclude=openssh*
 # ==================================
 
 [kloxo-ius]
-name=kloxo - IUS Community Packages for Enterprise Linux $releasever - \$basearch
-baseurl=http://dl.iuscommunity.org/pub/ius/stable/Redhat/$releasever/\$basearch
-mirrorlist=http://dmirr.iuscommunity.org/mirrorlist/?repo=ius-el$releasever&arch=\$basearch
+name=kloxo - IUS Community Packages for Enterprise Linux \$releasever - \$basearch
+baseurl=http://dl.iuscommunity.org/pub/ius/stable/Redhat/\$releasever/\$basearch
+mirrorlist=http://dmirr.iuscommunity.org/mirrorlist/?repo=ius-el\$releasever&arch=\$basearch
 enabled=1
 gpgcheck=0
 
 # ==================================
 
 [kloxo-epel]
-name=kloxo - Extra Packages for Enterprise Linux $releasever - \$basearch
-baseurl=http://download.fedoraproject.org/pub/epel/$releasever/\$basearch
-mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel-$releasever&arch=\$basearch
+name=kloxo - Extra Packages for Enterprise Linux \$releasever - \$basearch
+baseurl=http://download.fedoraproject.org/pub/epel/\$releasever/\$basearch
+mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel-\$releasever&arch=\$basearch
 enabled=1
 gpgcheck=0" > /etc/yum.repos.d/kloxo-mr.repo
