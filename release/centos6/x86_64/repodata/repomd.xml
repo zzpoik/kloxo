@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <repomd xmlns="http://linux.duke.edu/metadata/repo" xmlns:rpm="http://linux.duke.edu/metadata/rpm">
-  <revision>1355563988</revision>
+  <revision>1355630974</revision>
   <data type="other">
     <checksum type="sha">ea267010566e437ebdcf4d9432b9a4d043dd0cc0</checksum>
-    <timestamp>1355563989</timestamp>
+    <timestamp>1355630974</timestamp>
     <size>6189</size>
     <open-size>35373</open-size>
     <open-checksum type="sha">4e54cc021d74a4d4e49c6b58c6425ed5fdc44fb6</open-checksum>
@@ -11,7 +11,7 @@
   </data>
   <data type="filelists">
     <checksum type="sha">7cdbb85bd125b38b67adc8c06f7d82661c32ad06</checksum>
-    <timestamp>1355563989</timestamp>
+    <timestamp>1355630974</timestamp>
     <size>3386</size>
     <open-size>25851</open-size>
     <open-checksum type="sha">c21017f5fce7080a7c123eb810589779712ee672</open-checksum>
@@ -19,7 +19,7 @@
   </data>
   <data type="primary">
     <checksum type="sha">ce13a38b5b34b36ce76d8236adcbc0bba2ea8cf1</checksum>
-    <timestamp>1355563989</timestamp>
+    <timestamp>1355630974</timestamp>
     <size>7902</size>
     <open-size>56774</open-size>
     <open-checksum type="sha">debd2be64153a20ebf8a814b81526684e4fd11fd</open-checksum>

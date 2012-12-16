@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <repomd xmlns="http://linux.duke.edu/metadata/repo" xmlns:rpm="http://linux.duke.edu/metadata/rpm">
-  <revision>1355563991</revision>
+  <revision>1355630977</revision>
   <data type="other">
-    <checksum type="sha">cd7e70f9e9c798e8cc90c971739031a635a5c52a</checksum>
-    <timestamp>1355563992</timestamp>
-    <size>9586</size>
-    <open-size>37838</open-size>
-    <open-checksum type="sha">42961e64fd35282a6173d05e0c525acaa456dc96</open-checksum>
+    <checksum type="sha">4e7c95283e2a0a8d9b0fd97b0d0559f98333dfc2</checksum>
+    <timestamp>1355630977</timestamp>
+    <size>9967</size>
+    <open-size>39488</open-size>
+    <open-checksum type="sha">09494caf4f7fa0ad92bd4bf367ae855d5f0f0347</open-checksum>
     <location href="repodata/other.xml.gz"/>
   </data>
   <data type="filelists">
-    <checksum type="sha">5283738f9a29c965a8c4d4c498fcb9f454573600</checksum>
-    <timestamp>1355563992</timestamp>
-    <size>2894</size>
-    <open-size>10260</open-size>
-    <open-checksum type="sha">2c8e426f5faef9364952097f4dab1793a4ca73f8</open-checksum>
+    <checksum type="sha">77129ad0ab87210c95bd525338c5099ab62e2571</checksum>
+    <timestamp>1355630977</timestamp>
+    <size>3012</size>
+    <open-size>10850</open-size>
+    <open-checksum type="sha">8960196bbfd15d8a53f76222d0b71f6fac6fb81f</open-checksum>
     <location href="repodata/filelists.xml.gz"/>
   </data>
   <data type="primary">
-    <checksum type="sha">5da5df703d8791d76c5cc6ecef01005ab7959a01</checksum>
-    <timestamp>1355563992</timestamp>
-    <size>6837</size>
-    <open-size>28659</open-size>
-    <open-checksum type="sha">6c9de78e6cf04c5074ca58386f27cb5680288b00</open-checksum>
+    <checksum type="sha">1fc8bdba16ae32cb6beb1600feb4120ea162486b</checksum>
+    <timestamp>1355630977</timestamp>
+    <size>7362</size>
+    <open-size>30610</open-size>
+    <open-checksum type="sha">9c7fba8cd4e7333c18a24ae207691b951a5d2361</open-checksum>
     <location href="repodata/primary.xml.gz"/>
   </data>
 </repomd>

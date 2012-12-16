@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <repomd xmlns="http://linux.duke.edu/metadata/repo" xmlns:rpm="http://linux.duke.edu/metadata/rpm">
-  <revision>1355563988</revision>
+  <revision>1355630973</revision>
   <data type="other">
-    <checksum type="sha">5023b7f2689af9b263e47b333eb202754fc2c030</checksum>
-    <timestamp>1355563988</timestamp>
-    <size>17903</size>
-    <open-size>101589</open-size>
-    <open-checksum type="sha">c1eb2ee87686e97557a81c0a70495973d705b5e6</open-checksum>
+    <checksum type="sha">b1c519005d7a4420fd3101c8a3845b1d9b39261a</checksum>
+    <timestamp>1355630974</timestamp>
+    <size>17347</size>
+    <open-size>95905</open-size>
+    <open-checksum type="sha">1a8fa811b412ebd48c2e7a2692434b9c4ecc3f1a</open-checksum>
     <location href="repodata/other.xml.gz"/>
   </data>
   <data type="filelists">
-    <checksum type="sha">2a4325ec1020f7a5793650fb67764034162459cd</checksum>
-    <timestamp>1355563988</timestamp>
-    <size>17183</size>
-    <open-size>150972</open-size>
-    <open-checksum type="sha">9caec5efd41401181df9a3fc90e6efb243c679ff</open-checksum>
+    <checksum type="sha">04ed9320cc6d3c547826ed6e0ec60bff6b12c5f1</checksum>
+    <timestamp>1355630974</timestamp>
+    <size>16506</size>
+    <open-size>140751</open-size>
+    <open-checksum type="sha">30a19ea3936c789f09ce78637cab044fa484ed64</open-checksum>
     <location href="repodata/filelists.xml.gz"/>
   </data>
   <data type="primary">
-    <checksum type="sha">5ad0b7f66729c73b8283133a51873b1754e0a873</checksum>
-    <timestamp>1355563988</timestamp>
-    <size>26673</size>
-    <open-size>156362</open-size>
-    <open-checksum type="sha">79be8adecb0def7f1c173c4b35e14de0784400a7</open-checksum>
+    <checksum type="sha">580dcb2ea86e831c028d6cf6f1053638a204fd38</checksum>
+    <timestamp>1355630974</timestamp>
+    <size>25823</size>
+    <open-size>151351</open-size>
+    <open-checksum type="sha">81a78c73277552b2471dd535c9dece3c5f69f6b2</open-checksum>
     <location href="repodata/primary.xml.gz"/>
   </data>
 </repomd>
