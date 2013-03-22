@@ -37,11 +37,11 @@ B. For Final Release:
     # move repo dir
     cd /etc/yum.repos.d/
 	
-    # get repo file
+    # get repo file -- no need for 6.5.0.c and after
     wget https://github.com/mustafaramadhan/kloxo/raw/release/kloxo-mr.repo --no-check-certificate
 	
-	# move to /
-	cd /
+    # move to /
+    cd /
 
     # install
     yum install kloxo-mr
