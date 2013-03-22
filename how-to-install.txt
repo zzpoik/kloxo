@@ -1,0 +1,51 @@
+A. For Dev:
+
+A.1. pre-install -- better for fresh install
+
+    cd /
+
+    # update centos to latest version
+    yum update -y
+    # install some packages like package-cleanup, etc
+    yum install yum-utils yum-priorities vim-minimal subversion curl zip unzip -y
+    yum install telnet -y
+
+    setenforce 0
+    echo 'SELINUX=disabled' > /etc/selinux/config
+
+    cd /
+
+A.2. Install/reinstall/upgrade -- data not destroyed with this fork - 
+     for existing kloxo (6.1.x), run 'sh /script/update' first.
+
+    # delete if exist, create kloxo temp dir
+    rm -rf /tmp/kloxo; mkdir /tmp/kloxo ; cd /tmp/kloxo; 
+	
+    rm -f ./kloxo-mr-dev.sh
+
+    # get kloxo-mr-dev installer from github
+    wget https://github.com/mustafaramadhan/kloxo/raw/dev/kloxo/install/kloxo-mr-dev.sh --no-check-certificate
+
+    # install kloxo
+    sh ./kloxo-mr-dev.sh
+    
+    # better reboot
+    reboot
+   
+B. For Final Release:
+
+    # move repo dir
+    cd /etc/yum.repos.d/
+	
+    # get repo file
+    wget https://github.com/mustafaramadhan/kloxo/raw/release/kloxo-mr.repo --no-check-certificate
+	
+	# move to /
+	cd /
+
+    # install
+    yum install kloxo-mr
+    
+    # better reboot
+    reboot
+
