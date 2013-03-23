@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013031801
+%define timestamp 2013031802
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -56,5 +56,7 @@ echo "ATTN: Run 'sh %{kloxo}/install/setup.sh' completely setup"
 echo
 
 %changelog
+* Sat Mar 23 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031802.mr
+- fix critical bug (don't install php-mysqli on install/setup process)
 * Mon Mar 18 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031801.mr
 - first release of Kloxo-MR
