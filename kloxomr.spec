@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013031802
+%define timestamp 2013031803
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -51,9 +51,23 @@ This fork named as Kloxo-MR (meaning 'Kloxo fork by Mustafa Ramadhan').
 /script
 
 %post
-echo
-echo "ATTN: Run 'sh %{kloxo}/install/setup.sh' completely setup"
-echo
+if [ "$1" = "1" ]; then
+    echo
+    echo " --------------------------------------------------------------- "
+    echo "|                                                               |"
+    echo "|  Run 'sh %{kloxo}/install/setup.sh' completely install        |"
+    echo "|                                                               |"
+    echo " --------------------------------------------------------------- "
+    echo
+elif [ "$1" = "2" ]; then
+    echo
+    echo " --------------------------------------------------------------- "
+    echo "|                                                               |"
+    echo "|  Run 'sh /script/cleanup' completely update                   |"
+    echo "|                                                               |"
+    echo " --------------------------------------------------------------- "
+    echo
+fi
 
 %changelog
 * Sat Mar 23 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031802.mr
