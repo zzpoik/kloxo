@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013031805
+%define timestamp 2013031807
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -47,36 +47,71 @@ This fork named as Kloxo-MR (meaning 'Kloxo fork by Mustafa Ramadhan').
 /script
 
 %post
+
+# this is for fresh install
 if [ "$1" = "1" ]; then
-    echo
-    echo " --- Kloxo-MR Web Panel ------------------------------------------------- "
-    echo "|                                                                        |"
-    echo "|  Attention:                                                            |"
-    echo "|                                                                        |"
-    echo "|  Run 'sh /usr/local/lxlabs/kloxo/install/setup.sh' completely install  |"
-    echo "|                                                                        |"
-    echo " ----------------------------------------------------------- MRatWork --- "
-    echo
+	if [ -f /var/lib/mysql/kloxo ] ; then
+		# but previous version already exists
+		echo
+		echo "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
+		echo "_/                                                                        _/"
+		echo "_/  ..:: Kloxo-MR Web Panel ::..                                          _/"
+		echo "_/                                                                        _/"
+		echo "_/  Attention:                                                            _/"
+		echo "_/                                                                        _/"
+		echo "_/  Run 'sh /script/cleanup' for to make sure running well                _/"
+		echo "_/  or 'sh /script/cleanup-simple' (cleanup without fix services configs  _/"
+		echo "_/                                                                        _/"
+		echo "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
+		echo
+	else
+		# real fresh install
+		echo
+		echo "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
+		echo "_/                                                                        _/"
+		echo "_/  ..:: Kloxo-MR Web Panel ::..                                          _/"
+		echo "_/                                                                        _/"
+		echo "_/  Attention:                                                            _/"
+		echo "_/                                                                        _/"
+		echo "_/  Run 'sh /usr/local/lxlabs/kloxo/install/setup.sh' completely install  _/"
+		echo "_/                                                                        _/"
+		echo "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
+		echo
+	fi
 elif [ "$1" = "2" ]; then
-    echo
-    echo " --- Kloxo-MR Web Panel ------------------------------------------------- "
-    echo "|                                                                        |"
-    echo "|  Attention:                                                            |"
-    echo "|                                                                        |"
-    echo "|  Run 'sh /script/cleanup' completely update                            |"
-    echo "|                                                                        |"
-    echo " ----------------------------------------------------------- MRatWork --- "
-    echo
+	# yum update
+	echo
+	echo "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
+	echo "_/                                                                        _/"
+	echo "_/  ..:: Kloxo-MR Web Panel ::..                                          _/"
+	echo "_/                                                                        _/"
+	echo "_/  Attention:                                                            _/"
+	echo "_/                                                                        _/"
+	echo "_/  Run 'sh /script/cleanup' for to make sure running well                _/"
+	echo "_/  or 'sh /script/cleanup-simple' (cleanup without fix services configs  _/"
+	echo "_/                                                                        _/"
+	echo "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
+	echo
 fi
 
 %changelog
+* Wed Mar 27 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031807.mr
+- fix traffic issue and installer.sh/installer.php; add some scripts
+
+* Mon Mar 25 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031806.mr
+- no need cleanup on installer/setup also change mysqli to mysql on reset password
+
 * Mon Mar 25 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031805.mr
 - no need running full installer.sh twice just function step2 if running setup.sh
+
 * Mon Mar 25 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031804.mr
 - fix bugs relate to install/setup
+
 * Sat Mar 23 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031803.mr
 - remove php modules (except php-pear) because conflict between centos and other repos
+
 * Sat Mar 23 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031802.mr
 - fix critical bug (don't install php-mysqli on install/setup process)
+
 * Mon Mar 18 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031801.mr
 - first release of Kloxo-MR
