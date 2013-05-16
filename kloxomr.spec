@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013031807
+%define timestamp 2013031813
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -95,6 +95,28 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Thu May 16 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031813.mr
+- fix sh permission to 755; fix www redirect; make simple awstats link
+- add mariadb in mysql branch; disable mariadb from centalt repo (conflict when install)
+- based on 6.5.1.a-2013050502 and 6.5.1.a-2013051601
+
+* Sun May 5 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031812.mr
+- update suphp config (fix for possible security issue) and remove delete spamassassin dirs
+- based on 6.5.1.a-2013050501 and 6.5.1.a-2013050502
+
+* Fri Apr 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031811.mr
+- fix packer.sh (remove lang except en-us); use ionice for du
+- based on 6.5.1.a-2013042601 and 6.5.1.a-2013042602
+
+* Sun Apr 21 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031810.mr
+- fix some script based-on 6.5.1.a-2013042001 and 6.5.1.a-2013042101
+
+* Mon Apr 8 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031809.mr
+- fix some script based-on 6.5.1.a-2013040801
+
+* Sat Mar 30 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031808.mr
+- fix install issue on openvz
+
 * Wed Mar 27 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031807.mr
 - fix traffic issue and installer.sh/installer.php; add some scripts
 
