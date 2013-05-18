@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013031813
+%define timestamp 2013031814
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -95,6 +95,11 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Sat May 18 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031814.mr
+- fix install process and reset password from ssh
+- fix wildcards for website
+- based on until 6.5.1.a-2013051804
+
 * Thu May 16 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031813.mr
 - fix sh permission to 755; fix www redirect; make simple awstats link
 - add mariadb in mysql branch; disable mariadb from centalt repo (conflict when install)
