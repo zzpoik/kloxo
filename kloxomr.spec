@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013031815
+%define timestamp 2013031816
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -95,6 +95,10 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Sun May 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031816.mr
+- fix qmail init
+- based on until 6.5.1.a-2013052101
+
 * Sun May 19 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031815.mr
 - fix kloxo database path
 - based on until 6.5.1.a-2013051901
