@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013031816
+%define timestamp 2013031817
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -95,6 +95,13 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Fri May 31 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031817.mr
+- fix restart-services
+- fix userlist with exist checking
+- fix mail config (smtp and submission already work!)
+- remove for exlude mariadb from centalt repo
+- based on until 6.5.1.a-2013053102
+
 * Sun May 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031816.mr
 - fix qmail init
 - based on until 6.5.1.a-2013052101
