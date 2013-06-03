@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013031817
+%define timestamp 2013031818
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -95,6 +95,13 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Mon Jun 3 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031818.mr
+- based on until 6.5.1.a-2013060301
+- fix web config for www-redirect and wildcards
+- create mail account automatically create subscribe folders
+- fix smtp issue
+- possible customize qmail run script
+
 * Fri May 31 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031817.mr
 - fix restart-services
 - fix userlist with exist checking
