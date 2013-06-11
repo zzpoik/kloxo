@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013031819
+%define timestamp 2013031820
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -53,48 +53,57 @@ if [ "$1" = "1" ]; then
 	if [ -f /var/lib/mysql/kloxo ] ; then
 		# but previous version already exists
 		echo
-		echo "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
-		echo "_/                                                                          _/"
-		echo "_/  ..:: Kloxo-MR Web Panel ::..                                            _/"
-		echo "_/                                                                          _/"
-		echo "_/  Attention:                                                              _/"
-		echo "_/                                                                          _/"
-		echo "_/  Run 'sh /script/cleanup' for to make sure running well                  _/"
-		echo "_/  or 'sh /script/cleanup-simple' (cleanup without fix services configs    _/"
-		echo "_/                                                                          _/"
-		echo "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
+		echo " _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
+		echo " _/                                                                          _/"
+		echo " _/  ..:: Kloxo-MR Web Panel ::..                                            _/"
+		echo " _/                                                                          _/"
+		echo " _/  Attention:                                                              _/"
+		echo " _/                                                                          _/"
+		echo " _/  Run 'sh /script/cleanup' for to make sure running well                  _/"
+		echo " _/  or 'sh /script/cleanup-simple' (cleanup without fix services configs    _/"
+		echo " _/                                                                          _/"
+		echo " _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
 		echo
 	else
 		# real fresh install
 		echo
-		echo "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
-		echo "_/                                                                          _/"
-		echo "_/  ..:: Kloxo-MR Web Panel ::..                                            _/"
-		echo "_/                                                                          _/"
-		echo "_/  Attention:                                                              _/"
-		echo "_/                                                                          _/"
-		echo "_/  Run 'sh /usr/local/lxlabs/kloxo/install/setup.sh' completely install    _/"
-		echo "_/                                                                          _/"
-		echo "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
+		echo " _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
+		echo " _/                                                                          _/"
+		echo " _/  ..:: Kloxo-MR Web Panel ::..                                            _/"
+		echo " _/                                                                          _/"
+		echo " _/  Attention:                                                              _/"
+		echo " _/                                                                          _/"
+		echo " _/  Run 'sh /usr/local/lxlabs/kloxo/install/setup.sh' completely install    _/"
+		echo " _/                                                                          _/"
+		echo " _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
 		echo
 	fi
 elif [ "$1" = "2" ]; then
 	# yum update
 	echo
-	echo "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
-	echo "_/                                                                          _/"
-	echo "_/  ..:: Kloxo-MR Web Panel ::..                                            _/"
-	echo "_/                                                                          _/"
-	echo "_/  Attention:                                                              _/"
-	echo "_/                                                                          _/"
-	echo "_/  Run 'sh /script/cleanup' for to make sure running well                  _/"
-	echo "_/  or 'sh /script/cleanup-simple' (cleanup without fix services configs)   _/"
-	echo "_/                                                                          _/"
-	echo "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
+	echo " _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
+	echo " _/                                                                          _/"
+	echo " _/  ..:: Kloxo-MR Web Panel ::..                                            _/"
+	echo " _/                                                                          _/"
+	echo " _/  Attention:                                                              _/"
+	echo " _/                                                                          _/"
+	echo " _/  Run 'sh /script/cleanup' for to make sure running well                  _/"
+	echo " _/  or 'sh /script/cleanup-simple' (cleanup without fix services configs)   _/"
+	echo " _/                                                                          _/"
+	echo " _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
 	echo
 fi
 
 %changelog
+* Tue Jun 11 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031820.mr
+- based on until 6.5.1.a-2013061101
+- install without asking 'master/slave' (always as 'master'; run make-slave for change to slave)
+- more info backup/restore
+- mod smtp-ssl_run for rblsmtpd/blacklist; remove double process for softlimit change
+- fix issue when install on openvz host
+- enable gateway when add ip
+- modified nginx config for dualstack ip (ipv4+ipv6)
+
 * Tue Jun 4 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031819.mr
 - based on until 6.5.1.a-2013060402
 - fix fixmail-all ('cp' weird behaviour for copy dir)
