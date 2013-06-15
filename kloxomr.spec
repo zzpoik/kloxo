@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013031820
+%define timestamp 2013031821
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -95,6 +95,15 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Sat Jun 15 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031820.mr
+- based on until 6.5.1.a-2013061501
+- back to disable mariadb from centalt (still have a problem install Kloxo-MR on centos 6 32bit)
+- fix diprotect path for apache
+- not need softlimit change (already set inside qmail-toaster)
+- fix clearcache script for openvz host
+- fix function.sh and lxphpcli.sh (add exec)
+- back to use restart function instead stop and start for restart
+
 * Tue Jun 11 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031820.mr
 - based on until 6.5.1.a-2013061101
 - install without asking 'master/slave' (always as 'master'; run make-slave for change to slave)
