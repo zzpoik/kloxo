@@ -59,7 +59,7 @@ name=Kloxo-MR - centalt - $basearch
 baseurl=http://centos.alt.ru/repository/centos/$releasever/$basearch/
 enabled=1
 gpgcheck=0
-exclude=openssh* perl*
+exclude=openssh* perl* mariadb*
 
 # ==================================
 
@@ -73,11 +73,12 @@ exclude=php52*
 
 [kloxo-mr-ius-c5]
 name=Kloxo-MR - IUS Community Packages for EL 5 (special) - $basearch
-baseurl=http://dl.iuscommunity.org/pub/ius/stable/Redhat/5/$basearch
-mirrorlist=http://dmirr.iuscommunity.org/mirrorlist/?repo=ius-el5&arch=$basearch
+baseurl=http://dl.iuscommunity.org/pub/ius/archive/CentOS/5/$basearch
 enabled=1
 gpgcheck=0
 includepkgs=php52*
+
+http://dl.iuscommunity.org/pub/ius/archive/CentOS/5/$basearch
 
 # ==================================
 
@@ -94,7 +95,7 @@ gpgcheck=0
 [kloxo-mr-varnish-3.0]
 name=Kloxo-MR - Varnish 3.0 for EL $releasever - $basearch
 baseurl=http://repo.varnish-cache.org/redhat/varnish-3.0/el$releasever/$basearch
-enabled=1
+enabled=0
 gpgcheck=0
 
 # ==================================
@@ -103,7 +104,7 @@ gpgcheck=0
 [kloxo-mr-centosec]
 name=Kloxo-MR - CentOS $releasever Packages from CentOS.EC
 baseurl=http://centos$releasever.ecualinux.com/$basearch
-enabled=1
+enabled=0
 gpgcheck=0
 
 # ==================================
@@ -113,7 +114,7 @@ gpgcheck=0
 name=Kloxo-MR - nginx repo
 baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
 gpgcheck=0
-enabled=1
+enabled=0
 
 # ==================================
 
