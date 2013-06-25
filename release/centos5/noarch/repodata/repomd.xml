@@ -3,40 +3,40 @@
   <data type="other_db">
     <location href="repodata/other.sqlite.bz2"/>
     <checksum type="sha">539466db0e15b31b5483b77991bb6659e4fb776f</checksum>
-    <timestamp>1371998315</timestamp>
+    <timestamp>1372198623</timestamp>
     <open-checksum type="sha">273072d7c77164718af3eaeda84309a493e0c2d5</open-checksum>
     <database_version>10</database_version>
   </data>
   <data type="other">
     <location href="repodata/other.xml.gz"/>
     <checksum type="sha">793dcbe9301f8513357714f122cfb5665ed23c11</checksum>
-    <timestamp>1371998313</timestamp>
+    <timestamp>1372198623</timestamp>
     <open-checksum type="sha">4bb7b17d5c6391c71b496e615fd973e6fd3bb9ab</open-checksum>
   </data>
   <data type="filelists_db">
     <location href="repodata/filelists.sqlite.bz2"/>
     <checksum type="sha">9a7081136476e87bbfa340a72f653f3c2126488f</checksum>
-    <timestamp>1371998317</timestamp>
+    <timestamp>1372198624</timestamp>
     <open-checksum type="sha">1cee75abdec3dd405b1b97ae920a665bf89ea8d3</open-checksum>
     <database_version>10</database_version>
   </data>
   <data type="filelists">
     <location href="repodata/filelists.xml.gz"/>
     <checksum type="sha">2e56078aa6945cc3369e6af6565716af530e5474</checksum>
-    <timestamp>1371998313</timestamp>
+    <timestamp>1372198623</timestamp>
     <open-checksum type="sha">39d39432a0825f6123206e74f6ceba6fed629d27</open-checksum>
   </data>
   <data type="primary_db">
     <location href="repodata/primary.sqlite.bz2"/>
     <checksum type="sha">4e5520bf6f2506d75019f89b30ce918e2de226e4</checksum>
-    <timestamp>1371998321</timestamp>
+    <timestamp>1372198627</timestamp>
     <open-checksum type="sha">aa7fba71a0a224f8f8b9596ca8933a1ccfb08e3d</open-checksum>
     <database_version>10</database_version>
   </data>
   <data type="primary">
     <location href="repodata/primary.xml.gz"/>
     <checksum type="sha">aa5bf392f1705527b1e6d1a101c72305f19fb944</checksum>
-    <timestamp>1371998313</timestamp>
+    <timestamp>1372198623</timestamp>
     <open-checksum type="sha">dc579f7892dcf7c09967e341a2589169b9aaea69</open-checksum>
   </data>
 </repomd>
