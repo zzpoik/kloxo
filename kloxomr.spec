@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013031821
+%define timestamp 2013031824
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -95,7 +95,26 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
-* Sat Jun 15 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031820.mr
+* Wed Jun 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031824.mr
+- fix restore message
+- prepare for qmail-toaster custom-based run/log run
+
+* Thu Jun 20 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031823.mr
+- based on until 6.5.1.a-2013062301
+- restart kloxo if found 'server 7779' not connected
+- move maillog from /var/log/kloxo to /var/log; remove smtp.log and courier.log
+- dual log (multilog and splogger) for qmail-toaster
+- remove unwanted files (espacially related to qmail-toaster)
+- bug fix for reset-mysql-root-password script
+- change to apache:apache for dirprotect dir
+- fix segfault when install
+- change kloxo sql without engine=myisam
+
+* Sun Jun 16 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031822.mr
+- fix clearcache script
+- remove certain qmail config fix (becuase logic and code move to rpm)
+
+* Sat Jun 15 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031821.mr
 - based on until 6.5.1.a-2013061501
 - back to disable mariadb from centalt (still have a problem install Kloxo-MR on centos 6 32bit)
 - fix diprotect path for apache

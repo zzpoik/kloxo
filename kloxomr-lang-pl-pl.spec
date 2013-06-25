@@ -2,7 +2,7 @@
 %define productname kloxomr-lang
 %define packagename pl-pl
 %define sourcename pl-pl
-%define timestamp 2013031801
+%define timestamp 2013031823
 
 Name: %{productname}-%{packagename}
 Summary: Kloxo-MR PL-PL language
@@ -37,5 +37,11 @@ Kloxo-MR PL-PL language
 %{kloxo}/%{packagename}
 
 %changelog
+* Wed Jun 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f.2013031823-1.mr
+- update
+
+* Tue Apr 16 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f.2013031809-1.mr
+- update
+
 * Mon Mar 18 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f.2013031801-1.mr
 - compile Kloxo-MR language (only en-us including Kloxo-MR package)
