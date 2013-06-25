@@ -66,7 +66,7 @@ gpgcheck=0
 [kloxo-mr-centalt]
 name=Kloxo-MR - centalt - $basearch
 baseurl=http://centos.alt.ru/repository/centos/$releasever/$basearch/
-mirrorlist=http://rpms.potissima.com/repo/mirrors/centalt-centos$releasever-$basearch-mirrors.txt
+mirrorlist=http://rpms.potissima.com/repo/mirrors/centalt-centos-$releasever-$basearch-mirrors.txt
 enabled=1
 gpgcheck=0
 exclude=openssh* perl* mariadb*
