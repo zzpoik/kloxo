@@ -45,3 +45,4 @@ Kloxo-MR PL-PL language
 
 * Mon Mar 18 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f.2013031801-1.mr
 - compile Kloxo-MR language (only en-us including Kloxo-MR package)
+- constribute by Spacedust <admin@galeriaportali.pl>

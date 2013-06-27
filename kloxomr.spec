@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013031824
+%define timestamp 2013031825
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -95,7 +95,16 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Thu Jun 27 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031825.mr
+- based on until 6.5.1.a-2013062701
+- remove double install process for mysql and httpd
+- fix conflict of mysql install
+- set php53u and mysql51/mysql55 as default install
+- fix telaen config copy
+- fix webmail detect
+
 * Wed Jun 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031824.mr
+- based on until 6.5.1.a-2013062602
 - fix restore message
 - prepare for qmail-toaster custom-based run/log run
 
