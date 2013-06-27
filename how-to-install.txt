@@ -6,7 +6,7 @@ A. pre-install -- better for fresh install
     yum update -y
     # install some packages like package-cleanup, etc
     yum install yum-utils yum-priorities vim-minimal subversion curl zip unzip -y
-    yum install telnet -y
+    yum install telnet wget -y
 
     setenforce 0
     echo 'SELINUX=disabled' > /etc/selinux/config
@@ -21,11 +21,11 @@ B.1 For Dev (alpha, beta, candidate) Release:
 
     # delete if exist, create kloxo temp dir
     rm -rf /tmp/kloxo; mkdir /tmp/kloxo ; cd /tmp/kloxo; 
-	
+
     rm -f ./kloxo-mr-dev.sh
 
     # get kloxo-mr-dev installer from github
-    wget https://github.com/mustafaramadhan/kloxo/raw/dev/kloxo/install/kloxo-mr-dev.sh --no-check-certificate
+    wget -r https://github.com/mustafaramadhan/kloxo/raw/dev/kloxo/install/kloxo-mr-dev.sh --no-check-certificate
 
     # install kloxo
     sh ./kloxo-mr-dev.sh
@@ -39,16 +39,15 @@ B.2. For Final Release:
 
     # move repo dir
     cd /etc/yum.repos.d/
-	
+
     # get repo file -- no need for 6.5.0.c and after
-    wget https://github.com/mustafaramadhan/kloxo/raw/release/kloxo-mr.repo --no-check-certificate
-	
+    wget -r https://github.com/mustafaramadhan/kloxo/raw/release/kloxo-mr.repo --no-check-certificate
+
     # move to /
     cd /
 
     # install (and then run 'setup.sh' instead 'installer.sh')
-    yum install kloxomr
+    yum install kloxomr -y
     
     # better reboot
     reboot
-
