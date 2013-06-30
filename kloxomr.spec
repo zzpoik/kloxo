@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013031825
+%define timestamp 2013031826
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -95,6 +95,13 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Thu Jun 27 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031826.mr
+- based on until 6.5.1.a-2013062801
+- fix install process (need running setup.sh 2x in certain condition)
+- fix wrong message for afterlogic when running cleanup/fixwebmail/fixmail-all
+- back to use 'wget' instead 'wget -r' in how-to-install
+- disable mirror for repo and just using for emergency
+
 * Thu Jun 27 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031825.mr
 - based on until 6.5.1.a-2013062701
 - remove double install process for mysql and httpd
