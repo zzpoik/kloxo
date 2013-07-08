@@ -1,0 +1,157 @@
+# 1. release #
+
+# 1.1. release-neutral #
+
+[release-neutral-noarch]
+name=Kloxo-MR - release-neutral-noarch
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/neutral/noarch/
+enabled=1
+gpgcheck=0
+
+[release-neutral-i386]
+name=Kloxo-MR - release-neutral-i386
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/neutral/i386/
+enabled=1
+gpgcheck=0
+
+[release-neutral-x86_64]
+name=Kloxo-MR - release-neutral-x86_64
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/neutral/x86_64/
+enabled=1
+gpgcheck=0
+
+# 1.2. release-centos5 #
+
+[release-centos5-noarch]
+name=Kloxo-MR - release-centos5-noarch
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos5/noarch/
+enabled=1
+gpgcheck=0
+
+[release-centos5-i386]
+name=Kloxo-MR - release-centos5-i386
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos5/i386/
+enabled=1
+gpgcheck=0
+
+[release-centos5-x86_64]
+name=Kloxo-MR - release-centos5-x86_64
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos5/x86_64/
+enabled=1
+gpgcheck=0
+
+# 1.3. release-centos6 #
+
+[release-centos6-noarch]
+name=Kloxo-MR - release-centos6-noarch
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos6/noarch/
+enabled=1
+gpgcheck=0
+
+[release-centos6-i386]
+name=Kloxo-MR - release-centos6-i386
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos6/i386/
+enabled=1
+gpgcheck=0
+
+[release-centos6-x86_64]
+name=Kloxo-MR - release-centos6-x86_64
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos6/x86_64/
+enabled=1
+gpgcheck=0
+
+# 2. testing #
+
+# 2.1. testing-neutral #
+
+[testing-neutral-noarch]
+name=Kloxo-MR - testing-neutral-noarch
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/neutral/noarch/
+enabled=1
+gpgcheck=0
+
+[testing-neutral-i386]
+name=Kloxo-MR - testing-neutral-i386
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/neutral/i386/
+enabled=1
+gpgcheck=0
+
+[testing-neutral-x86_64]
+name=Kloxo-MR - testing-neutral-x86_64
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/neutral/x86_64/
+enabled=1
+gpgcheck=0
+
+# 2.2. testing-centos5 #
+
+[testing-centos5-noarch]
+name=Kloxo-MR - testing-centos5-noarch
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/centos5/noarch/
+enabled=1
+gpgcheck=0
+
+[testing-centos5-i386]
+name=Kloxo-MR - testing-centos5-i386
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/centos5/i386/
+enabled=1
+gpgcheck=0
+
+[testing-centos5-x86_64]
+name=Kloxo-MR - testing-centos5-x86_64
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/centos5/x86_64/
+enabled=1
+gpgcheck=0
+
+# 2.3. testing-centos6 #
+
+[testing-centos6-noarch]
+name=Kloxo-MR - testing-centos6-noarch
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/centos6/noarch/
+enabled=1
+gpgcheck=0
+
+[testing-centos6-i386]
+name=Kloxo-MR - testing-centos6-i386
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/centos6/i386/
+enabled=1
+gpgcheck=0
+
+[testing-centos6-x86_64]
+name=Kloxo-MR - testing-centos6-x86_64
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/centos6/x86_64/
+enabled=1
+gpgcheck=0
+
+# 3. srpms #
+
+[srpms]
+name=Kloxo-MR - srpms
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/SRPMS/
+enabled=1
+gpgcheck=0
+
+# 4. centalt #
+
+[centalt-centos-5-i386]
+name=Kloxo-MR - centalt-centos-5-i386
+baseurl=http://centos.alt.ru/repository/centos/5/i386/
+enabled=1
+gpgcheck=0
+
+[centalt-centos-5-x86_64]
+name=Kloxo-MR - centalt-centos-5-x86_64
+baseurl=http://centos.alt.ru/repository/centos/5/x86_64/
+enabled=1
+gpgcheck=0
+
+[centalt-centos-6-i386]
+name=Kloxo-MR - centalt-centos-6-i386
+baseurl=http://centos.alt.ru/repository/centos/6/i386/
+enabled=1
+gpgcheck=0
+
+[centalt-centos-6-x86_64]
+name=Kloxo-MR - centalt-centos-6-x86_64
+baseurl=http://centos.alt.ru/repository/centos/6/x86_64/
+enabled=1
+gpgcheck=0
