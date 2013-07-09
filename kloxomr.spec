@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013031826
+%define timestamp 2013031827
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -95,6 +95,18 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Wed Jul 10 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031827.mr
+- based on until 6.5.1.a-2013071001
+- disable mysql from ius repo (make conflict) when install process
+- change kloxo-mr.repo related to disable mysql from ius
+- mysql-convert script will convert all database for storage-engine target
+- move certain parameter of nginx from 'location /' to 'server'
+- disable 'php_admin_value[memory_limit]' on php-fpm template
+- restart will be execute start if not running for qmail service
+- rename custom qmail run/log run of qmail-toaster
+- increase value of TopCountries and others for webalizer
+- fix web config, expecially for add/delete domain.
+
 * Thu Jun 27 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031826.mr
 - based on until 6.5.1.a-2013062801
 - fix install process (need running setup.sh 2x in certain condition)
