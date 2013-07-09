@@ -15,7 +15,7 @@ REPOPATH="$CURRPATH/repo/centalt"
 
 for a in 5 6
 do
-	for b in i386 x86_64
+	for b in i386 x86_64 SRPMS
 	do
 		if [ -d $REPOPATH/centos/$a/$b ] ; then
 			mv -f $REPOPATH/centos/$a/$b $REPOPATH/centos/$a/centalt-centos-$a-$b
@@ -30,6 +30,4 @@ do
 		createrepo --checkts --update $REPOPATH/centos/$a/$b
 	done
 done
-
-chmod -R o-w+r $CURRPATH
 

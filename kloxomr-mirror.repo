@@ -144,6 +144,12 @@ baseurl=http://centos.alt.ru/repository/centos/5/x86_64/
 enabled=1
 gpgcheck=0
 
+[centalt-centos-5-SRPMS]
+name=Kloxo-MR - centalt-centos-5-SRPMS
+baseurl=http://centos.alt.ru/repository/centos/5/SRPMS/
+enabled=1
+gpgcheck=0
+
 [centalt-centos-6-i386]
 name=Kloxo-MR - centalt-centos-6-i386
 baseurl=http://centos.alt.ru/repository/centos/6/i386/
@@ -153,5 +159,11 @@ gpgcheck=0
 [centalt-centos-6-x86_64]
 name=Kloxo-MR - centalt-centos-6-x86_64
 baseurl=http://centos.alt.ru/repository/centos/6/x86_64/
+enabled=1
+gpgcheck=0
+
+[centalt-centos-6-SRPMS]
+name=Kloxo-MR - centalt-centos-6-SRPMS
+baseurl=http://centos.alt.ru/repository/centos/6/SRPMS/
 enabled=1
 gpgcheck=0

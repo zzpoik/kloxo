@@ -23,6 +23,8 @@ done
 
 mkdir -p $CURRPATH/repo/mratwork/SRPMS
 
+chmod -R o-w+r $CURRPATH
+
 createrepo --database --update $CURRPATH/repo/mratwork/SRPMS
 
 for type in release testing
@@ -35,8 +37,6 @@ do
 		done
 	done
 done
-
-chmod -R o-w+r $CURRPATH
 
 ### MR -- need change path because don't want path include '/home/repos/rpms.mratwork.com/repo/mratwork'
 cd $CURRPATH/repo/mratwork/

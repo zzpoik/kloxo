@@ -54,5 +54,3 @@ fi
 
 createrepo --checkts --update $REPOPATH/SRPMS
 
-chmod -R o-w+r $CURRPATH
-
