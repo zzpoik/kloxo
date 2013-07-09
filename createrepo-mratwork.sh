@@ -25,7 +25,7 @@ mkdir -p $CURRPATH/repo/mratwork/SRPMS
 
 chmod -R o-w+r $CURRPATH
 
-createrepo --database --update $CURRPATH/repo/mratwork/SRPMS
+createrepo --update $CURRPATH/repo/mratwork/SRPMS
 
 for type in release testing
 do
@@ -33,7 +33,7 @@ do
 	do
 		for item in i386 x86_64 noarch
 		do
-			createrepo --checkts --update $CURRPATH/repo/mratwork/$type/$ver/$item
+			createrepo --update $CURRPATH/repo/mratwork/$type/$ver/$item
 		done
 	done
 done

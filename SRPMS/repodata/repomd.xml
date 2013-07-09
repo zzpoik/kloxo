@@ -1,42 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <repomd xmlns="http://linux.duke.edu/metadata/repo">
-  <data type="other_db">
-    <location href="repodata/other.sqlite.bz2"/>
-    <checksum type="sha">9087b2d5f3e70b56db0f25fd1588cc7597f59f63</checksum>
-    <timestamp>1373321728</timestamp>
-    <open-checksum type="sha">1079d769934017dd71e49be54135e408b0c2979e</open-checksum>
-    <database_version>10</database_version>
-  </data>
   <data type="other">
     <location href="repodata/other.xml.gz"/>
-    <checksum type="sha">f3aa2d58927cd8f93555b358b8abf61c0401b3ec</checksum>
-    <timestamp>1373321725</timestamp>
-    <open-checksum type="sha">34b90034284c246e043cfb2b89496f2d7dc701b2</open-checksum>
-  </data>
-  <data type="filelists_db">
-    <location href="repodata/filelists.sqlite.bz2"/>
-    <checksum type="sha">3ce7f10b9ea3238e85d0707a19a5600d458007f2</checksum>
-    <timestamp>1373321731</timestamp>
-    <open-checksum type="sha">c733875496805f07aae2738fac249f4bbc15ff2e</open-checksum>
-    <database_version>10</database_version>
+    <checksum type="sha">5773186e45f21dfb9386f92f21b241d654af6f05</checksum>
+    <timestamp>1373412792</timestamp>
+    <open-checksum type="sha">804f6afdec6c8c0cc21b3d07acfc6d4cfd2a1980</open-checksum>
   </data>
   <data type="filelists">
     <location href="repodata/filelists.xml.gz"/>
-    <checksum type="sha">71ad01331d8bcc42e675fcdca6d597a7748dfed9</checksum>
-    <timestamp>1373321725</timestamp>
-    <open-checksum type="sha">63b470ddc342767cc61574a35c3006f408fef1ba</open-checksum>
-  </data>
-  <data type="primary_db">
-    <location href="repodata/primary.sqlite.bz2"/>
-    <checksum type="sha">0d7f8a7b6142c43c376b12c7fb28ef309f476c92</checksum>
-    <timestamp>1373321746</timestamp>
-    <open-checksum type="sha">7f38c036733ed7ffc75906a3e48686580ed87fd0</open-checksum>
-    <database_version>10</database_version>
+    <checksum type="sha">e582b60b67276950e3ee796fb6f72023b1356983</checksum>
+    <timestamp>1373412792</timestamp>
+    <open-checksum type="sha">9e077e00032ad113e0004d1e09f8c744b9b4eee4</open-checksum>
   </data>
   <data type="primary">
     <location href="repodata/primary.xml.gz"/>
-    <checksum type="sha">26d574df60e82a67f0a4200fb9d9f914dc68762b</checksum>
-    <timestamp>1373321725</timestamp>
-    <open-checksum type="sha">339a25133b00eef3deefcbf4b9561a95229493c1</open-checksum>
+    <checksum type="sha">c843f57a6295fe372e566aa7696d1b6b78f06adc</checksum>
+    <timestamp>1373412792</timestamp>
+    <open-checksum type="sha">a986307d0d657ab33661dfac18cd40fbc2b7f34f</open-checksum>
   </data>
 </repomd>
