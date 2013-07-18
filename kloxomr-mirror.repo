@@ -167,3 +167,26 @@ name=Kloxo-MR - centalt-centos-6-SRPMS
 baseurl=http://centos.alt.ru/repository/centos/6/SRPMS/
 enabled=1
 gpgcheck=0
+
+# 5. ius archive #
+
+[ius-centos-5-i386]
+name=Kloxo-MR - ius-centos-5-i386
+baseurl=http://dl.iuscommunity.org/pub/ius/archive/CentOS/5/i386
+enabled=1
+gpgcheck=0
+includepkgs=php52*
+
+[ius-centos-5-x86_64]
+name=Kloxo-MR - ius-centos-5-x86_64
+baseurl=http://dl.iuscommunity.org/pub/ius/archive/CentOS/5/x86_64
+enabled=1
+gpgcheck=0
+includepkgs=php52*
+
+[ius-centos-5-SRPMS]
+name=Kloxo-MR - ius-centos-5-SRPMS
+baseurl=http://dl.iuscommunity.org/pub/ius/archive/CentOS/5/SRPMS
+enabled=1
+gpgcheck=0
+includepkgs=php52*
