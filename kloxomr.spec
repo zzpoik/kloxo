@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013031827
+%define timestamp 2013080502
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -95,6 +95,30 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Thu Jul 11 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013080502.mr
+- based on until 6.5.1.a-2013080502
+- change timestamp from 20130318xx to real timestamp release
+- change lxphp + lxlighttpd to php52s + hiawatha (the first cp using it!)
+- template-based for dns server (bind and djbdns)
+- bugfix for add ip
+- remove unwanted files (related to os detect/specific)
+- because using hiawatha, socket error already fixed (related to php-cli wrapper)
+- using closeinput instead closeallinput (no different effect found)
+- remove unwanted skin images
+- change /restart or /backendrestart to /load-wrapper (related to socket error issue)
+- change helpurl from forum.lxcenter.org to forum.mratwork.com
+- exclude bind from centalt because something trouble when using it
+- add error page for panel
+- remove lxphp-module-install and change to php5Xs-extension-install
+- add/change set-secondary-php script
+
+* Thu Jul 11 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031828.mr
+- based on until 6.5.1.a-2013071102
+- disable mysql51 and mysql55 from ius (make conflict)
+- improve mysql-convert and mysql-optimize
+- modified kloxo-mr.repo
+- make setup process until 3x if kloxo database not created (normally enough 1-2x)
+
 * Wed Jul 10 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031827.mr
 - based on until 6.5.1.a-2013071001
 - disable mysql from ius repo (make conflict) when install process
