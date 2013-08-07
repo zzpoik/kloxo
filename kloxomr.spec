@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013080502
+%define timestamp 2013080701
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -95,7 +95,27 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
-* Thu Jul 11 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013080502.mr
+* Tue Aug 7 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013080701.mr
+- fix bind dns config (bind work now like djbsns)
+
+* Tue Aug 6 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013080605.mr
+- simple execute for djbdns list.master.conf.tpl
+- fix 'make' execute for axfrdns of djbdns
+- fix no conf directory issues when using djbdns (cleanup will be create this dirs)
+- fix bind domains.conf.tpl (problem with ns declare)
+- add 'make' install when install kloxo (djbdns need it)
+- add 'sock' dir for php-fpm socket when running cleanup
+
+* Tue Aug 6 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013080602.mr
+- fix dns config especially 'server alias' issue
+- switch to djbns also execute djbdns 'setup'
+
+* Tue Aug 6 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013080601.mr
+- bugfix for dns config (wrong ns and cname)
+- bugfix for access panel via https/7777
+- mod sysctl.conf when running cleanup
+
+* Mon Aug 5 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013080502.mr
 - based on until 6.5.1.a-2013080502
 - change timestamp from 20130318xx to real timestamp release
 - change lxphp + lxlighttpd to php52s + hiawatha (the first cp using it!)
