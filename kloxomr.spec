@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013080701
+%define timestamp 2013081208
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -95,6 +95,12 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Mon Aug 12 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013081208.mr
+- add allowed-transfer script for dns server (make possible dns server as 'master')
+- fix some minor bugs for dns template
+- fix some minor bugs for install process
+- mod/add restart/clearcache script
+
 * Tue Aug 7 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013080701.mr
 - fix bind dns config (bind work now like djbsns)
 
