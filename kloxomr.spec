@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013081208
+%define timestamp 2013081701
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -95,6 +95,29 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Sat Aug 17 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013081701.mr
+- fix/add packages listing on 'services' and 'component list'
+- make cp address as additional panel
+
+* Fri Aug 16 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013081601.mr
+- fix detect ftp for lxguard (because think as using syslog but possible using rsyslog)
+- fix restart scripts (because old script not work for other then english
+- add php*-gd and php*-pdo (because repo not make as 'default') as default ext
+- add config for microcache for nginx
+
+* Wed Aug 14 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013081402.mr
+- update customize fastcgi_param for ngix
+- add init file checking for dns initial
+- no convert cname to a record for local domain
+- fix remove lxphp.exe for lxphp (because change to php52s)
+
+* Tue Aug 13 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013081304.mr
+- fix error 500 on kloxo-hiawatha (back to use TimeForCGI)
+
+* Tue Aug 13 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013081303.mr
+- fix upload issue (increasing MaxRequestSize TimeForRequest and MaxKeepAlive)
+- fix/mod restart scripts
+
 * Mon Aug 12 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013081208.mr
 - add allowed-transfer script for dns server (make possible dns server as 'master')
 - fix some minor bugs for dns template
