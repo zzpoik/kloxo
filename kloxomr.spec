@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013081701
+%define timestamp 2013082002
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -95,6 +95,18 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Sun Aug 18 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013082002.mr
+- fix mysql-to-mariadb bug
+- better getRpmVersion
+- use lib.php from dev but disable mariadb/powerdns/hiawatha initial
+- mod suphp configs
+- better apache tpl
+- better getRpmVersionViaYum function
+
+* Sun Aug 18 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013081801.mr
+- php*-gd, -bcmath and -pgsql also detect when running cleanup
+- all languages including in core (still compile separately)
+
 * Sat Aug 17 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013081701.mr
 - fix/add packages listing on 'services' and 'component list'
 - make cp address as additional panel
