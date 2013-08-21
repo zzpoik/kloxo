@@ -5912,34 +5912,6 @@ function getAllClientList()
 	return $users;
 }
 
-function getIpfromDns()
-{
-	global $gbl, $sgbl, $login, $ghtml;
-
-	$login->loadAllObjects('client');
-	$list = $login->getList('client');
-
-	$ip = array();
-
-	foreach($list as $c) {
-		$dlist = $c->getList('domaina');
-
-		if (!$dlist) { continue; }
-
-		foreach($dlist as $l) {
-			$dns = $l->getObject('dns');
-
-			foreach($dns->dns_record_a as $k => $o) {
-				if (($o->ttype === 'aaa') || ($o->ttype === 'a')) {
-					$ip[] = $o->param;
-				}
-			}
-		}
-	}
-
-	return array_unique($ip);
-}
-
 function setInitialPureftpConfig($nolog = null)
 {
 	log_cleanup("Initialize PureFtp service", $nolog);
