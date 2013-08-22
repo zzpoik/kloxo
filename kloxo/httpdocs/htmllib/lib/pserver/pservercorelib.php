@@ -476,16 +476,23 @@ class pservercore extends Lxclient
 			$rlist[] = array('Virtual Memory', "Virtual:Virtual Memory Usage (MB)", $l['used_s_virtual'], $l['priv_s_virtual']);
 		}
 
-		$rlist[] = array('Server Traffic', "Traffic:Server Traffic", $this->used->server_traffic_usage, '-');
-		$rlist[] = array('Server Traffic', "Traffic:Server Traffic For Last Month", $this->used->server_traffic_last_usage, '-');
+		$rlist[] = array('Server Traffic', "Traffic:Server Traffic For Current Month", $this->used->server_traffic_usage, '-');
+		$rlist[] = array('Server Traffic', "Last Traffic:Server Traffic For Last Month", $this->used->server_traffic_last_usage, '-');
 
 		$cpu = $l['cpu'];
 
 		foreach ($cpu as $k => $c) {
 		//	$rlist[] = array('cpu', "CPU$k Model (speed)",  "{$c['used_s_cpumodel']} ({$c['used_s_cpuspeed']})", '-');
 		//	$rlist[] = array('cpu', "CPU$k speed", "{$c['used_s_cpuspeed']}", '-');
-			$rlist[] = array('cpu', "CPU$k", "{$c['used_s_cpuspeed']}", '-');
+			$rlist[] = array('cpu', "CPU$k:CPU processor/core $k", "{$c['used_s_cpuspeed']}", '-');
 		}
+
+		$loadavg = sys_getloadavg();
+
+		$rlist[] = array('loadavg', "LoadAvg1:Load Average in 1 minutes", "{$loadavg['0']} %", '100 %');
+		$rlist[] = array('loadavg', "LoadAvg5:Load Average in 5 minutes", "{$loadavg['1']} %", '100 %');
+		$rlist[] = array('loadavg', "LoadAvg15:Load Average in 15 minutes", "{$loadavg['2']} %", '100 %');
+		
 
 		return $rlist;
 	}
@@ -889,8 +896,9 @@ class pservercore extends Lxclient
 		$driver = null;
 
 		foreach ((array)$list as $l) {
-			$mod = getreal("/module/") . "/$l";
-			include_once "$mod/lib/driver.inc";
+		//	$mod = getreal("/module/") . "/$l";
+		//	include_once "$mod/lib/driver.inc";
+
 			$dlist = $driver[$os];
 
 			if (isset($driver['all'])) {
@@ -1187,8 +1195,9 @@ STRIN;
 				$this->dns_driver = $gbl->getSyncClass($this->__masterserver, $this->nname, 'dns');
 				$this->spam_driver = $gbl->getSyncClass($this->__masterserver, $this->nname, 'spam');
 
-				$vlist['web_driver'] = array('s', array('apache', 'lighttpd', 'nginx', 'lighttpdproxy', 'nginxproxy'));
-				$vlist['dns_driver'] = array('s', array('bind', 'djbdns'));
+				$vlist['web_driver'] = array('s', array('apache', 'lighttpd', 'nginx', 'hiawatha', 
+					'lighttpdproxy', 'nginxproxy', 'hiawathaproxy'));
+				$vlist['dns_driver'] = array('s', array('bind', 'djbdns', 'maradns', 'powerdns'));
 				$vlist['spam_driver'] = array('s', array('spamassassin', 'bogofilter'));
 
 				$vlist['no_fix_config'] = array('f', 'on', 'off');
