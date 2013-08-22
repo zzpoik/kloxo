@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013082002
+%define timestamp 2013082301
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -31,7 +31,8 @@ This fork named as Kloxo-MR (meaning 'Kloxo fork by Mustafa Ramadhan').
 %{__cp} -rp * $RPM_BUILD_ROOT%{kloxo}/
 %{__mkdir} -p $RPM_BUILD_ROOT/script/
 %{__cp} -rp $RPM_BUILD_ROOT%{kloxo}/pscript/* $RPM_BUILD_ROOT/script/
-%{__cp} -rp $RPM_BUILD_ROOT%{kloxo}/httpdocs/htmllib/script/* $RPM_BUILD_ROOT/script/
+## disable because move to pscript
+#%{__cp} -rp $RPM_BUILD_ROOT%{kloxo}/httpdocs/htmllib/script/* $RPM_BUILD_ROOT/script/
 
 %clean
 #%{__rm} -rf $RPM_BUILD_ROOT
@@ -95,7 +96,24 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
-* Sun Aug 18 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013082002.mr
+* Thu Aug 22 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013082301.mr
+- set root:root to installatron symlink
+- add graph for load average
+- move files inside script to pscript
+- fix readsmtpLog for read smtp.log to maillog
+- fix mail forward with disable detect mail account
+- get client list from db directly instead from client object
+
+* Thu Aug 22 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013082201.mr
+- fix dns config issue (update config not work)
+- mod/change fix-all (include fixftpuser instead fixftp)
+- add process for delete /etc/pure-ftpd/pureftpd.passwd.tmp (unfinish loop for cleanup)
+
+* Wed Aug 21 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013082102.mr
+- fix dns config (make faster and no memory leak if running fixdns/cleanup)
+- fix installatron-install script
+
+* Tue Aug 20 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013082002.mr
 - fix mysql-to-mariadb bug
 - better getRpmVersion
 - use lib.php from dev but disable mariadb/powerdns/hiawatha initial
