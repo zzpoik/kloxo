@@ -19,6 +19,7 @@ class web__ extends lxDriverClass
 		if (!$blist) { $blist = array($l); }
 
 		// MR -- for fixed an issue version conflict!
+		// no action for hiawatha because used by Kloxo too
 		if ($l === 'httpd') {
 			$blist[] = "{$l}-tools";
 			$blist[] = "{$l}-devel";
@@ -29,25 +30,20 @@ class web__ extends lxDriverClass
 			$blist[] = "{$l}-devel";
 		}
 		
-		// MR -- because nginx using for execute Kloxo, uninstall mean remove ~lxcenter.conf only
-	/*
-		if ($l === 'nginx') {
-			lxfile_rm("/etc/nginx/conf.d/~lxcenter.conf");
-			createRestartFile($l);
-		} else {
-	*/
-			lxshell_return("service", $l, "stop");
+		lxshell_return("service", $l, "stop");
 
-			foreach ($blist as $k => $v) {
-				lxshell_return("rpm", "-e", "--nodeps", $v);
+		foreach ($blist as $k => $v) {
+			// MR -- no remove for hiawatha
+			if ($v !== 'hiawatha') {
+				setRpmRemoved($v);
 			}
+		}
 
-			lxshell_return("chkconfig", $l, "off");
+		lxshell_return("chkconfig", $l, "off");
 
-			if (file_exists("/etc/init.d/{$l}")) {
-				lunlink("/etc/init.d/{$l}");
-			}
-	//	}
+		if (file_exists("/etc/init.d/{$l}")) {
+			lunlink("/etc/init.d/{$l}");
+		}
 	}
 
 	static function installMeTrue($drivertype = null)
@@ -77,6 +73,8 @@ class web__ extends lxDriverClass
 				setRpmInstalled("{$a}-fastcgi");
 			} elseif ($a === 'nginx') {
 				setRpmInstalled("GeoIP");
+			} elseif ($a === 'hiawatha') {
+				// no action
 			}
 
 			self::setWebserverInstall($a);
@@ -131,6 +129,8 @@ class web__ extends lxDriverClass
 			if (file_exists($nginxsslcfgfile)) {
 				lxfile_rm("{$nginxsslcfgfile}");
 			}
+		} elseif ($a === 'hiawatha') {
+			// no action
 		}
 	}
 
@@ -139,9 +139,11 @@ class web__ extends lxDriverClass
 		$l = getRpmBranchList($webserver);
 
 		if (!$l) { $l = array($webserver); }
-	
-		// MR -- priority for first data on list
-		setRpmInstalled($l[0]);
+
+		if ($l[0] !== 'hiawatha') {
+			// MR -- priority for first data on list
+			setRpmInstalled($l[0]);
+		}
 
 		// MR -- overwrite init
 
@@ -373,7 +375,8 @@ class web__ extends lxDriverClass
 			}
 
 			// MR -- make simple, delete all .conf files first
-			lxshell_return("rm", "-rf", "/etc/php-fpm.d/*.conf");
+		//	lxshell_return("rm", "-rf", "/etc/php-fpm.d/*.conf");
+			exec("rm -rf /etc/php-fpm.d/*.conf");
 
 			// MR -- that mean 'ini' type config
 			$cfgmain = getLinkCustomfile("/home/php-fpm/etc", "php53-fpm.conf");
@@ -1218,7 +1221,7 @@ class web__ extends lxDriverClass
 		$this->main->createPhpInfo();
 		web::createstatsConf($domname, $this->main->stats_username, $this->main->stats_password);
 
-		//	$this->createSSlConf();
+	//	$this->createSSlConf();
 
 		$this->createConfFile();
 
