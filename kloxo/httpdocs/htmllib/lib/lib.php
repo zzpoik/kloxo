@@ -1742,8 +1742,13 @@ function cp_fileserv_list($root, $list)
 
 function cp_fileserv($file)
 {
-	lxfile_mkdir("__path_serverfile");
-	lxfile_generic_chown("__path_serverfile", "lxlabs:lxlabs");
+	global $gbl, $sgbl, $login, $ghtml;
+
+	$path = __path_serverfile;
+
+	lxfile_mkdir($path);
+	lxfile_generic_chown($path, "lxlabs:lxlabs");
+
 	$file = expand_real_root($file);
 	dprint("Fileserv copying file $file\n");
 
@@ -1761,11 +1766,11 @@ function cp_fileserv($file)
 	$base = basename(ltempnam("__path_serverfile", $basebase));
 	$pass = md5($file . time());
 	$ar = array('filename' => $file, 'password' => $pass);
-	lfile_put_serialize("__path_serverfile/$base", $ar);
-	lxfile_generic_chown("__path_serverfile/$base", "lxlabs");
+	lfile_put_serialize("{$path}/$base", $ar);
+	lxfile_generic_chown("{$path}/$base", "lxlabs");
 	$res['file'] = $base;
 	$res['pass'] = $pass;
-//	$stat = llstat("__path_serverfile/$base");
+//	$stat = llstat("{$path}/$base");
 	$res['size'] = lxfile_size($file);
 
 	return $res;
@@ -1773,8 +1778,10 @@ function cp_fileserv($file)
 
 function do_zip_to_fileserv($type, $arg, $logto = null)
 {
-	lxfile_mkdir("__path_serverfile/tmp");
-	lxfile_unix_chown_rec("__path_serverfile", "lxlabs");
+	$path = __path_serverfile;
+
+	lxfile_mkdir("{$path}/tmp");
+	lxfile_unix_chown_rec("{$path}", "lxlabs");
 
 	$basebase = basename($arg[0]);
 
@@ -6977,7 +6984,7 @@ function setInitialServices($nolog = null)
 
 	setInitialDnsConfig('bind', $nolog);
 	setInitialDnsConfig('djbdns', $nolog);
-//	setInitialDnsConfig('maradns', $nolog);
+	setInitialDnsConfig('maradns', $nolog);
 
 	setInitialWebConfig('apache', $nolog);
 	setWebDriverChownChmod('apache', $nolog);
@@ -6985,8 +6992,8 @@ function setInitialServices($nolog = null)
 	setWebDriverChownChmod('lighttpd', $nolog);
 	setInitialWebConfig('nginx', $nolog);
 	setWebDriverChownChmod('nginx', $nolog);
-//	setInitialWebConfig('hiawatha', $nolog);
-//	setWebDriverChownChmod('hiawatha', $nolog);
+	setInitialWebConfig('hiawatha', $nolog);
+	setWebDriverChownChmod('hiawatha', $nolog);
 
 	setInitialPhpFpmConfig($nolog);
 
@@ -7106,9 +7113,9 @@ function getParseInlinePhp($template, $input)
 
 	$ret = null;
 
-	if (!ob_get_status()) {
+//	if (!ob_get_status()) {
 		ob_start();
-	}
+//	}
 
 	eval('?>' . $template);
 
@@ -7121,6 +7128,8 @@ function getParseInlinePhp($template, $input)
 	$ret = (count($splitter) === 2) ? '### begin' . $splitter[1] : $ret;
 	$splitter = explode(';;; begin', $ret);
 	$ret = (count($splitter) === 2) ? ';;; begin' . $splitter[1] : $ret;
+	$splitter = explode('/// begin', $ret);
+	$ret = (count($splitter) === 2) ? '/// begin' . $splitter[1] : $ret;
 
 	return $ret;
 }
@@ -7356,8 +7365,6 @@ function getRpmVersionViaYum($rpm)
 	} else {
 		$ver = '';
 	}
-	
-	return $ver;
 */
 	exec("yum info {$rpm} | grep 'Version' | awk '{print $3}'", $out, $ret);
 
