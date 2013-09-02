@@ -124,7 +124,7 @@ gpgcheck=0
 
 # 3. srpms #
 
-[srpms]
+[SRPMS]
 name=Kloxo-MR - srpms
 baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/SRPMS/
 enabled=1

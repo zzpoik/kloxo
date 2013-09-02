@@ -24,8 +24,7 @@ do
 				mv -f $REPOPATH/$a/$b/$c $REPOPATH/$a/$b/$a-$b-$c
 			fi
 
-			reposync --delete --newest-only \
-				--config=$CURRPATH/kloxomr-mirror.repo \
+			reposync --delete --config=$CURRPATH/kloxomr-mirror.repo \
 				--repoid=$a-$b-$c --download_path=$REPOPATH/$a/$b
 
 			mv -f $REPOPATH/$a/$b/$a-$b-$c $REPOPATH/$a/$b/$c
@@ -37,19 +36,11 @@ done
 
 ### MR -- SRPMS portion ###
 if yum list installed yum* | grep @ ; then
-	reposync --delete --norepopath --newest-only \
-		--config=$CURRPATH/kloxomr-mirror.repo \
-		--repoid=srpms --download_path=$REPOPATH/SRPMS
+	reposync --delete --norepopath --config=$CURRPATH/kloxomr-mirror.repo \
+		--repoid=SRPMS --download_path=$REPOPATH/SRPMS
 else
-	if [ -d $REPOPATH/$a/$b/SRPMS ] ; then
-		mv -f $REPOPATH/$a/$b/SRPMS $REPOPATH/$a/$b/srpms
-	fi
-
-	reposync --delete --newest-only \
-		--config=$CURRPATH/kloxomr-mirror.repo \
-		--repoid=srpms --download_path=$REPOPATH/srpms
-
-	mv -f $REPOPATH/$a/$b/srpms $REPOPATH/$a/$b/SRPMS
+	reposync --delete --config=$CURRPATH/kloxomr-mirror.repo \
+		--repoid=SRPMS --download_path=$REPOPATH
 fi
 
 createrepo --checkts --update $REPOPATH/SRPMS

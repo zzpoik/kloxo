@@ -21,8 +21,7 @@ do
 			mv -f $REPOPATH/centos/$a/$b $REPOPATH/centos/$a/centalt-centos-$a-$b
 		fi
 
-		reposync --delete --newest-only \
-			--config=$CURRPATH/kloxomr-mirror.repo \
+		reposync --delete --config=$CURRPATH/kloxomr-mirror.repo \
 			--repoid=centalt-centos-$a-$b --download_path=$REPOPATH/centos/$a
 
 		mv -f $REPOPATH/centos/$a/centalt-centos-$a-$b $REPOPATH/centos/$a/$b
