@@ -663,7 +663,8 @@ function PrepareRoundCubeDb($nolog = null)
 	$pass = slave_get_db_pass();
 	$user = "root";
 	$host = "localhost";
-	$link = mysql_connect($host, $user, $pass);
+
+	$link = mysqli_connect($host, $user, $pass);
 
 	if (!$link) {
 		log_cleanup("- Mysql root password incorrect", $nolog);
@@ -701,8 +702,8 @@ function PrepareRoundCubeDb($nolog = null)
 
 	lfile_put_contents($cfgfile, $content);
 
-	$result = mysql_query("GRANT ALL ON roundcubemail.* TO roundcube@localhost IDENTIFIED BY '{$pass}'", $link);
-	mysql_query("flush privileges", $link);
+	$result = mysqli_query($link, "GRANT ALL ON roundcubemail.* TO roundcube@localhost IDENTIFIED BY '{$pass}'");
+	mysqli_query($link, "flush privileges");
 
 	if (!$result) {
 		print("- Could not grant privileges. Script Abort");
@@ -730,7 +731,7 @@ function PrepareHordeDb($nolog = null)
 	$pass = slave_get_db_pass();
 	$user = "root";
 	$host = "localhost";
-	$link = mysql_connect($host, $user, $pass);
+	$link = mysqli_connect($host, $user, $pass);
 
 	if (!$link) {
 		log_cleanup("- Mysql root password incorrect", $nolog);
@@ -743,7 +744,7 @@ function PrepareHordeDb($nolog = null)
 		$pstring = "-p\"$pass\"";
 	}
 
-	$result = mysql_select_db('horde_groupware', $link);
+	$result = mysqli_select_db($link, 'horde_groupware');
 
 	log_cleanup("- Fix MySQL commands in import files of Horde", $nolog);
 
@@ -768,8 +769,8 @@ function PrepareHordeDb($nolog = null)
 
 	lfile_put_contents($cfgfile, $content);
 
-	$result = mysql_query("GRANT ALL ON horde_groupware.* TO horde_groupware@localhost IDENTIFIED BY '{$pass}'", $link);
-	mysql_query("flush privileges", $link);
+	$result = mysqli_query($link, "GRANT ALL ON horde_groupware.* TO horde_groupware@localhost IDENTIFIED BY '{$pass}'");
+	mysqli_query($link, "flush privileges");
 
 	if (!$result) {
 		log_cleanup("Could not grant privileges. Script Aborted", $nolog);
@@ -808,7 +809,7 @@ function PrepareAfterlogicDb($nolog = null)
 	$pass = slave_get_db_pass();
 	$user = "root";
 	$host = "localhost";
-	$link = mysql_connect($host, $user, $pass);
+	$link = mysqli_connect($host, $user, $pass);
 
 	if (!$link) {
 		log_cleanup("- Mysql root password incorrect", $nolog);
@@ -841,8 +842,8 @@ function PrepareAfterlogicDb($nolog = null)
 
 	lfile_put_contents($cfgfile, $content);
 
-	$result = mysql_query("GRANT ALL ON afterlogic.* TO afterlogic@localhost IDENTIFIED BY '{$pass}'", $link);
-	mysql_query("flush privileges", $link);
+	$result = mysqli_query($link, "GRANT ALL ON afterlogic.* TO afterlogic@localhost IDENTIFIED BY '{$pass}'");
+	mysqli_query($link, "flush privileges");
 
 	lfile_put_contents($cfgfile, $content);
 
@@ -1329,7 +1330,7 @@ function fix_flag_variable($table, $flagvariable)
 
 function upload_file_to_db($dbtype, $dbhost, $dbuser, $dbpassword, $dbname, $file)
 {
-	mysql_upload_file_to_db($dbhost, $dbuser, $dbpassword, $dbname, $file);
+	mysqli_upload_file_to_db($dbhost, $dbuser, $dbpassword, $dbname, $file);
 }
 
 function calculateRealTotal($inout)
@@ -1349,17 +1350,17 @@ function calculateRealTotal($inout)
 
 function mysql_upload_file_to_db($dbhost, $dbuser, $dbpassword, $dbname, $file)
 {
-	$rs = mysql_connect($dbhost, $dbuser, $dbpassword);
+	$rs = mysqli_connect($dbhost, $dbuser, $dbpassword);
 
 	if (!$rs) {
 		throw new lxException('no_mysql_connection_while_uploading_file,', '');
 	}
 
-	mysql_select_db($dbname);
+	mysqli_select_db($link, $dbname);
 
 	$res = lfile_get_contents($file);
 
-	$res = mysql_query($res);
+	$res = mysqli_query($link, $res);
 
 	if (!$res) {
 		throw new lxException('no_mysql_connection_while_uploading_file,', '');
@@ -2913,9 +2914,15 @@ function checkIfLatest()
 
 function getLatestVersion()
 {
-	$nlist = getVersionList();
+//	$nlist = getVersionList();
+//	return $nlist[count($nlist) - 1];
 
-	return $nlist[count($nlist) - 1];
+	$ver = getRpmVersionViaYum("kloxomr");
+
+	$rel = getRpmReleaseViaYum("kloxomr");
+	$rel = explode(".", $rel);
+
+	return $ver.'-'.$rel[0];
 }
 
 function getDownloadServer()
@@ -4257,12 +4264,12 @@ function fix_self_ssl($nolog = null)
 	log_cleanup("Fix Self SSL", $nolog);
 	log_cleanup("- Fix process", $nolog);
 
-	$pgm = $sgbl->__var_program_name;
-	$ret = lxshell_return("diff", "../etc/program.pem", "htmllib/filecore/old.program.pem");
+//	$pgm = $sgbl->__var_program_name;
+//	$ret = lxshell_return("diff", "../etc/program.pem", "htmllib/filecore/old.program.pem");
 
-	if (!$ret) {
+//	if (!$ret) {
 		lxfile_cp("htmllib/filecore/program.pem", "../etc/program.pem");
-	}
+//	}
 
 //	exec("/etc/init.d/$pgm restart");
 }
@@ -5679,9 +5686,9 @@ function setInitialPhpFpmConfig($nolog = null)
 
 	$phpver = getPhpVersion();
 
-	$phptype = version_compare($phpver, "5.3.2", ">") ? "php53" : "php";
+	$phpchoose = version_compare($phpver, "5.3.2", ">") ? "php53" : "php";
 
-	$t = getLinkCustomfile("{$fpmpath}", "{$phptype}-fpm.conf");
+	$t = getLinkCustomfile("{$fpmpath}", "{$phpchoose}-fpm.conf");
 	if (file_exists($t)) {
 		lxfile_cp($t, "/etc/php-fpm.conf");
 	}
@@ -6121,7 +6128,7 @@ function setCheckPackages($nolog = null)
 		"{$phpbranch}", "{$phpbranch}-mbstring", "{$phpbranch}-mysql", "{$phpbranch}-pear",
 		"{$phpbranch}-pecl-geoip", "{$phpbranch}-pecl-imagick", "{$phpbranch}-gd",
 		"{$phpbranch}-mcrypt", "{$phpbranch}-xml", "{$phpbranch}-bcmath", "{$phpbranch}-pgsql",
-		"webalizer",  "dos2unix", "rrdtool", "xinetd", "lxjailshell", "libmhash");
+		"webalizer",  "dos2unix", "rrdtool", "xinetd", "lxjailshell");
 
 	foreach ($list as $l) {
 		if ($l === '') { continue; }
@@ -6194,8 +6201,8 @@ function setSomePermissions($nolog = null)
 	log_cleanup("- Set permissions for phpsuexec.sh script", $nolog);
 	lxfile_unix_chmod("../file/phpsuexec.sh", "0755");
 
-	log_cleanup("- Set permissions for /home/kloxo/httpd/lighttpd/ dir", $nolog);
-	lxfile_unix_chown_rec("/home/kloxo/httpd/lighttpd/", "apache:apache");
+//	log_cleanup("- Set permissions for /home/kloxo/httpd/lighttpd/ dir", $nolog);
+//	lxfile_unix_chown_rec("/home/kloxo/httpd/lighttpd/", "apache:apache");
 
 	log_cleanup("- Set permissions for /var/lib/php/session/ dir", $nolog);
 	lxfile_unix_chmod("/var/lib/php/session/", "777");
@@ -7307,23 +7314,23 @@ function resetQmailAssign()
 {
 	$pass = slave_get_db_pass();
 
-	$con = mysql_connect("localhost", "root", $pass);
+	$con = mysqli_connect("localhost", "root", $pass);
 
 	if (!$con) {
-		die('Could not connect: ' . mysql_error());
+		die('Could not connect: ' . mysqli_error($con));
 	}
 
-	mysql_select_db("vpopmail", $con);
+	mysqli_select_db($con, "vpopmail");
 
-	$result = mysql_query("SELECT * FROM vpopmail");
+	$result = mysqli_query($con, "SELECT * FROM vpopmail");
 
 	$n = array();
 
-	while($row = mysql_fetch_array($result)) {
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 		$n[$row['pw_domain']] = str_replace("/" . $row['pw_name'], '', $row['pw_dir']);
 	}
 
-	mysql_close($con);
+	mysqli_close($con);
 
 	$t = '';
 
@@ -7378,6 +7385,14 @@ function getRpmVersionViaYum($rpm)
 	}
 */
 	exec("yum info {$rpm} | grep 'Version' | awk '{print $3}'", $out, $ret);
+
+	return $out[0];
+}
+
+function getRpmReleaseViaYum($rpm)
+{
+
+	exec("yum info {$rpm} | grep 'Release' | awk '{print $3}'", $out, $ret);
 
 	return $out[0];
 }

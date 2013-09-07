@@ -160,8 +160,7 @@ function print_customer_mode($object)
 			<td>
 				<table align="left" width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-						<td nowrap><a
-								href="<?= $url ?>>>>>" Switch To <?= $mode ?> Mode </a> </td>
+						<td nowrap><a	href="<?= $url ?>">>>>> Switch To <?= $mode ?> Mode </a> </td>
 						<td width="100%"> &nbsp; </td>
 					</tr>
 				</table>

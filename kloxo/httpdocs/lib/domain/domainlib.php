@@ -874,7 +874,10 @@ class Domaind extends DomainBase
 		if ($dontwasflag) {
 			return;
 		}
-		$dns->setUpdateSubaction('full_update');
+
+	//	$dns->setUpdateSubaction('full_update');
+		$dns->setUpdateSubaction('domain');
+
 		$dns->was();
 	}
 
@@ -1559,7 +1562,7 @@ class Domaind extends DomainBase
 		return true;
 	}
 
-	function createShowAlistConfig(&$alist)
+	function createShowAlistConfig(&$alist, $subaction = null)
 	{
 		global $gbl, $sgbl, $login, $ghtml;
 		$alist['__title_advanced'] = $login->getKeywordUc('advanced');
