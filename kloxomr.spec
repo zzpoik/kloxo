@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013082301
+%define timestamp 2013090903
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -74,7 +74,7 @@ if [ "$1" = "1" ]; then
 		echo " _/                                                                          _/"
 		echo " _/  Attention:                                                              _/"
 		echo " _/                                                                          _/"
-		echo " _/  Run 'sh /usr/local/lxlabs/kloxo/install/setup.sh' completely install    _/"
+		echo " _/  Run 'sh /script/upcp' to install completely                             _/"
 		echo " _/                                                                          _/"
 		echo " _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
 		echo
@@ -96,6 +96,92 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Mon Sep 9 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013090903.mr
+- fix some bug on installer.php
+- change install mysql55 instead mysql (from centos) because have trouble with MySQLi API in 5.0.x
+- fix for php52s (add install net-snmp)
+- adjutment installer.sh to match with setup.sh
+
+* Mon Sep 9 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013090901.mr
+- change 'Kloxo' title to 'Kloxo-MR'
+- beside 'fs.file-max' also add others (like 'vm.swappiness') to optimize
+- instead warning for 'hostname', add 'universal' hostname to '/etc/hosts' in install process
+
+* Sun Sep 8 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013090801.mr
+- mod service list
+- mod reset-mysql-root-password
+- remove 'javascript:' except for 'href'
+- fix select all for client list
+- add another var to sysctl.conf (for minimize buffers and cached memory)
+
+* Sat Sep 7 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013090704.mr
+- fix install process (especially in centos 5); fix qmail-toaster initial
+- fix/better update process
+- chkconfig off for php-fpm when install (because using ruid2 as 'default' php-type)
+
+* Sat Sep 7 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013090702.mr
+- fix identify hostname (use 'hostname' instead 'hostname -f')
+- remove unused code
+- fix updatelib.php for install process
+- fix for ruid2 (need php.conf) for 'default' php-type
+
+* Sat Sep 7 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013090701.mr
+- move hostname checking from installer.php to setup.sh/installer.sh
+
+* Fri Sep 6 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013090607.mr
+- add function for checking hostname and stop install process if not qualified
+- remove libmhash to checking
+- no need check old.program.pem
+- fix/better lxphp.exe checking when running upcp
+- add '-y' to force to 'reinstall'; fix setup.sh/installer.sh/upcp script for install process
+
+* Fri Sep 6 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013090603.mr
+- add parse_ini.inc (prepare for kloxo config in ini format)
+- fix 'default' default.conf
+- mod fixdomainkey execute dns subaction for domain instead full_update
+- change listen ip-port to socket in php-fpm.conf (for php 5.2)
+- fix upcp script for fresh install 
+- fix installer.php for 'default' web using ruid2 (need enable php.conf) 
+
+* Tue Sep 2 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013090302.mr
+- make install setup (run 'sh /script/upcp' instead '/usr/local/lxlabs/kloxo/install'
+- fix mysqli_query for webmail database
+- better reset-mysql-root password and mysql-convert code
+
+* Mon Sep 2 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013090302.mr
+- testing for 6.5.1.a
+- convert mysql to mysqli API in Kloxo-MR code
+- fix display/theme
+- add/mod hash/bucket because nginx not started in certain conditions
+- change lxphp to php52s in desclib.php
+
+* Mon Sep 2 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013090201.mr
+- fix display/theme (restore no domain list; wrong button title)
+- add/mod hash/bucket for nginx.conf (nginx not start in certain conditions)
+- add changelog content of first release 6.5.0.f
+
+* Tue Aug 27 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013082704.mr
+- taken code from 6.5.1.a (but maradns and hiawatha still disable)
+- convert cname to a record for djbdns (because cname work work)
+- fix error/warning for debug panel
+- fix htmllib
+- fix hiawatha service not execute after cleanup; fix old link to /script
+- fix web drivers list
+- add hiawatha, maradns and powerdns in update services in cleanup
+
+* Mon Aug 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013082602.mr
+- fix html tags especially for deprecated tag like <font>
+
+* Mon Aug 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013082601.mr
+- make fixdns faster (synchronize and allowed_transfer change to per-client)
+- add 'accept-charset="utf-8"' for <form>
+
+* Sat Aug 24 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013082401.mr
+- fix panel port (back to 7778/7777 from 37778/37777)
+
+* Fri Aug 23 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013082302.mr
+- fix clientmail.php (missing ';')
+
 * Thu Aug 22 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013082301.mr
 - set root:root to installatron symlink
 - add graph for load average
@@ -337,3 +423,42 @@ fi
 
 * Mon Mar 18 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031801.mr
 - first release of Kloxo-MR
+- FIX - Security bug (possible sql-injection on login and switch 'safe' and 'unsafe' mode)
+- FIX - Backup and restore (no worry about 'could_not_zip' and 'could_not_unzip')
+- FIX - No password prompt when install spamdyke
+- FIX - Add missing fetchmail when install
+- FEATURE - Add Nginx, Nginx-proxy and Lighttpd-proxy
+- FEATURE - Possible using different 'Php Branch' (for Php version 5.2, 5.3 and 5.4)
+- FEATURE - Possible enable/disable 'Secondary Php' (using lxphp and suphp)
+- FEATURE - More 'Php-type' (mod_php, suphp, fcgid and php-fpm) with different apache mpm
+- FEATURE - Template-based web, php and php-fpm configs (use 'inline-php') and possible to customize
+- FEATURE - Reverse DNS always appear
+- FEATURE - Add select 'Ssl Key Bits' (2048, 1024 and 512) for 'Add Ssl Certificate'
+- FEATURE - More logs on 'Log Manager'
+- FEATURE - Enable logrotate
+- FEATURE - Support for Centos 5 and 6 on 32bit or 64bit
+- FEATURE - Possible install on Yum-based Linux OS (Fedora, ScientificLinux, CloudLinux and etc)
+- FEATURE - Based-on multiple repo (Kloxo-MR owned, CentAlt, IUS, Epel and etc)
+- FEATURE - Support different 'Mysql Branch' and MariaDB
+- FEATURE - Add 'sysinfo' script to support purpose
+- FEATURE - Add 'lxphp-module-install' script for installing module for lxphp
+- FEATURE - Add and modified some scripts (convert-to-qmailtoaster, fix-qmail-assign, fixvpop and fixmail) for mail services
+- FEATURE - Faster and better change mysql root password
+- FEATURE - Add new webmail (afterlogic Webmail lite, T-Dah and Squirrelmail)
+- FEATURE - Automatic add webmail when directory create inside /home/kloxo/httpd/webmail
+- FEATURE - Change components to rpm format (addon, webmail, phpmyadmin and etc)
+- FEATURE - Possible access FTP via ssl port
+- FEATURE - Automatic install RKHunter and add log to 'Log Manager'
+- CHANGE - Use qmail-toaster instead qmail-lxcenter (with script for convert)
+- CHANGE - New interface for login and 'defaults' pages
+- CHANGE - Use Kloxo-MR logo instead Kloxo logo
+- CHANGE - Remove xcache, zend, ioncube and output compressed from 'Php Configs'
+- CHANGE - Use php-fpm instead fastcgi or spawn-cgi for Lighttpd
+- CHANGE - Use 'en-us' instead 'en' type for language
+- CHANGE - Remove unwanted files and or code for windows os target
+- CHANGE - Use '*' (wildcard) instead 'real' ip for web config and then no issue related to 'ip not found'
+- CHANGE - Use 'apache:apache' instead 'lxlabs:lxlabs' ownership for '/home/kloxo/httpd' ('defaults' page')
+- CHANGE - Use local data for 'Release Note' instead download
+- CHANGE - Use tar.gz instead zip for compressing Kloxo-MR
+- PATCH - bug fix for installer.sh (installer.sh for 'dev' step and yum install/update + setup.sh for final step)
+- PATCH - remove php modules (except php-pear) because conflict between centos with other repos
