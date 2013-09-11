@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013090903
+%define timestamp 2013090904
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -96,6 +96,13 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Mon Sep 9 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013090904.mr
+- fix some display/theme; add testing for reset-mysql-root-password
+- fix insert 'universal' hostname
+- install mariadb if exist instead mysql55
+- fix installer (because php52s must install after mysql55 and php53u)
+- fix getRpmVersion()
+
 * Mon Sep 9 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013090903.mr
 - fix some bug on installer.php
 - change install mysql55 instead mysql (from centos) because have trouble with MySQLi API in 5.0.x
