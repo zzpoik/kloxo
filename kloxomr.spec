@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013090904
+%define timestamp 2013091202
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -96,6 +96,16 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Thu Sep 12 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013091202.mr
+- add option server/client/domain in fixdomainkey
+- fix installer process (conflict between mysql from centalt and ius)
+- fix php-fpm tpl for deprecated commenting
+- fix html code for display/theme
+
+* Wed Sep 11 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013091101.mr
+- change procedural to object style of MySQLi API
+- fix link in langfunctionlib.php
+
 * Mon Sep 9 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013090904.mr
 - fix some display/theme; add testing for reset-mysql-root-password
 - fix insert 'universal' hostname
