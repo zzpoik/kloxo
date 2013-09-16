@@ -119,7 +119,7 @@ function csainlist($string, $ssl)
 	return false;
 }
 
-function file_put_between_comments($username, $stlist, $endlist, $startstring, $endstring, $file, $string)
+function file_put_between_comments($username, $stlist, $endlist, $startstring, $endstring, $file, $string, $nowarning = null)
 {
 	global $gbl, $sgbl, $login, $ghtml;
 
@@ -130,7 +130,13 @@ function file_put_between_comments($username, $stlist, $endlist, $startstring, $
 
 	$prgm = $sgbl->__var_program_name;
 
-	$startcomment = "###Please Don't edit these comments or the content in between. $prgm uses this to recognize the lines it writes to the the file. If the above line is corrupted, it may fail to recognize them, leading to multiple lines.";
+	$startcomment = '';
+
+	if ($nowarning !== true) {
+		$startcomment = "\n### Please Don't edit these comments or the content in between. ".
+			"$prgm uses this to recognize the lines it writes to the the file. ".
+			"If the above line is corrupted, it may fail to recognize them, leading to multiple lines.";
+	}
 
 	$outlist = null;
 	$afterlist = null;
@@ -169,7 +175,7 @@ function file_put_between_comments($username, $stlist, $endlist, $startstring, $
 	}
 
 	$afterstring = implode("\n", $afterlist);
-	$outstring = "{$outstring}\n{$startstring}\n{$startcomment}\n{$string}\n{$endstring}\n$afterstring\n";
+	$outstring = "{$outstring}\n{$startstring}{$startcomment}\n{$string}\n{$endstring}\n$afterstring\n";
 
 	lxuser_put_contents($username, $file, $outstring);
 }
@@ -647,6 +653,58 @@ function slave_get_driver($class)
 	$rmt = lfile_get_unserialize("../etc/slavedb/driver");
 
 	return $rmt->data[$class];
+}
+
+function PreparePowerdnsDb($nolog = null)
+{
+	global $gbl, $sgbl, $login, $ghtml;
+
+	log_cleanup("Preparing PowerDNS database", $nolog);
+
+//	if (!isRpmInstalled('pdns')) { return; }
+
+//	if (!file_exists("/etc/pdns")) { return; }
+
+	$pass = slave_get_db_pass();
+	$user = "root";
+	$host = "localhost";
+
+	$link = new mysqli($host, $user, $pass);
+
+	if (!$link) {
+		log_cleanup("- Mysql root password incorrect", $nolog);
+
+		exit;
+	}
+
+	$pstring = null;
+
+	if ($pass) {
+		$pstring = "-p\"$pass\"";
+	}
+
+	log_cleanup("- Fixing MySQL commands in import files", $nolog);
+
+	$pdnspath = "/home/pdns";
+
+	exec("mysql -f -u root {$pstring} < {$pdnspath}/tpl/pdns.sql >/dev/null 2>&1");
+
+	$sfile = getLinkCustomfile("{$pdnspath}/etc/conf", "pdns.conf");
+	$tfile = "/etc/pdns/pdns.conf";
+
+	$content = file_get_contents($sfile);
+
+	log_cleanup("- Generating password", $nolog);
+	$pass = randomString(8);
+
+	$result = $link->query("GRANT ALL ON powerdns.* TO powerdns@localhost IDENTIFIED BY '{$pass}'");
+	$link->query("flush privileges");
+
+	$content = str_replace("gmysql-password=powerdns", "gmysql-password={$pass}", $content);
+
+	log_cleanup("- Add Password to configuration file", $nolog);
+
+	file_put_contents($tfile, $content);
 }
 
 function PrepareRoundCubeDb($nolog = null)
@@ -5603,15 +5661,17 @@ function setInitialDnsConfig($type, $nolog = null)
 
 	setCopyDnsConfFiles($type);
 
-	if ($type === 'pdns') { return; }
+	if ($type === 'pdns') { 
+		PreparePowerdnsDb($nolog);
+	} else {
+		$newlist = array("defaults", "master", "slave", "reverse");
 
-	$newlist = array("defaults", "master", "slave", "reverse");
+		$path = "/home/{$type}/conf";
 
-	$path = "/home/{$type}/conf";
-
-	foreach ($newlist as &$n) {
-		if (!file_exists("{$path}/{$n}")) {
-			lxfile_mkdir("{$path}/{$n}");
+		foreach ($newlist as &$n) {
+			if (!file_exists("{$path}/{$n}")) {
+				lxfile_mkdir("{$path}/{$n}");
+			}
 		}
 	}
 }
@@ -6200,7 +6260,10 @@ function setInitialServer($nolog = null)
 	lxfile_cp(getLinkCustomfile("/usr/local/lxlabs/kloxo/init", "kloxo.init"),
 		"/etc/init.d/kloxo");
 
-	exec("chkconfig hiawatha off; service hiawatha stop");
+	if (file_exists("/etc/init.d/hiawatha")) {
+		exec("chkconfig hiawatha off; service hiawatha stop");
+	}
+
 	exec("chown root:root /etc/init.d/kloxo; chmod 755 /etc/init.d/kloxo");
 	exec("chkconfig kloxo on");
 }
@@ -7010,6 +7073,8 @@ function setInitialServices($nolog = null)
 
 	setInitialServer($nolog);
 
+	setHostsFile($nolog);
+
 	setDefaultPages($nolog);
 
 	setInitialPhpMyAdmin($nolog);
@@ -7476,3 +7541,25 @@ function getKloxoType()
 	}
 }
 
+function setHostsFile($nolog = null)
+{
+	log_cleanup("Add 'hostname' information to '/etc/hosts'", $nolog);
+
+	$begincomment[] = "### begin - add by Kloxo-MR";
+	$endcomment[] = "### end - add by Kloxo-MR";
+
+	exec("hostname -s", $hnshort);
+	exec("hostname", $hnfull);
+	exec("hostname -i", $hnip);
+
+	$content = "{$hnip[0]} {$hnfull[0]} {$hnshort[0]}";
+
+	$hnfile = '/etc/hosts';
+
+	$scontent = file_get_contents($hnfile);
+
+	log_cleanup("- Add ip, short and full name of 'hostname'", $nolog);
+
+	file_put_between_comments("root:root", $begincomment, $endcomment, 
+		$begincomment[0], $endcomment[0], $hnfile, $content, $nowarning=true);
+}
