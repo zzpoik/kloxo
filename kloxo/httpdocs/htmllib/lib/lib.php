@@ -5556,6 +5556,17 @@ function setRpmRemoved($rpmname)
 	}
 }
 
+function setRpmRemovedViaYum($rpmname)
+{
+	if (!isRpmInstalled($rpmname)) { return; }
+
+	$ret = lxshell_return("yum", "-y", "remove", $rpmname);
+
+	if ($ret) {
+		throw new lxException("remove_{$rpmname}_failed", '', 'parent');
+	}
+}
+
 function setRpmReplaced($rpmname, $replacewith)
 {
 	$ret = lxshell_return("yum", "-y", "replace", $rpmname, "--replace-with={$replacewith}");
@@ -6443,7 +6454,7 @@ function removeDnsOtherDriver($driverapp = null, $nolog = null)
 {
 	$actives = getDnsDriverList($driverapp);
 
-	$avails = array('djbdns', 'bind', 'maradns', 'pdns');
+	$avails = array('djbdns', 'bind', 'maradns', 'pdns', 'nsd');
 
 	// array_diff return values of $avails that not present on $actives
 	$diffs = array_diff($avails, $actives);
@@ -7090,6 +7101,7 @@ function setInitialServices($nolog = null)
 	setInitialDnsConfig('djbdns', $nolog);
 	setInitialDnsConfig('maradns', $nolog);
 	setInitialDnsConfig('pdns', $nolog);
+	setInitialDnsConfig('nsd', $nolog);
 
 	setInitialWebConfig('apache', $nolog);
 	setWebDriverChownChmod('apache', $nolog);
