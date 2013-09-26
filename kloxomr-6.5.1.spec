@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013091702
+%define timestamp 2013092606
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -96,6 +96,82 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Thu Sep 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013092606.mr
+- change 'please contact'
+- mod to web config only need init.conf (ssl, default and cp) and each domain config
+- fix 'text record' for pdns (thanks SpaceDust)
+- change apache ip to 127.0.0.1 in proxy 'mode'
+- cleanup also remove /home/<webdrive>/conf/webmails
+- fix dns uninstall
+- use qmailctl instead service for stop/start qmail
+- fix 'defaults' dir content remove
+- remove unused function in web__lib.php and fix related to it
+- fix lighttpd for running with 'new' config model
+
+* Tue Sep 24 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013092403.mr
+- better changedriver message
+- disable qmail restart inside tmpupdatecleanup.php
+- disable robots to cp, disable, default and webmail dirs
+- ready testing for hiawatha and hiawatha-proxy (still unfinish work)
+- reformat dns config tpl
+- fix webmail and cp for hiawatha (move from 'generic' to each 'domain'config)
+- emulate index files and permalink in urltoolkit for hiawatha
+
+* Mon Sep 23 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013092302.mr
+- add for 'lost' replace_between function
+- change to better dnsnotify.pl and mod dnsnotify
+- mod dnsnotify.pl for detail info
+- add replace for maradns; add backend-bind for pdns
+- add error log for php.ini.tpl
+- use faatcgi+php-fpm instead ruid2 as default httpd in install process
+
+* Sun Sep 22 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013092202.mr
+- optimize config and process ('reload/restart' process) for dns
+- fix restart-all (have a problem when php-fpm restart before web server restart)
+- mod pdns.sql
+- fix wrong djbdns tpl
+- fix maradns tpl (but change to ip4_bind_address script still not ready)
+- maradns.init include change default 'ip4_bind_address' to hostname ip
+- add 'notify=yes' in bind
+- mod to small dns config because using 'origin' based
+- fix action login in update dns config process
+- remove 'srv record' in djbdns; mod mararc for accept modified for xfr and zone list
+- fix issue in dns switch (need stop server before unistall; found issue in maradns)
+- back to use read db instead call var for__var_mmaillist in web__lib.php
+- fix missing parameter in createListNlist
+- add list.transfered.conf.tpl for maradns
+- fix list.master.conf.tpl in maradns
+- fix uninstall dns (wrong var)
+- add 'dnsnotify' in maradns and djbdns with external script
+- add supermasters process in pdns
+- mod README.md
+
+* Thu Sep 19 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013091903.mr
+- fix nsd (add dns_nsdlib.php and disable include for slave conf)
+
+* Thu Sep 19 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013091902.mr
+- add double quote for 'txt record' of pdns
+- fix issue fail install pdns-backend-mysql after install pdns
+- mod pdns.sql for optimize to innodb
+- maradns ready
+- add and use setRpmRemovedViaYum for dns drivers
+- disable process xfr on maradns
+- fix maradns domain config
+- try to use '0.0.0.0' for maradns ip bind
+- prepare for NSD dns server
+- convert all 'cname record' to 'a record' in dns server config
+- mod watchdog list
+- add 'nsd' in 'reserved', 'dns' and 'driver' list;
+- set for 'nsd' dns server
+- fix latest nginx (cache dir)
+- still using '0.0.0.0' for 'nsd' notify/provide-xfr 
+
+* Tue Sep 17 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013091704.mr
+- add convert to utf8 charset for mysql-convert
+- automatically add 'SPF record' beside 'A record' for 'SPF'
+- fix pdns for addon-domain
+- fix warning when spam switch
+
 * Tue Sep 17 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013091702.mr
 - fix detect primary ip for hostname
 - disable dnssec for powerdns because still not work; add 'create database' in pdns.sql
