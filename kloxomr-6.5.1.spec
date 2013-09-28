@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013092606
+%define timestamp 2013092802
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -96,6 +96,15 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Sat Sep 28 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013092802.mr
+- hiawatha already work for redirect 
+- set enable gzip and fix urltoolkit setting for hiawatha
+- using 'qmailcrl restart' instead 'qmailctl stop qmailctl start'
+- make simple logic for webmail in web config
+- fix webmail config (thanks for hiawatha with their strict path)
+- change 'insert into' to 'insert ignore into' for sql to guarantee latest data 
+- remove 'old style' sql data and function 
+
 * Thu Sep 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013092606.mr
 - change 'please contact'
 - mod to web config only need init.conf (ssl, default and cp) and each domain config
