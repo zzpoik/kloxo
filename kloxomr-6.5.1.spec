@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013092802
+%define timestamp 2013093003
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -96,6 +96,18 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Mon Sep 30 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013093003.mr
+- fix varnish init and copy config
+- mod mysql-convert.php 
+
+* Mon Sep 30 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013093001.mr
+- ready for testing varnish cache server
+- add new 'class' as 'webcache'
+- make simple 'removeOtherDrivers' function
+- delete old config when switch web/dns to
+- remove unused files
+- restart qmail using 'restart' instead 'stop' and 'start'
+
 * Sat Sep 28 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013092802.mr
 - hiawatha already work for redirect 
 - set enable gzip and fix urltoolkit setting for hiawatha
