@@ -1,7 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013093003
-
+%define timestamp 2013100302
 Name: %{productname}
 Summary: Kloxo-MR web panel
 Version: 6.5.1.a
@@ -96,6 +95,25 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Thu Oct 2 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013100302.mr
+- back to add .db_schema which importance for panel display
+- all web server include 'generic' permalink; change user as 'ats' instead 'root' for trafficserver
+- enable 'debug' for trafficserver
+- no include php imagick for install
+- fix copy config for 'nsd' dns server
+- restart qmail with 'stop; sleep 2 start' instead 'restart'
+- add missing file (db_schema)
+
+* Wed Oct 2 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013100204.mr
+- fix httpd template if web cache enable
+- fix web cache for 'none'
+- fix 'userdir' logic in template of httpd 
+- fix dns and weh config
+- change ats to root for minimize permissions issue for trafficserver; 
+- remove 'debug' file
+- fix 'default' web server in installing process
+- fix 'default' configs copy for webcache server
+
 * Mon Sep 30 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013093003.mr
 - fix varnish init and copy config
 - mod mysql-convert.php 
