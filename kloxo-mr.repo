@@ -50,7 +50,7 @@ gpgcheck=0
 [kloxo-mr-testing-version-arch]
 name=Kloxo-MR - testing-version-$basearch
 baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/centos$releasever/$basearch/
-mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-testing-centos$releasever-i386-mirrors.txt
+mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-testing-centos$releasever-$basearch-mirrors.txt
 enabled=0
 gpgcheck=0
 
