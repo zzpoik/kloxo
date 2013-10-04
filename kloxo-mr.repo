@@ -150,3 +150,18 @@ name=Kloxo-MR - Fedora Core $releasever - $basearch - ATrpms
 baseurl=http://dl.atrpms.net/el$releasever-$basearch/atrpms/stable
 gpgcheck=0
 enable=0
+
+# ==================================
+
+# for litespeed
+[kloxo-mr-litespeed]
+name=Kloxo-MR - LiteSpeed Tech Repository for CentOS $releasever - $basearch
+baseurl=http://rpms.litespeedtech.com/centos/$releasever/$basearch/
+enabled=1
+gpgcheck=0
+
+[kloxo-mr-litespeed-update]
+name=Kloxo-MR - LiteSpeed Tech Repository for CentOS $releasever - $basearch
+baseurl=http://rpms.litespeedtech.com/centos/$releasever/update/$basearch/
+enabled=1
+gpgcheck=0

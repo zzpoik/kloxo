@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013100302
+%define timestamp 2013100403
 Name: %{productname}
 Summary: Kloxo-MR web panel
 Version: 6.5.1.a
@@ -95,6 +95,11 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Fri Oct 4 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013100403.mr
+- use trafficserver 4 config for version 3 and 4 because running well
+- fix webmail logic
+- introduce 'none' driver for web, dns and spam (as the same as webcache model)
+
 * Thu Oct 2 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013100302.mr
 - back to add .db_schema which importance for panel display
 - all web server include 'generic' permalink; change user as 'ats' instead 'root' for trafficserver
