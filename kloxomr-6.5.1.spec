@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013100403
+%define timestamp 2013101201
 Name: %{productname}
 Summary: Kloxo-MR web panel
 Version: 6.5.1.a
@@ -95,6 +95,30 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Sat Oct 12 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013101201.mr
+- fix tmpfs detect logic; fix program appear in 'switch programs'
+- add cache grace in varnish
+- mod comment in hiawatha config
+- add squid driver
+- add message for hiawatha microcache
+- restructuring files for drivers and lib categories (prepare for easy add driver)
+- most link in panel already 'right-click' to open (one step to new theme)
+- remove unused files
+
+* Tue Oct 8 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013100801.mr
+- fix sysinfo to adopt hiawatha info
+- fix hiawatha config for reverse-proxy
+- disable 'microcache' in lighttpd because no different
+- fix/optimize lighttpd.conf settting
+- also enable 'microcache' nginx-proxy
+- change remap.config setting for trafficserver
+- set 'default value' for web/webcache/dns/spam driver because add 'none' driver
+- fix web config for sure using 'php-fpm_event' as 'default' phptype
+- warning in installer when '/tmp' set as 'tmpfs' (trouble with backup/restore)
+- set max ip connection to 25 (like nginx config)
+- use 'boosted' config for varnish
+- prepare for squid web cache
+
 * Fri Oct 4 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013100403.mr
 - use trafficserver 4 config for version 3 and 4 because running well
 - fix webmail logic
