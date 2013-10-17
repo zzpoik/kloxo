@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013101201
+%define timestamp 2013101703
 Name: %{productname}
 Summary: Kloxo-MR web panel
 Version: 6.5.1.a
@@ -12,6 +12,9 @@ Source0: %{name}-%{version}-%{timestamp}.tar.gz
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
+
+Obsoletes: kloxomr-addon-extjs, kloxomr-addon-yui-dragdrop
+Obsoletes: kloxomr-addon-fckeditor, kloxomr-addon-ckeditor
 
 %description
 This is special edition (fork) of Kloxo with many features not existing on 
@@ -95,6 +98,26 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Thu Oct 17 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013101703.mr
+- fix for simplicity panel (no need frame and no thick/thin skin) 
+- fix default slavedb driver
+
+* Thu Oct 17 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013101701.mr
+- restructure panel dirs
+- introduce simplicity panel (based on thin feather but with css menu)
+- remove unwanted files (related to panel display)
+- use simplicity as 'default' panel
+
+* Tue Oct 15 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013101501.mr
+- select simple skin automatically redirect to display.php (no need frame-base again)
+- fix issue in 'default' skin
+- fix many bugs in interface
+
+* Sat Oct 12 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013101203.mr
+- rename all .phps to .php; move htmllib to panel dir
+- integrate extjs, yui-dropdown and fckeditor without source, example and docs files
+- disable install kloxomr-addon 
+
 * Sat Oct 12 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013101201.mr
 - fix tmpfs detect logic; fix program appear in 'switch programs'
 - add cache grace in varnish
