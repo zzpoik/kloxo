@@ -1,6 +1,7 @@
+%define debug_package %{nil}
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013101703
+%define timestamp 2013102203
 Name: %{productname}
 Summary: Kloxo-MR web panel
 Version: 6.5.1.a
@@ -76,7 +77,8 @@ if [ "$1" = "1" ]; then
 		echo " _/                                                                          _/"
 		echo " _/  Attention:                                                              _/"
 		echo " _/                                                                          _/"
-		echo " _/  Run 'sh /script/upcp' to install completely                             _/"
+		echo " _/  - Run 'sh /script/upcp' to install completely                           _/"
+		echo " _/  - Then, go to 'Switch Program' to enable web and other programs         _/"
 		echo " _/                                                                          _/"
 		echo " _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
 		echo
@@ -98,6 +100,41 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Tue Oct 22 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013102203.mr
+- resubmit install script because wrong 'version'
+- automatically change to 'simplicity' when still using 'default' skin
+- 'simplicity' as default with background image
+- fix password dialog for login with 'default' password (like 'admin')
+- change (add/remove) background images
+
+* Tue Oct 22 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013102201.mr
+- remove 'default' skin but add color to feather
+- move certain functions from lib.php to htmllib.php
+- change default color from 'b1c0f0' to 'EFE8E0'
+- restructure skin dirs; reduce background image with to 1600 px
+
+* Mon Oct 21 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013102103.mr
+- disable web and dns installed by default
+- mod setup.sh/installer.sh to handle 3x running installer.php when kloxo database fail to created
+
+* Mon Oct 21 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013102102.mr
+- fix skeleton.zip (previous with un-transparent logo)
+- fix to make infomsg to center in feather/default skin
+- move 'show/hide' button from tab to header
+- fix js script for show/hide toggle
+
+* Mon Oct 21 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013102101.mr
+- 'simplicity' near final; adjustment for 'default' and 'feather' skin
+- convert some table-base to div-base html codes (not final work)
+- add base extjs script (importance for frame-based skin)
+
+* Sat Oct 19 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013101901.mr
+- move all files in panel dir to theme dir amd adjustment link
+- 'message inbox' as 'help' in simplicity psnel
+- delete fckeditor _samples
+- 'simplicity' skin able change background
+- prepare for re-write display code
+
 * Thu Oct 17 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013101703.mr
 - fix for simplicity panel (no need frame and no thick/thin skin) 
 - fix default slavedb driver
