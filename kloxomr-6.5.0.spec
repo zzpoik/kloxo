@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013091702
+%define timestamp 2013102801
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -96,6 +96,33 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Mon Oct 28 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013102801.mr
+- fix sometimes fail to create 'kloxo' table
+- fix innodb aio (related to fs.aio-max-nr in /etc/sysctl.conf)
+
+* Thu Sep 19 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013091901.mr
+- add double quote for 'txt record' of pdns
+- fix issue fail install pdns-backend-mysql after install pdns
+- mod pdns.sql for optimize to innodb
+- maradns ready
+- add and use setRpmRemovedViaYum for dns drivers
+- disable process xfr on maradns
+- fix maradns domain config
+- try to use '0.0.0.0' for maradns ip bind
+- prepare for NSD dns server
+- convert all 'cname record' to 'a record' in dns server config
+- mod watchdog list
+- add 'nsd' in 'reserved', 'dns' and 'driver' list;
+- set for 'nsd' dns server
+- fix latest nginx (cache dir)
+- still using '0.0.0.0' for 'nsd' notify/provide-xfr 
+
+* Tue Sep 17 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013091704.mr
+- add convert to utf8 charset for mysql-convert
+- automatically add 'SPF record' beside 'A record' for 'SPF'
+- fix pdns for addon-domain
+- fix warning when spam switch
+
 * Tue Sep 17 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013091702.mr
 - fix detect primary ip for hostname
 - disable dnssec for powerdns because still not work; add 'create database' in pdns.sql

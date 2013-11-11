@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013102203
+%define timestamp 2013111002
 Name: %{productname}
 Summary: Kloxo-MR web panel
 Version: 6.5.1.a
@@ -78,6 +78,10 @@ if [ "$1" = "1" ]; then
 		echo " _/  Attention:                                                              _/"
 		echo " _/                                                                          _/"
 		echo " _/  - Run 'sh /script/upcp' to install completely                           _/"
+		echo " _/                                                                          _/"
+		echo " _/  - Some file downloads may not show a progress bar so please,            _/"
+		echo " _/    do not interrupt the process.                                         _/"
+		echo " _/                                                                          _/"
 		echo " _/  - Then, go to 'Switch Program' to enable web and other programs         _/"
 		echo " _/                                                                          _/"
 		echo " _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
@@ -100,6 +104,124 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Sun Nov 10 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013111002.mr
+- fix appearance php warning
+- set isDefaultSkin() to 'simplicity'
+- fix 'select folder' in 'ftp user'
+- fix 'custombutton'
+- fix set_login_skin_to_feather()
+- remove unwanted files
+- after running upcp always restart-all
+- fix/mod install process (no need 'yes' answer; auto restart-all) 
+- 
+
+* Sat Nov 9 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013110902.mr
+- add 'reverse-font' (metro-like) for 'button type' of 'appearence'
+- fix apache issue when enable secondary php
+
+* Fri Nov 8 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013110802.mr
+- set 3 options for 'show directions'
+- back to use addondomainlib.php (combine list + add parked + add redirect still not work)
+- mod 'vertical 2' and set higher width and height for buttons show (need because set bigger font)
+- install already set /tmp to permissions 1777
+- also check already hosted when add domain
+- fix/mod web server config (permalink)
+- fix error 500 issue in apache (not able set 'cgi.rfc2616_headers = 1' in php.ini)
+- fix/mod add domain (add 'domain owner' option)
+- set to hidden of 'infomsg' in 'feather' skin (also appear if mouseover to 'help' button)
+- add 'button type' in appearance (button using font or image)
+- fix display where height problem in content when using div-div and change to div-table
+
+* Tue Nov 5 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013110502.mr
+- fix wrong style.css
+- set font-size to bigger (9pt instead 8pt)
+- change 'PHPMyAdmin' to 'SQL Manager' (prepare to using sqlite format for database)
+- add dragdivscroll.js (horizontal mouse scrolling for buttons)
+- remove graph column (trouble with bigger font; unnecessary)
+
+* Mon Nov 4 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013110404.mr
+- fix space between part of content
+- forgot submit for 'show direction' 
+
+* Mon Nov 4 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013110402.mr
+- fix/mod display
+- add 'show direction' for appear where skin able select for 'buttons' direction
+ 
+* Sun Nov 3 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013110302.mr
+- horizontal buttons flow instead vertical in 'simplicity' skin
+- enable/disable compressing in php.ini
+- to make sure, also install traceroute and util-linux (ionice)
+
+* Sat Nov 2 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013110202.mr
+- fix infomsg issue in 'webserver config'
+- make more bigger font size 
+- fix updateform in appearancelib.php
+- add desc_addondomain_l declare (to prevent no object warning)
+- fix many issue related to theme
+- set drop menu to 'centered', fix width drop menu to 500px
+- fix menu for resolution 1024
+- add/mode background images
+- fix background selected
+- add brightness color function (use in the future)
+- 'feather' skin still use icon images but 'simplicity' use symbol chars
+- set smaller box in 'simplicity' skin
+- embeded menu instead div caller
+- delete gray version of background images
+- no separate breadcomb with tab and content
+- no need execute 'lxLoadBody()' js in 'simplicity' skin
+
+* Wed Oct 30 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013103005.mr
+- change path from $os.inc to rhel.inc
+- fix path for webcache driver
+- change 'Domain Adm' to 'Administer' text
+- change certain image icon to char font
+- fix resourceclass width table
+- fix infomsg issue in 'webserver config'
+- make more bigger font size
+
+* Wed Oct 30 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013103003.mr
+- remove 'add form' in each 'all' list
+- fix background logic 
+- better confirm page (with background color)
+
+* Wed Oct 30 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013103001.mr
+- fix path for drivers which move at previous
+- res and naming adjustment for background
+
+* Tue Oct 29 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013102903.mr
+- disable installapp update in scavenge
+- move files related to driver
+- fix sitepreview
+
+* Mon Oct 28 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013102802.mr
+- fix dns config (wrong code submit)
+- fix fixdns and fixweb 
+
+* Mon Oct 28 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013102801.mr
+- just fix html, css and js code for display
+- add 'fs.aio-max-nr' and increase 'fs.file-max' value in install process
+- make shadow effect for certain part
+
+* Sat Oct 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013102601.mr
+- try other dropdown menu (like it)
+- remove unwanted files
+- fix some 'bad' display
+
+* Fri Oct 25 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013102502.mr
+- move and rename header, bottom and lpanel.php to frame_ prefix and move to theme dir
+- move functions related to lpanel from htmllib.php to frame_lpanel.php
+- remove unwanted files/dirs
+- add missing lst files
+- fix packer process 
+
+* Thu Oct 24 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013102402.mr
+- restructure image/button/icon dirs
+- remove unwanted files/functions
+- fix nsd issue when select without domain exist
+- mod os_create_default_slave_driver_db()
+- fix mailaccount display
+- remove content of login dir
+
 * Tue Oct 22 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013102203.mr
 - resubmit install script because wrong 'version'
 - automatically change to 'simplicity' when still using 'default' skin
