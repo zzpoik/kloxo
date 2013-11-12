@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013111002
+%define timestamp 2013111202
 Name: %{productname}
 Summary: Kloxo-MR web panel
 Version: 6.5.1.a
@@ -104,6 +104,15 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Tue Nov 12 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013111202.mr
+- set 'simplicity' tab slight bigger
+- 'password' and 'server roles' tab always appear in 'server'
+- change 'symbol' char to char number < 256 (make compatible for pc without unicode font)
+- set 'block title' to centered (simple solution for weird certain pages like 'server roles' page)
+- merge/reorganize buttons 'groups' (example: merge 'domain' and 'domain adm'/'administer' to 'domain')
+- remove 'postmaster@...' from mailaccount in title because always postmaster from first domain
+- change 'config' to 'configure' and 'config ...' to '... configure' in title
+
 * Sun Nov 10 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013111002.mr
 - fix appearance php warning
 - set isDefaultSkin() to 'simplicity'
