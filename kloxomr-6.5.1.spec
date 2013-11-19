@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013111202
+%define timestamp 2013111901
 Name: %{productname}
 Summary: Kloxo-MR web panel
 Version: 6.5.1.a
@@ -104,6 +104,23 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Mon Nov 19 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013111901.mr
+- fix related to forcedeletedserver
+- run cleanup when click update (that mean update kloxomr)
+- better info in 'update home' and fix installed/check-update rpm
+- using text instead image for 'mail disk usage'
+- add domain from commandline no need 'domain owned' approve
+
+* Mon Nov 18 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013111801.mr
+- fix too small font in certain pages
+- make more space in drop menu
+- set index.php in menu file only able access by display.php
+- fix menu in 'simplicity' skin
+
+* Sat Nov 16 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013111601.mr
+- menu in 'simplicity' skin ready to multi-languages
+- fix/mod many aspects related to better appearance
+
 * Tue Nov 12 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013111202.mr
 - set 'simplicity' tab slight bigger
 - 'password' and 'server roles' tab always appear in 'server'

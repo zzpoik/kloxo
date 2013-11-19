@@ -149,7 +149,7 @@ gpgcheck=0
 name=Kloxo-MR - Fedora Core $releasever - $basearch - ATrpms
 baseurl=http://dl.atrpms.net/el$releasever-$basearch/atrpms/stable
 gpgcheck=0
-enable=0
+enabled=0
 
 # ==================================
 
