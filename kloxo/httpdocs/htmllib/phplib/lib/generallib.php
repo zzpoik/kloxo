@@ -233,7 +233,15 @@ class General extends Lxdb
 
 	function updatePortConfig($param)
 	{
+		global $gbl, $sgbl, $login, $ghtml;
+
 		if_demo_throw_exception('port');
+
+		$sslport = $param['portconfig_b-sslport'];
+		$nonsslport = $param['portconfig_b-nonsslport'];
+
+		exec("echo '$sslport' > /home/kloxo/httpd/cp/.ssl.port");
+		exec("echo '$nonsslport' > /home/kloxo/httpd/cp/.nonssl.port");
 
 		return $param;
 	}
