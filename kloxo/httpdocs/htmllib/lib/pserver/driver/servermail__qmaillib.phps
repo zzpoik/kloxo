@@ -61,11 +61,18 @@ function save_xinetd_qmail()
 	if ($this->main->isOn('spamdyke_flag')) {
 		$spamdyke = "/usr/bin/spamdyke -f /etc/spamdyke.conf";
 		$ret = lxshell_return("rpm", "-q", "spamdyke");
+
 		if ($ret) {
 			throw new lxException('spamdyke_is_not_installed', 'spamdyke_flag', '');
 		}
-	}
 
+		exec("echo '/usr/bin/rblsmtpd' > /var/qmail/control/rblsmtpd");
+		exec("echo '/usr/bin/spamdyke -f /etc/spamdyke.conf' > /var/qmail/control/spamdyke");
+	} else {
+		exec("rm -rf /var/qmail/control/rblsmtpd");
+		exec("rm -rf  /var/qmail/control/spamdyke");
+	}
+		
 	if ($this->main->smtp_instance > 0) {
 		$instance = $this->main->smtp_instance;
 	} else {
