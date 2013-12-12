@@ -7585,3 +7585,34 @@ function setHostsFile($nolog = null)
 	file_put_between_comments("root:root", $begincomment, $endcomment, 
 		$begincomment[0], $endcomment[0], $hnfile, $content, $nowarning=true);
 }
+
+function validate_docroot($docroot) {
+	///#656 When adding a subdomain, the Document Root field is not being validated
+	if (csa($docroot, " /")) {
+		throw new lxexception("document_root_may_not_contain_spaces", 'docroot', "");
+	} else {
+		$domain_validation = str_split($docroot);
+		$domain_validation_num = strlen($docroot) - 1;
+			
+		if ($domain_validation[$domain_validation_num] == " ") {
+			throw new lxexception("document_root_may_not_contain_spaces", 'docroot', "");
+		}
+
+		if (strpos("..", $docroot) !== false) {
+			throw new lxexception("document_root_may_not_contain_doubledots", 'docroot', "");
+		}
+
+		if (strpos("./", $docroot) !== false) {
+			throw new lxexception("document_root_may_not_contain_dotslash", 'docroot', "");
+		}
+
+		if (strpos("/.", $docroot) !== false) {
+			throw new lxexception("document_root_may_not_contain_slashdot", 'docroot', "");
+		}
+
+		if (strpos("~", $docroot) !== false) {
+			throw new lxexception("document_root_may_not_contain_tilde", 'docroot', "");
+		}
+	}
+}
+

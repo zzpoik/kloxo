@@ -655,7 +655,7 @@ class Domaind extends DomainBase
 
 		$web->ipaddress = $dnstemplate->getIpForBaseDomain();
 		$web->docroot = $this->docroot;
-
+	/*
 		///#656 When adding a subdomain, the Document Root field is not being validated
 		if (csa($web->docroot, " /")) {
 			throw new lxexception("document_root_may_not_contain_spaces", 'docroot', "");
@@ -667,8 +667,11 @@ class Domaind extends DomainBase
 				throw new lxexception("document_root_may_not_contain_spaces", 'docroot', "");
 			}
 		}
-
+	*/
+	
 		$web->docroot = trim($web->docroot, "/");
+		
+		validate_docroot($web->docroot);
 
 		$dns->copyObject($dnstemplate);
 		$dns->dbaction = 'add';
@@ -956,10 +959,6 @@ class Domaind extends DomainBase
 			throw new lxException('domain_already_exists_as_pointer', 'parent');
 		}
 		
-		if (strpos($param['docroot'], "..") !== false) {
-			throw new lxException('no_permit_documentroot_with_doubledots', 'parent');
-		}
-
 		$param['web-nname'] = $param['nname'];
 		$param['dns-nname'] = $param['nname'];
 		$param['dns-zone_type'] = 'master';

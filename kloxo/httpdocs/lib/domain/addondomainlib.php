@@ -55,6 +55,11 @@ class addondomain extends Lxdb
 		} else {
 			$param['real_clparent_f'] = $parent->nname;
 		}
+		
+		// MR -- that mean redirect
+		if (isset($param['destinationdir'])) {
+			validate_docroot($param['destinationdir']);
+		}
 
 		return $param;
 	}

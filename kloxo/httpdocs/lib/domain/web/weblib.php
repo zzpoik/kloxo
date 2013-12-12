@@ -1160,6 +1160,13 @@ class Web extends Lxdb
 		callInBackground("se_submit", array($login->contactemail, $this->nname, $param['email']));
 		throw new lxException("se_submit_running_background", '', $this->nname);
 	}
+	
+	function update($subaction, $param)
+	{
+		if ($subaction === 'docroot') {
+			validate_docroot($param['docroot']);
+		}
+	}
 
 	function updateform($subaction, $param)
 	{
