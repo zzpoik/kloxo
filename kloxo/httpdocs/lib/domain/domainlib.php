@@ -951,9 +951,15 @@ class Domaind extends DomainBase
 		lxclient::fixpserver_list($param);
 
 		$param['nname'] = strtolower($param['nname']);
+		
 		if (exists_in_db(null, 'addondomain', $param['nname'])) {
 			throw new lxException('domain_already_exists_as_pointer', 'parent');
 		}
+		
+		if (strpos($param['docroot'], "..") !== false) {
+			throw new lxException('no_permit_documentroot_with_doubledots', 'parent');
+		}
+
 		$param['web-nname'] = $param['nname'];
 		$param['dns-nname'] = $param['nname'];
 		$param['dns-zone_type'] = 'master';
