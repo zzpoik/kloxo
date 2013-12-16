@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013111901
+%define timestamp 2013121402
 Name: %{productname}
 Summary: Kloxo-MR web panel
 Version: 6.5.1.a
@@ -104,7 +104,112 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
-* Mon Nov 19 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013111901.mr
+* Sat Dec 14 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013121402.mr
+- fix tree appear in feather skin 
+- fix infomsg in 'Feather' skin
+- fix certain infomsg; remove useless code in display
+- fix appear if no infomsg
+- fix link in show
+- split %client% to %client% and %loginas% in infomsg
+- add certain infomsgs
+
+* Wed Dec 11 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013121104.mr
+- no permit if docroot with '..'
+- change colors for version in login page
+- beside when add domain, validate docroot also in 'docroot update' and 'redirect docroot'
+
+* Wed Dec 11 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013121102.mr
+- change to use jcterm instead sshterm-template for ssh access
+
+* Mon Dec 9 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013120904.mr
+- fix spamdyke disable/enable (need update qmail-toaster also)
+- fix tls issue in smtp
+- update panel port also create .ssl.port .nonssl.port files in /home/kloxo/httpd/cp
+- port in cp also change if panel port change
+
+* Mon Dec 9 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013120901.mr
+- use 'post' instead 'get' if form have enctype
+- change certain text (like 'show') to keywords
+- fix htmledit appear and change height from 200 to 500
+- switch to apache also install all necessary module (fix mod_fastcgi issue)
+- prepare to change pure-ftp service from xinetd to init
+- fix ie8 issue (possible)
+- also change 'edit' beside 'html_edit' from 600 to 900px
+- fix simplicity skin in IE8 
+- mod/add certain infomsg
+- prepare qmail stmp run (but still include in qmail rpm)
+- fix pagenum/pagesize list
+
+* Fri Dec 6 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013120601.mr
+- update running cleanup-nokloxorestart instead cleanup
+- add remark in messagelib.php for 'customize' var
+- back to use action var instead get in form except for pagenum/pagesize in list
+
+* Thu Dec 5 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013120503.mr
+- change 'maxuploadsize' in kloxo-hiawatha from 100 to 2000 (MB)
+- fix/mod 'simplicity' menu
+- help/infomsg now able to use full html tags (like ul/ol/p)
+- fix/mod space in certain list; fix dbadmin and skeleton reference
+- mod certain infomsg with rich html (unfinish jobs)
+- mod width to wrap percentage (from 100 to 25)
+- finishing reformat help messages (some messages still 'No information')
+- fix messagelib.php
+- combine add and list for ipaddress and adjustment menu
+
+* Tue Dec 3 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013120301.mr
+- note inside hiawatha.conf.base where able upload until 2GB if using hiawatha-9.3-2+
+
+* Mon Dec 2 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013120201.mr
+- move html.php from lib to theme
+- add findindexfile in kloxo-hiawatha
+- fix menu related to login-as-cancel
+- fix sitepreview (also hn_urlrewrite) related to access php file directly
+- fix hiawatha default.conf.tpl
+- add getDescription function beside get getKeyword
+- mod 'Comments' to without textarea
+- combine resourplan 'information' and 'account on plan'
+- fix/move infomsg for resourceplan
+- add squid.conf (missing in previous)
+
+* Fri Nov 29 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013112902.mr
+- fix menu (wrong file 'version')
+
+* Fri Nov 29 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013112901.mr
+- fix hiawatha config if site access with '?s=a'
+- translate certain text messages
+- reversedns only able access by admin
+- delete certain useless files
+- fix/mod port checking
+- disable licensecheck
+- menu appear tree 'style' when admin/reseller access their customer
+
+* Sat Nov 23 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013112305.mr
+- fix update from panel (just enough running cleanup)
+- mod 'ionice' from '-c3' (idle) to '-c2' (best-effort)
+
+* Sat Nov 23 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013112304.mr
+- mod hiawatha log format to extended (the same as apache log format)
+- fix getContent in ffilelib.php
+- better appear list in weblastvisit
+- fix toggleVisibilityByClass in lxa.js
+- fix branch list functions
+- mod to not appear 'Consumed Login' when select 'Login As'
+- fix/mod menu and buttons
+- fix naming js function (to toggleVisibilityById)
+- add 'click here' for 'help' and 'logout'
+- add 'Login As (Cancel)' in menu
+- remove 'Home' in 'Backup/Restore' and 'Update' title
+
+* Fri Nov 22 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013112201.mr
+- fix menu link in 'simplicity' skin (to using 'real link')
+- fix ownwerahip in filemanager
+- add php55u branch
+- remove all '__m_message_pre' in add/update form and infomsg appear depend on variable in messagelib.php
+- remove commonmessagelib.php because useless
+- fix getRpmVersionViaYum
+- mod toggleVisibility to make possible display all infomsg in 1 page;
+
+* Tue Nov 19 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013111901.mr
 - fix related to forcedeletedserver
 - run cleanup when click update (that mean update kloxomr)
 - better info in 'update home' and fix installed/check-update rpm

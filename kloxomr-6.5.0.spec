@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013102801
+%define timestamp 2013121102
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -96,6 +96,21 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Wed Dec 11 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013121102.mr
+- change to use jcterm instead sshterm-template for ssh access
+
+* Mon Dec 9 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013120902.mr
+- fix spamdyke disable/enable (need update qmail-toaster also)
+- fix tls issue in smtp
+- update panel port also create .ssl.port .nonssl.port files in /home/kloxo/httpd/cp
+- port in cp also change if panel port change
+
+
+* Tue Dec 3 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013120301.mr
+- fix mysql not able to start if /tmp not 1777 permission
+- fix sitepreview to able to access php file directly
+- note inside hiawatha.conf.base where able upload until 2GB if using hiawatha-9.3-2+
+
 * Mon Oct 28 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013102801.mr
 - fix sometimes fail to create 'kloxo' table
 - fix innodb aio (related to fs.aio-max-nr in /etc/sysctl.conf)
