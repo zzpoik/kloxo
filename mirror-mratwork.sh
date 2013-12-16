@@ -24,7 +24,7 @@ do
 				mv -f $REPOPATH/$a/$b/$c $REPOPATH/$a/$b/$a-$b-$c
 			fi
 
-			reposync --delete --config=$CURRPATH/kloxomr-mirror.repo \
+			reposync --delete --config=$CURRPATH/mratwork-mirror.repo \
 				--repoid=$a-$b-$c --download_path=$REPOPATH/$a/$b
 
 			mv -f $REPOPATH/$a/$b/$a-$b-$c $REPOPATH/$a/$b/$c
@@ -36,10 +36,10 @@ done
 
 ### MR -- SRPMS portion ###
 if yum list installed yum* | grep @ ; then
-	reposync --delete --norepopath --config=$CURRPATH/kloxomr-mirror.repo \
+	reposync --delete --norepopath --config=$CURRPATH/mratwork-mirror.repo \
 		--repoid=SRPMS --download_path=$REPOPATH/SRPMS
 else
-	reposync --delete --config=$CURRPATH/kloxomr-mirror.repo \
+	reposync --delete --config=$CURRPATH/mratwork-mirror.repo \
 		--repoid=SRPMS --download_path=$REPOPATH
 fi
 
