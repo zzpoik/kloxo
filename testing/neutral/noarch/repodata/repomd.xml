@@ -2,20 +2,20 @@
 <repomd xmlns="http://linux.duke.edu/metadata/repo">
   <data type="other">
     <location href="repodata/other.xml.gz"/>
-    <checksum type="sha">4339baee6db0e4681a7d1d7e9817ef579020f68d</checksum>
-    <timestamp>1387267568</timestamp>
-    <open-checksum type="sha">ccacbb630394aff684c4b1e8f661064f243c4a61</open-checksum>
+    <checksum type="sha">7deb9cc30684692da65a3a0d680c5eb41685a4c4</checksum>
+    <timestamp>1387269862</timestamp>
+    <open-checksum type="sha">9e33dc245ef4e349f81dabfc9b2605fd0c952e12</open-checksum>
   </data>
   <data type="filelists">
     <location href="repodata/filelists.xml.gz"/>
-    <checksum type="sha">b1718d0e15ab7b3e2dfb5f96bd7e5156822ac36f</checksum>
-    <timestamp>1387267568</timestamp>
-    <open-checksum type="sha">0860ad6d24c991010cd65d227ddea8148334ce3d</open-checksum>
+    <checksum type="sha">92aaa0322cb911103a0a61d54081183776a40f7b</checksum>
+    <timestamp>1387269862</timestamp>
+    <open-checksum type="sha">2878c9f66b2f3d09ce37275a2cac92bec22d0b7e</open-checksum>
   </data>
   <data type="primary">
     <location href="repodata/primary.xml.gz"/>
-    <checksum type="sha">caab082e75e7882077e3b1b7955511f1a867f43b</checksum>
-    <timestamp>1387267568</timestamp>
-    <open-checksum type="sha">221c46fcbfc21e6e33b4bea3d4cfc7a2b988a238</open-checksum>
+    <checksum type="sha">423064054ee5c5e92d50f61a64e2b66d4e98b4a7</checksum>
+    <timestamp>1387269862</timestamp>
+    <open-checksum type="sha">e034b96c2c880e7ed5f5447cd4d8226a84254d59</open-checksum>
   </data>
 </repomd>
