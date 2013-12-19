@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "$(rpm -q mratwork-release)" == "" ] ; then
+if [ "$(rpm -qa mratwork-release)" == "" ] ; then
     cd /tmp
     wget https://github.com/mustafaramadhan/kloxo/raw/rpms/release/neutral/noarch/mratwork-release-0.0.1-1.noarch.rpm --no-check-certificate
     rpm -ivh mratwork-release-0.0.1-1.noarch.rpm
@@ -26,6 +26,7 @@ u=$(echo $t|grep -i '5.0.')
 if [ "$u" != "" ] ; then
 	echo "Need update mysql first..."
 	echo "- Run 'yum replace mysql --replace-with=mysql55'" 
+	echo "- For OpenVZ VPS, add 'innodb_use_native_aio=0' under '[mysqld]' in '/etc/my.cnf'"
 	exit
 fi
 
