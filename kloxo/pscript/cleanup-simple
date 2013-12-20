@@ -1,5 +1,7 @@
 #!/bin/sh
 
+chkconfig kloxo on
+
 if [ "$(rpm -qa mratwork-release)" == "" ] ; then
     cd /tmp
     wget https://github.com/mustafaramadhan/kloxo/raw/rpms/release/neutral/noarch/mratwork-release-0.0.1-1.noarch.rpm --no-check-certificate
@@ -9,6 +11,11 @@ if [ "$(rpm -qa mratwork-release)" == "" ] ; then
     rm -rf /etc/yum.repos.d/kloxo-mr.repo
 else
     yum update mratwork-release -y
+fi
+
+if [ "$(rpm -qa lxphp)" == "" ] ; then
+    yum remove lxphp lxlighttpd lxzend -y
+	yum install php52s hiawatha
 fi
 
 checktmpfs=$(cat /etc/fstab|grep '/tmp'|grep 'tmpfs')
