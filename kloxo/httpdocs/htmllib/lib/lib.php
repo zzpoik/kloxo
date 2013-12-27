@@ -6276,12 +6276,23 @@ function setInitialServer($nolog = null)
 	lxfile_cp(getLinkCustomfile("/usr/local/lxlabs/kloxo/init", "kloxo.init"),
 		"/etc/init.d/kloxo");
 
-	if (file_exists("/etc/init.d/hiawatha")) {
-		exec("chkconfig hiawatha off; service hiawatha stop");
-	}
+	fix_hiawatha();
 
 	exec("chown root:root /etc/init.d/kloxo; chmod 755 /etc/init.d/kloxo");
 	exec("chkconfig kloxo on");
+}
+
+function fix_hiawatha()
+{
+	if (file_exists("/etc/init.d/hiawatha")) {
+		$webdrv = slave_get_driver('web');
+
+		if (strpos($webdrv, 'hiawatha')) {
+			exec("chkconfig hiawatha off; service hiawatha stop");
+		} else {
+			exec("chkconfig hiawatha on");
+		}
+	}
 }
 
 function setSomePermissions($nolog = null)

@@ -102,6 +102,9 @@ function updatecleanup_main()
 		symlink("/var/installatron/frontend", "/usr/local/lxlabs/kloxo/httpdocs/installatron");
 	}
 
+	log_cleanup("Fixing Hiawatha service");
+	fix_hiawatha();
+
 	log_cleanup("*** Executing Update (cleanup) - END ***");	
 }
 
