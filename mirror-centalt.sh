@@ -24,7 +24,9 @@ do
 		reposync --delete --config=$CURRPATH/kloxomr-mirror.repo \
 			--repoid=centalt-centos-$a-$b --download_path=$REPOPATH/centos/$a
 
-		mv -f $REPOPATH/centos/$a/centalt-centos-$a-$b $REPOPATH/centos/$a/$b
+		if [ -d $REPOPATH/centos/$a/centalt-centos-$a-$b ] ; then
+			mv -f $REPOPATH/centos/$a/centalt-centos-$a-$b $REPOPATH/centos/$a/$b
+		fi
 
 		createrepo --checkts --update $REPOPATH/centos/$a/$b
 	done

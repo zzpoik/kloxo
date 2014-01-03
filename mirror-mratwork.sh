@@ -20,9 +20,9 @@ do
 	do
 		for c in noarch i386 x86_64
 		do
-			if [ -d $REPOPATH/$a/$b/$c ] ; then
+			#if [ -d $REPOPATH/$a/$b/$c ] ; then
 				mv -f $REPOPATH/$a/$b/$c $REPOPATH/$a/$b/$a-$b-$c
-			fi
+			#fi
 
 			reposync --delete --config=$CURRPATH/mratwork-mirror.repo \
 				--repoid=$a-$b-$c --download_path=$REPOPATH/$a/$b
@@ -35,12 +35,12 @@ do
 done
 
 ### MR -- SRPMS portion ###
-if yum list installed yum* | grep @ ; then
-	reposync --delete --norepopath --config=$CURRPATH/mratwork-mirror.repo \
-		--repoid=SRPMS --download_path=$REPOPATH/SRPMS
-else
+if [ "$(yum list installed kernel* | grep @)" == "" ] ; then
 	reposync --delete --config=$CURRPATH/mratwork-mirror.repo \
 		--repoid=SRPMS --download_path=$REPOPATH
+else
+	reposync --delete --norepopath --config=$CURRPATH/mratwork-mirror.repo \
+		--repoid=SRPMS --download_path=$REPOPATH/SRPMS
 fi
 
 createrepo --checkts --update $REPOPATH/SRPMS
