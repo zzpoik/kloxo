@@ -69,6 +69,11 @@ class web__ extends lxDriverClass
 
 			if ($a === 'httpd') {
 				setRpmInstalled("mod_ssl");
+				setRpmInstalled("mod_rpaf");
+				setRpmInstalled("mod_ruid2");
+				setRpmInstalled("mod_suphp");
+				setRpmInstalled("mod_fastcgi");
+				setRpmInstalled("mod_fcgid");
 			} elseif ($a === 'lighttpd') {
 				setRpmInstalled("{$a}-fastcgi");
 			} elseif ($a === 'nginx') {

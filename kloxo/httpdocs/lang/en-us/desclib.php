@@ -1290,3 +1290,5 @@ $__description["no_fix_config"] = array("No fix config");
 
 // MR -- in 'webservr config'
 $__description["php_branch"] = array("Php Branch");
+
+$__description["ssh_terminal"] = array("Ssh Terminal");
