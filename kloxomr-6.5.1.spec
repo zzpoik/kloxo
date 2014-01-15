@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013121402
+%define timestamp 2014011001
 Name: %{productname}
 Summary: Kloxo-MR web panel
 Version: 6.5.1.a
@@ -104,6 +104,68 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Fri Jan 10 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014011001.mr
+- fix mysql-aio issue in openvz; add disable-mysql-aio script
+- mod how-to-install.txt for additional step when update from Kloxo 6.1.12
+- no add certain param in sysctl.conf if openvz
+
+* Tue Jan 07 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014010701.mr
+- fix install problem in openvz (wrong detect centos version)
+- also remove exim in convert-to-qmailtoaster
+- add try-catch in default_index.php
+
+* Fri Jan 03 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014010301.mr
+- mod again ionice (become not using '-n')
+- fix hiawatha for proxy (404 and 504 error)
+
+* Wed Jan 01 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014010101.mr
+- change ionice value
+- detect hiawatha as web server when running restart-web/-all
+- fix try-cache process in appear; fix logic for nowrap in list table
+
+* Thu Dec 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013122602.mr
+- fix hiawatha service after hiawatha update
+
+* Thu Dec 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013122601.mr
+- fix mysql conflict because wrong detect centos 6
+- fix web config for disable domain
+- fix clearcache logic
+- fix appear if restore from previous version
+
+* Fri Dec 20 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013122002.mr
+- fix wrong logic of lxphp detect
+
+* Fri Dec 20 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013122001.mr
+- add keyword text for updateall message and adjusment updateallWarningfunction js
+- fix/mod certain infomsg
+- change submit naming from frm_change to frm_button/frm_button_all and add frm_change hidden input
+- add id for hidden input tags beside name; fix all_client appear
+- add warning to need add 'innodb_use_native_aio=0' in /etc/my.cnf to update to mysql to 5.5 if running cleanup
+- cleanup process also fix if lxphp exist
+- reupload abstract_012.jpg
+- mod certain text in messagelib.php
+
+* Tue Dec 17 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013121703.mr
+- fix install and cleanup related to mratwork.repo
+
+* Tue Dec 17 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013121702.mr
+- fix logic for custom php-fpm in nginx 
+
+* Tue Dec 16 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013121701.mr
+- add/mod certain keyword/message
+- fix 'webmail system default'
+- mod message box (remove image)
+- fix login page if 'session timeout' state
+
+* Mon Dec 16 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013121603.mr
+- fix security bug for php-fpm (add open_basedir)
+- mod php-fpm open_basedir
+
+* Mon Dec 16 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013121601.mr
+- change kloxo-mr.repo to mratwork.repo via rpm and sdjustment in install and cleanup script
+- change 'processed logs' to 'client processed logs' and 'stats configuration' to 'domain processed logs'
+- fix error in debug file if 'property' not exist
+
 * Sat Dec 14 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013121402.mr
 - fix tree appear in feather skin 
 - fix infomsg in 'Feather' skin

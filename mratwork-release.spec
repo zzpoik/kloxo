@@ -1,7 +1,7 @@
 Summary: MRatwork release file and package configuration
 Name: mratwork-release
 Version: 0.0.1
-Release: 1
+Release: 4
 License: AGPLV3
 Group: System Environment/Base
 URL: http://mratwork.com/
@@ -22,17 +22,22 @@ MRatwork rpm release. This package contains yum configuration for the MRatWork R
 %{__rm} -rf %{buildroot}
 %{__mkdir} -p %{buildroot}/%{_sysconfdir}/yum.repos.d/
 
-if $(yum list *yum*|grep @) ;  then
-	releasever='6'
-else
+checker=$(yum list *yum*|grep @)
+
+if [ "$checker" == "" ] ;  then
 	releasever='5'
+else
+	releasever='6'
 fi
 
-if [ "$(uname -m)" == "x86_64" ] ;  then
-	basearch='x86_64'
+unamem=$(uname -m)
+
+### MR -- may trouble in OpenVZ for basearch
+if [ "$unamem" == "x86_64" ] ;  then
+	# basearch='x86_64'
 	basearchalt='amd64'
 else
-	basearch='i386'
+	# basearch='i386'
 	basearchalt='x86'
 fi
 
@@ -45,9 +50,9 @@ enabled=1
 gpgcheck=0
 
 [mratwork-release-neutral-arch]
-name=MRatWork - release-neutral-$basearch
-baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/neutral/$basearch/
-mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-release-neutral-$basearch-mirrors.txt
+name=MRatWork - release-neutral-arch
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/neutral/\$basearch/
+mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-release-neutral-\$basearch-mirrors.txt
 enabled=1
 gpgcheck=0
 
@@ -59,9 +64,9 @@ enabled=1
 gpgcheck=0
 
 [mratwork-release-version-arch]
-name=MRatWork - release-version-$basearch
-baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos$releasever/$basearch/
-mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-release-centos$releasever-$basearch-mirrors.txt
+name=MRatWork - release-version-arch
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos$releasever/\$basearch/
+mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-release-centos$releasever-\$basearch-mirrors.txt
 enabled=1
 gpgcheck=0
 
@@ -73,9 +78,9 @@ enabled=0
 gpgcheck=0
 
 [mratwork-testing-neutral-arch]
-name=MRatWork - testing-neutral-$basearch
-baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/neutral/$basearch/
-mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-testing-neutral-$basearch-mirrors.txt
+name=MRatWork - testing-neutral-arch
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/neutral/\$basearch/
+mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-testing-neutral-\$basearch-mirrors.txt
 enabled=0
 gpgcheck=0
 
@@ -87,9 +92,9 @@ enabled=0
 gpgcheck=0
 
 [mratwork-testing-version-arch]
-name=MRatWork - testing-version-$basearch
-baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/centos$releasever/$basearch/
-mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-testing-centos$releasever-$basearch-mirrors.txt
+name=MRatWork - testing-version-arch
+baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/centos$releasever/\$basearch/
+mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-testing-centos$releasever-\$basearch-mirrors.txt
 enabled=0
 gpgcheck=0
 
@@ -103,9 +108,9 @@ gpgcheck=0
 # ==================================
 
 [mratwork-centalt]
-name=MRatWork - centalt - $basearch
-baseurl=http://centos.alt.ru/repository/centos/$releasever/$basearch/
-mirrorlist=http://rpms.mratwork.com/repo/mirrors/centalt-centos-$releasever-$basearch-mirrors.txt
+name=MRatWork - centalt - arch
+baseurl=http://centos.alt.ru/repository/centos/$releasever/\$basearch/
+mirrorlist=http://rpms.mratwork.com/repo/mirrors/centalt-centos-$releasever-\$basearch-mirrors.txt
 enabled=1
 gpgcheck=0
 exclude=openssh* perl* mariadb*
@@ -113,17 +118,17 @@ exclude=openssh* perl* mariadb*
 # ==================================
 
 [mratwork-ius]
-name=MRatWork - IUS Community Packages for EL $releasever - $basearch
-baseurl=http://dl.iuscommunity.org/pub/ius/stable/Redhat/$releasever/$basearch
-mirrorlist=http://dmirr.iuscommunity.org/mirrorlist/?repo=ius-el$releasever&arch=$basearch
+name=MRatWork - IUS Community Packages for EL $releasever - arch
+baseurl=http://dl.iuscommunity.org/pub/ius/stable/Redhat/$releasever/\$basearch
+mirrorlist=http://dmirr.iuscommunity.org/mirrorlist/?repo=ius-el$releasever&arch=\$basearch
 enabled=1
 gpgcheck=0
 exclude=php52* mysql51*
 
 [mratwork-ius-c5]
-name=MRatWork - IUS Community Packages for EL 5 (special) - $basearch
-baseurl=http://dl.iuscommunity.org/pub/ius/archive/CentOS/5/$basearch
-mirrorlist=http://rpms.mratwork.com/repo/mirrors/ius-centos-5-$basearch-mirrors.txt
+name=MRatWork - IUS Community Packages for EL 5 (special) - arch
+baseurl=http://dl.iuscommunity.org/pub/ius/archive/CentOS/5/\$basearch
+mirrorlist=http://rpms.mratwork.com/repo/mirrors/ius-centos-5-\$basearch-mirrors.txt
 enabled=1
 gpgcheck=0
 includepkgs=php52*
@@ -131,9 +136,9 @@ includepkgs=php52*
 # ==================================
 
 [mratwork-epel]
-name=MRatWork - Extra Packages for EL $releasever - $basearch
-baseurl=http://download.fedoraproject.org/pub/epel/$releasever/$basearch
-mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel-$releasever&arch=$basearch
+name=MRatWork - Extra Packages for EL $releasever - arch
+baseurl=http://download.fedoraproject.org/pub/epel/$releasever/\$basearch
+mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel-$releasever&arch=\$basearch
 enabled=1
 gpgcheck=0
 
@@ -141,8 +146,8 @@ gpgcheck=0
 
 # for varnish
 [mratwork-varnish-3.0]
-name=MRatWork - Varnish 3.0 for EL $releasever - $basearch
-baseurl=http://repo.varnish-cache.org/redhat/varnish-3.0/el$releasever/$basearch
+name=MRatWork - Varnish 3.0 for EL $releasever - arch
+baseurl=http://repo.varnish-cache.org/redhat/varnish-3.0/el$releasever/\$basearch
 enabled=1
 gpgcheck=0
 
@@ -151,7 +156,7 @@ gpgcheck=0
 # for hiawatha
 [mratwork-centosec]
 name=MRatWork - CentOS $releasever Packages from CentOS.EC
-baseurl=http://centos$releasever.ecualinux.com/$basearch
+baseurl=http://centos$releasever.ecualinux.com/\$basearch
 enabled=0
 gpgcheck=0
 exclude=cairo*
@@ -161,7 +166,7 @@ exclude=cairo*
 # for nginx-stable
 [mratwork-nginx]
 name=Kloxo-MR - nginx repo
-baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+baseurl=http://nginx.org/packages/centos/$releasever/\$basearch/
 gpgcheck=0
 enabled=0
 
@@ -179,7 +184,7 @@ gpgcheck=0
 # for atrpms
 [mratwork-atrpms]
 name=Kloxo-MR - Fedora Core $releasever - $basearch - ATrpms
-baseurl=http://dl.atrpms.net/el$releasever-$basearch/atrpms/stable
+baseurl=http://dl.atrpms.net/el$releasever-\$basearch/atrpms/stable
 gpgcheck=0
 enabled=0
 
@@ -198,5 +203,12 @@ _EOF_
 %config %{_sysconfdir}/yum.repos.d/mratwork.repo
 
 %changelog
-* Mon Dec 06 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 0.0.1-1
+* Tue Dec 17 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 0.0.1-3
+- fix version detect
+- no change for basearch except basearchalt
+
+* Mon Dec 16 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 0.0.1-2
+- fix version detect
+
+* Mon Dec 16 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 0.0.1-1
 - first release
