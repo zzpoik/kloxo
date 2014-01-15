@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2013121102
+%define timestamp 2014011001
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -96,6 +96,53 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Fri Jan 10 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014011001.mr
+- fix mysql-aio issue in openvz; add disable-mysql-aio script
+- fix mod_rpaf issue when select web proxy
+- add 'ssh_terminal' in desclib.php
+- mod how-to-install.txt for additional step when update from Kloxo 6.1.12
+- no add certain param in sysctl.conf if openvz
+
+* Tue Jan 07 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014010701.mr
+- fix install problem in openvz (wrong detect centos version)
+- also remove exim in convert-to-qmailtoaster
+
+* Fri Jan 03 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014010301.mr
+- mod again ionice (become not using '-n')
+
+* Wed Jan 01 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014010101.mr
+- change ionice value
+- detect hiawatha as web server when running restart-web/-all
+
+* Thu Dec 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013122602.mr
+- fix hiawatha service after hiawatha update
+
+* Thu Dec 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013122601.mr
+- fix mysql conflict because wrong detect centos 6
+
+* Fri Dec 20 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013122002.mr
+- fix wrong logic of lxphp detect
+
+* Fri Dec 20 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013122001.mr
+- cleanup process also fix if lxphp exist
+
+* Tue Dec 17 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013121703.mr
+- fix install and cleanup related to mratwork.repo
+
+* Tue Dec 17 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013121702.mr
+- fix logic for custom php-fpm in nginx 
+
+* Mon Dec 16 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013121603.mr
+- fix security bug for php-fpm (add open_basedir)
+- mod php-fpm open_basedir
+
+* Mon Dec 16 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013121601.mr
+- change kloxo-mr.repo to mratwork.repo via rpm and sdjustment in install and cleanup script
+
+* Wed Dec 11 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013121104.mr
+- no permit if docroot with '..'
+- beside when add domain, validate docroot also in 'docroot update' and 'redirect docroot'
+
 * Wed Dec 11 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013121102.mr
 - change to use jcterm instead sshterm-template for ssh access
 
