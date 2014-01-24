@@ -10,7 +10,7 @@ CURRPATH=$(cd $(dirname $0); pwd)
 
 cd $CURRPATH
 
-### MR -- CentAlt rpms ###
+### MR -- rpms ###
 REPOPATH="$CURRPATH/repo/mratwork"
 
 ### MR -- release/testing portion ###
