@@ -20,14 +20,16 @@ do
 	do
 		for c in noarch i386 x86_64
 		do
-			#if [ -d $REPOPATH/$a/$b/$c ] ; then
+			if [ -d $REPOPATH/$a/$b/$c ] ; then
 				mv -f $REPOPATH/$a/$b/$c $REPOPATH/$a/$b/$a-$b-$c
-			#fi
+			fi
 
 			reposync --delete --config=$CURRPATH/mratwork-mirror.repo \
 				--repoid=$a-$b-$c --download_path=$REPOPATH/$a/$b
 
-			mv -f $REPOPATH/$a/$b/$a-$b-$c $REPOPATH/$a/$b/$c
+			if [ -d $REPOPATH/$a/$b/$a-$b-$c ] ; then
+				mv -f $REPOPATH/$a/$b/$a-$b-$c $REPOPATH/$a/$b/$c
+			fi
 
 			createrepo --checkts --update $REPOPATH/$a/$b/$c
 		done
