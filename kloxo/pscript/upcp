@@ -12,6 +12,7 @@ if [ "$1" != "-y" ] ; then
 		sh /usr/local/lxlabs/kloxo/install/setup.sh $*
 	fi
 else
+
 	sh /usr/local/lxlabs/kloxo/install/setup.sh $*
 fi
 
