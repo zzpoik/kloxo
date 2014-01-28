@@ -794,7 +794,7 @@ class Ffile extends Lxclass
 				return $vlist;
 		}
 		
-		dprint($subaction);
+	//	dprint($subaction);
 		
 		return $vlist;
 	}
@@ -1063,7 +1063,6 @@ class Ffile extends Lxclass
 	function perDisplay($var)
 	{
 		if ($var === 'sizeper') {
-			//return array($this->getParentO()->size, $this->size, "");
 			return array($this->getParentO()->size, $this->size, "");
 		}
 	}

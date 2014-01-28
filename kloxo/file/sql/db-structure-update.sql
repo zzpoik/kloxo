@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `watchdog` (
   `olddeleteflag` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`nname`),
   KEY `parent_clname_watchdog` (`parent_clname`)
-);
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 INSERT INTO `watchdog` (`nname`, `parent_clname`, `parent_cmlist`, `servicename`, `syncserver`, `port`, `action`, `status`, `added_by_system`, `oldsyncserver`, `olddeleteflag`) VALUES
 ('dns___localhost', 'pserver-localhost', '', 'dns', 'localhost', '53', '__driver_dns', 'on', 'on', '', ''),
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `service` (
   `olddeleteflag` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`nname`),
   KEY `parent_clname_service` (`parent_clname`)
-);
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 INSERT INTO `service` (`nname`, `parent_clname`, `parent_cmlist`, `servicename`, `description`, `grepstring`, `syncserver`, `oldsyncserver`, `olddeleteflag`) VALUES
 ('qmail___localhost', 'pserver-localhost', '', 'qmail', 'Qmail-toaster Mail Server', 'qmail', 'localhost', '', ''),
