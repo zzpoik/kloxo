@@ -135,6 +135,9 @@ class Cron extends Lxdb
 	function updateform($subaction, $param)
 	{
 		global $gbl, $sgbl, $login, $ghtml;
+		
+		// MR --- for security reason, only enable for admin
+		if (!$this->isAdmin()) { return; }
 
 		$parent = $this->getParentO();
 
@@ -179,6 +182,9 @@ class Cron extends Lxdb
 	static function addform($parent, $class, $typetd = null)
 	{
 		global $gbl, $sgbl, $login, $ghtml;
+		
+		// MR --- for security reason, only enable for admin
+		if (!$this->isAdmin()) { return; }
 		
 		// This is to make sure that the static variables 'monthlist, weekdaylist' etc, are initialized. 
 		// There is no other way to do it.
