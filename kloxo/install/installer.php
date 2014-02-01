@@ -185,11 +185,11 @@ function lxins_main()
 		kloxo_install_bye();
 	}
 
-	system("chkconfig hiawatha off; hiawatha stop; rm -f /etc/init.d/hiawatha");
+	system("chkconfig hiawatha off; service hiawatha stop");
 	copy("{$kloxopath}/init/kloxo.init", "/etc/init.d/kloxo");
 	system("chmod 755 /etc/init.d/kloxo; chkconfig kloxo on");
 
-	system("/etc/init.d/kloxo restart >/dev/null 2>&1 &");
+	system("service kloxo restart >/dev/null 2>&1 &");
 }
 
 // ==== kloxo_all portion ===
