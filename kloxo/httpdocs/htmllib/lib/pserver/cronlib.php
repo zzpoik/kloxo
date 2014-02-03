@@ -33,9 +33,17 @@ class Cron extends Lxdb
 
 	static function createListAlist($parent, $class)
 	{
+		global $gbl, $sgbl, $login, $ghtml;
+
+		// MR --- for security reason, only enable for admin
+		if ($login->nname !== 'admin') { return; }
+
 		$alist[] = "a=list&c=$class";
-		$alist[] = "a=addform&c=$class&dta[var]=ttype&dta[val]=simple";
-		$alist[] = "a=addform&c=$class&dta[var]=ttype&dta[val]=complex";
+
+		if ($login->nname === 'admin') {
+			$alist[] = "a=addform&c=$class&dta[var]=ttype&dta[val]=simple";
+			$alist[] = "a=addform&c=$class&dta[var]=ttype&dta[val]=complex";
+		}
 		
 		return $alist;
 	}
@@ -135,9 +143,9 @@ class Cron extends Lxdb
 	function updateform($subaction, $param)
 	{
 		global $gbl, $sgbl, $login, $ghtml;
-		
+
 		// MR --- for security reason, only enable for admin
-		if (!$this->isAdmin()) { return; }
+		if ($login->nname !== 'admin') { return; }
 
 		$parent = $this->getParentO();
 
@@ -182,9 +190,9 @@ class Cron extends Lxdb
 	static function addform($parent, $class, $typetd = null)
 	{
 		global $gbl, $sgbl, $login, $ghtml;
-		
+
 		// MR --- for security reason, only enable for admin
-		if (!$this->isAdmin()) { return; }
+		if ($login->nname !== 'admin') { return; }
 		
 		// This is to make sure that the static variables 'monthlist, weekdaylist' etc, are initialized. 
 		// There is no other way to do it.
