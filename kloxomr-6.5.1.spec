@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2014011001
+%define timestamp 2014021503
 Name: %{productname}
 Summary: Kloxo-MR web panel
 Version: 6.5.1.a
@@ -51,6 +51,8 @@ This fork named as Kloxo-MR (meaning 'Kloxo fork by Mustafa Ramadhan').
 /script
 
 %post
+chmod 755 %{kloxo}/init/php*.sh
+
 
 # this is for fresh install
 if [ "$1" = "1" ]; then
@@ -104,6 +106,66 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Sat Feb 15 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014021502.mr
+- fix issue related to lxphp.exe
+- fix restarts and kloxo.init
+- set 755 for php*-cli.sh and php*-cgi.sh
+
+* Sat Feb 15 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014021502.mr
+- fix php53s-install (replace php53s to php53s-cli to escape conflict with regular php)
+- prepare for random prefix for databasename
+
+* Sat Feb 15 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014021501.mr
+- fix nginx config related to disable_symlinks
+
+* Fri Feb 14 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014021401.mr
+- fix php53s-install and restart-all script
+
+* Wed Feb 12 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014021201.mr
+- add SymLinksIfOwnerMatch to apache config and equivalent param for other webservers
+- change dynamic to ondemand for pm in php-fpm
+- panel execute under php 5.2 or php 5.3 but install process still in php 5.2
+- prepare jailed code (still disabled)
+- run php53s-install if want running panel under php 5.3
+
+* Mon Feb 3 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014020301.mr
+- update cron_task (make client only able to list and delete their cron)
+
+* Sun Feb 2 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014020201.mr
+- fix install process (add looping to make sure kloxo database created)
+
+* Fri Jan 31 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014013101.mr
+- kloxo service using spawncgi (make kloxo-phpcgi under lxlabs user like kloxo-hiawatha)
+- disable perl until fix hardlinks issue related to perl
+- mod permissions update display
+
+* Wed Jan 29 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014012902.mr
+- fix some issues to make better update from Kloxo official 
+
+* Wed Jan 29 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014012901.mr
+- fix hiawatha config for dirprotect
+- fix docroot where update not work 
+
+* Tue Jan 28 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014012802.mr
+- fix kloxo sql
+- mod file list column 
+
+* Tue Jan 28 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014012801.mr
+- mod kloxo sql to using myisam as storage-engine
+- fix ownership in filemanager
+
+* Mon Jan 27 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014012702.mr
+- back to use tcp/ip instead sock
+
+* Mon Jan 27 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014012701.mr
+- fix select-all in dns/mysql list
+- fix docroot
+- fix fastcgi (add ide-timeout)
+- fix clearcache
+- make update script as the same as cleanup
+- fix nsd tpl
+- use sock instead tcp/ip to access mysql in panel
+
 * Fri Jan 10 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014011001.mr
 - fix mysql-aio issue in openvz; add disable-mysql-aio script
 - mod how-to-install.txt for additional step when update from Kloxo 6.1.12
