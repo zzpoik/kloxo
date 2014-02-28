@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2014021503
+%define timestamp 2014021901
 Name: %{productname}
 Summary: Kloxo-MR web panel
 Version: 6.5.1.a
@@ -106,6 +106,26 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Wed Feb 19 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014021901.mr
+- fix sysinfo.php; add squid in webcache list
+- change client/database name to 64 chsrs and database username to 16 chars
+- vslidate for client/database name and database username
+- warning if 'switch program' and 'php-type' not set
+- change default php-type to php-fpm_worker
+- back to use default web, dns and spam server like 6.5.0 version
+- mysql_conver also include change to utf-8 charset in panel (like in command-line)
+- change '--- none ---' to '--- No Change ---'
+- use db_get_value for php-type value
+- fix issue if log not create
+- fix getRpmBranchInstalled() if list file not exists
+- mod randomString()
+- add convert_message() fot handling like '[%_server_%]' and implementing also for error/alert message
+- fix drop menu align in simplicity skin
+- mod changeport.php for compatible with 6.5.0 and 6.5.1
+- kloxo stop also checking php52s and php53s running or not
+- installer still using php52s (because less memory usage)
+- installer also php53s install and restart services before finish
+
 * Sat Feb 15 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014021502.mr
 - fix issue related to lxphp.exe
 - fix restarts and kloxo.init
