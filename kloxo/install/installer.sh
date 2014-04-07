@@ -133,11 +133,11 @@ yum remove bind* mysql* mariadb* MariaDB* php* httpd* mod_* -y
 	osverid=$(yum list *yum*|grep -i "@")
 
 	## it's mean centos 6 or equal
-	if [ "${osverid}" != "" ]  ; then
-		yum -y install mysql mysql-server mysql-libs
-	else
+	#if [ "${osverid}" != "" ]  ; then
+	#	yum -y install mysql mysql-server mysql-libs
+	#else
 		yum -y install mysql55 mysql55-server mysql55-libs
-	fi
+	#fi
 
 	# MR -- always disable mysql-aio
 	sh /script/disable-mysql-aio
