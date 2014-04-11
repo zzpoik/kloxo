@@ -25,6 +25,9 @@ mkdir -p $CURRPATH/repo/mratwork/SRPMS
 
 chmod -R o-w+r $CURRPATH
 
+echo "*** Delete old repodata dir..."
+find $CURRPATH/repo/mratwork/ -type d -name "repodata" -exec rm -rf {} \; >/dev/null 2>&1
+
 echo "*** Process for SRPMS..."
 createrepo $CURRPATH/repo/mratwork/SRPMS
 
@@ -39,6 +42,8 @@ do
 		done
 	done
 done
+
+find $CURRPATH/repo/mratwork/ -type d -name ".repodata" -exec rm -rf {} \; >/dev/null 2>&1
 
 ### MR -- need change path because don't want path include '/home/repos/rpms.mratwork.com/repo/mratwork'
 cd $CURRPATH/repo/mratwork/
