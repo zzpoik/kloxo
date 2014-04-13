@@ -25,7 +25,7 @@ mkdir -p $CURRPATH/repo/mratwork/SRPMS
 
 chmod -R o-w+r $CURRPATH
 
-echo "*** Delete old repodata dir..."
+echo "*** Delete old repodata dirs..."
 find $CURRPATH/repo/mratwork/ -type d -name "repodata" -exec rm -rf {} \; >/dev/null 2>&1
 
 echo "*** Process for SRPMS..."
