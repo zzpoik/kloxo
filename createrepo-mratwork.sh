@@ -29,7 +29,7 @@ echo "*** Delete old repodata dirs..."
 find $CURRPATH/repo/mratwork/ -type d -name "repodata" -exec rm -rf {} \; >/dev/null 2>&1
 
 echo "*** Process for SRPMS..."
-createrepo -d $CURRPATH/repo/mratwork/SRPMS
+createrepo $CURRPATH/repo/mratwork/SRPMS
 
 for type in release testing
 do
@@ -38,7 +38,7 @@ do
 		for item in i386 x86_64 noarch
 		do
 			echo "*** Process for '$type-$ver-$item'..."
-			createrepo -d $CURRPATH/repo/mratwork/$type/$ver/$item
+			createrepo $CURRPATH/repo/mratwork/$type/$ver/$item
 		done
 	done
 done

@@ -1,42 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <repomd xmlns="http://linux.duke.edu/metadata/repo">
-  <data type="other_db">
-    <location href="repodata/other.sqlite.bz2"/>
-    <checksum type="sha">a8296758fbde6f829dd8ee639bd290b76dc3e9fb</checksum>
-    <timestamp>1397473811</timestamp>
-    <open-checksum type="sha">4654fa2837328af4599c227ea20d762f5822b45e</open-checksum>
-    <database_version>10</database_version>
-  </data>
   <data type="other">
     <location href="repodata/other.xml.gz"/>
     <checksum type="sha">50e1fc2299a3156dea476ef49eaed196ee69243b</checksum>
-    <timestamp>1397473810</timestamp>
+    <timestamp>1397534596</timestamp>
     <open-checksum type="sha">e14274517c8372c3b3229a3c44e22dc3ec051de1</open-checksum>
-  </data>
-  <data type="filelists_db">
-    <location href="repodata/filelists.sqlite.bz2"/>
-    <checksum type="sha">2ba859deb38330de94e9bc1c63e24142fa0114a2</checksum>
-    <timestamp>1397473811</timestamp>
-    <open-checksum type="sha">f473a487fe8fc9b37a499e44f92e2636b3b678fe</open-checksum>
-    <database_version>10</database_version>
   </data>
   <data type="filelists">
     <location href="repodata/filelists.xml.gz"/>
     <checksum type="sha">d00c6684a8d8af56cfadc99a9b49724c963bd642</checksum>
-    <timestamp>1397473810</timestamp>
+    <timestamp>1397534596</timestamp>
     <open-checksum type="sha">8cdffd0e572c7a4d5034556657bde54eecc116f0</open-checksum>
-  </data>
-  <data type="primary_db">
-    <location href="repodata/primary.sqlite.bz2"/>
-    <checksum type="sha">a6714f7dc0f6a1b2c5e970d45d58905fc51799e4</checksum>
-    <timestamp>1397473812</timestamp>
-    <open-checksum type="sha">7eba6e4b1ae89bd3af89c2ebdda13d523360facc</open-checksum>
-    <database_version>10</database_version>
   </data>
   <data type="primary">
     <location href="repodata/primary.xml.gz"/>
     <checksum type="sha">d8a1f0c0c75cead8133b0d5424b1842793ff9aaf</checksum>
-    <timestamp>1397473810</timestamp>
+    <timestamp>1397534596</timestamp>
     <open-checksum type="sha">41c7d8039acb77bbf0fb542853442bbf92133e6c</open-checksum>
   </data>
 </repomd>
