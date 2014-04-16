@@ -7636,3 +7636,25 @@ function validate_docroot($docroot) {
 	}
 }
 
+function isTokenMatch()
+{
+	global $gbl;
+
+	$ret = true;
+
+	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+		// or possibly, count($_POST) > 0
+
+		$token_post = $_POST['frm_token'];
+		$token_session = $gbl->c_session->ssession_vars['__tmp_csrf_token'];
+
+		if ($token_post === $token_session) {
+			$ret = true;
+		} else {
+			$ret = false;
+		}
+	}
+
+	return $ret;
+}
+

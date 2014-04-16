@@ -2234,14 +2234,20 @@ function lx_frm_inc()
 	global $gbl, $sgbl, $login, $ghtml;
 
 	if (!$ghtml->iset("frm_action")) {
-		die("Action Not set <br/> ");
+		die("Action Not set.\n");
 	}
 
 	$caction = $ghtml->frm_action;
 	$cgi_action = "__ac_desc_{$ghtml->frm_action}";
 
 	if (!function_exists($cgi_action)) {
-		die("Action not supported..\n");
+		die("Action not supported.\n");
+	}
+
+	if(!file_exists("{$sgbl->__path_program_etc}/flag/not_use_token.flg")) {
+		if (!isTokenMatch()) {
+			die("Post token not match.\n");
+		}
 	}
 
 	try {
