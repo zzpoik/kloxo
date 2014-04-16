@@ -1579,6 +1579,17 @@ function create_xml($object, $stuff, $ret)
 		$string[] = $ghtml->object_variable_modify($stuff, $k);
 	}
 
+	if (isset($gbl->c_session->ssession_vars['__tmp_csrf_token'])) {
+		$token = $gbl->c_session->ssession_vars['__tmp_csrf_token'];
+	} else {
+		$token = randomString(64);
+
+		$gbl->setSessionV('__tmp_csrf_token', $token);
+		$gbl->c_session->write();
+	}
+
+	$string[] = $ghtml->object_variable_hidden("frm_token", $token);
+
 	$string[] = $ghtml->object_variable_hidden("frm_action", $action);
 
 	if (isset($ret['subaction'])) {
