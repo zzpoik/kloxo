@@ -2,20 +2,15 @@
 
 if [ "$(rpm -qa mratwork-release)" == "" ] ; then
     cd /tmp
-    wget https://github.com/mustafaramadhan/kloxo/raw/rpms/release/neutral/noarch/mratwork-release-0.0.1-1.noarch.rpm --no-check-certificate
+    wget https://github.com/mustafaramadhan/kloxo/raw/rpms/release/neutral/noarch/mratwork-release-0.0.1-1.noarch.rpm --no-check-certificate >/dev/null 2>&1
     rpm -ivh mratwork-release-0.0.1-1.noarch.rpm
-    yum update mratwork-release -y
+    yum update mratwork-release -y >/dev/null 2>&1
 
     rm -rf /etc/yum.repos.d/lxlabs.repo
     rm -rf /etc/yum.repos.d/lxcenter.repo
     rm -rf /etc/yum.repos.d/kloxo-mr.repo
 else
-    yum update mratwork-release -y
-fi
-
-if [ "$(rpm -qa lxphp)" != "" ] ; then
-    yum remove lxphp lxlighttpd lxzend -y
-	yum install php52s hiawatha
+    yum update mratwork-release -y >/dev/null 2>&1
 fi
 
 checktmpfs=$(cat /etc/fstab|grep '/tmp'|grep 'tmpfs')
@@ -27,19 +22,20 @@ if [ "${checktmpfs}" != "" ] ; then
 	exit
 fi
 
-t=$(mysql -V|awk '{print $5}')
-u=$(echo $t|grep -i '5.0.')
-
-if [ "$u" != "" ] ; then
-	echo "Need update mysql first..."
-	echo "- Run 'yum replace mysql --replace-with=mysql55'" 
-	echo "- For OpenVZ VPS, add 'innodb_use_native_aio=0' under '[mysqld]' in '/etc/my.cnf'"
-	exit
-fi
-
 T="$(date +%s%N)"
 
-#if $(rpm -qa|grep lxphp >/dev/null 2>&1) ; then
+if rpm -qa|grep mysql55 >/dev/null 2>&1 ; then
+	echo "Already use mysql55. No replace"
+else
+	if rpm -qa|grep mysql >/dev/null 2>&1 ; then
+		yum clean all >/dev/null 2>&1
+		echo "Replace mysql to mysql55"
+		yum replace mysql --replace-with=mysql55 -y >/dev/null 2>&1
+		yum install php52s -y >/dev/null 2>&1
+		yum update php52s -y >/dev/null 2>&1
+	fi
+fi
+
 if $(ls -al /usr/bin/lxphp.exe|grep /usr/local/lxlabs >/dev/null 2>&1) ; then
 	yum remove lxphp lxlighttpd lxzend >/dev/null 2>&1
 	
@@ -47,7 +43,7 @@ if $(ls -al /usr/bin/lxphp.exe|grep /usr/local/lxlabs >/dev/null 2>&1) ; then
 	
 	rm -rf /usr/bin/lxphp.exe
 	
-	yum install php52s -y >/dev/null 2>&1
+	yum install php52s hiawatha -y >/dev/null 2>&1
 fi
 
 . /script/directory

@@ -4,15 +4,23 @@ if [ ! -f /script/programname ] ; then
 	echo 'kloxo' > /script/programname
 fi
 
+if rpm -qa|grep mysql55  >/dev/null 2>&1 ; then
+	echo '- Already use mysql55. No replace'
+else
+	echo '- Replace to mysql55'
+	yum replace mysql --replace-with=mysql55 -y >/dev/null 2>&1
+fi
+
 if [ "$1" != "-y" ] ; then
-	if $(lxphp.exe -v >/dev/null 2>&1) ; then
+	if lxphp.exe -v >/dev/null 2>&1 ; then
+		yum update php52s -y >/dev/null 2>&1
+
 		. /script/directory
 		lxphp.exe ../bin/update.php
 	else
 		sh /usr/local/lxlabs/kloxo/install/setup.sh $*
 	fi
 else
-
 	sh /usr/local/lxlabs/kloxo/install/setup.sh $*
 fi
 
