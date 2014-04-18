@@ -5113,7 +5113,8 @@ class HtmlLib
 			<table <?= $blackstyle ?>>
 				<tr>
 					<td>
-						<form method="get" action="<?= $_SERVER["PHP_SELF"] ?>" accept-charset="utf-8">
+						<form method="post" action="<?= $_SERVER["PHP_SELF"] ?>" accept-charset="utf-8">
+							<input type='hidden' name='frm_token' value='<?= $gbl->c_session->ssession_vars['__tmp_csrf_token'] ?>'>
 <?php
 							$ghtml->print_current_input_vars(array("frm_confirmed"));
 							$ghtml->print_input("hidden", "frm_confirmed", "yes");
@@ -6867,7 +6868,8 @@ class HtmlLib
 						</tr>
 						<tr height=20 valign=middle>
 
-							<form name="<?= $form ?>" method="get" action="/display.php" accept-charset="utf-8">
+							<form name="<?= $form ?>" method="post" action="/display.php" accept-charset="utf-8">
+								<input type='hidden' name='frm_token' value='<?= $gbl->c_session->ssession_vars['__tmp_csrf_token'] ?>'>
 								<input type=hidden name="<?= trim($variablename) ?>">
 								<input type=hidden name=frm_action value="update">
 								<input type=hidden name=frm_subaction value="update">
