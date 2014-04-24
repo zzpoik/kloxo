@@ -449,8 +449,7 @@ class HtmlLib
 			<table cellspacing=0 cellpadding=0  <?= $idstring ?> <?= $borderbottom ?> valign=bottom>
 				<tr valign=bottom>
 					<td valign=middle wrap><img src="<?= $imglt ?>" height="<?= $height ?>" width="<?= $width ?>"></td>
-					<form method="get" name="form_<?= $form_name ?>" action="<?= $path ?>" <?= $target ?>
-					      accept-charset="utf-8">
+					<form method="get" name="form_<?= $form_name ?>" action="<?= $path ?>" <?= $target ?> accept-charset="utf-8">
 <?php
 						$this->print_input_vars($post);
 ?>
@@ -2478,7 +2477,9 @@ class HtmlLib
 			</tr>
 		</table>
 
-		<form name="chmod" method="get" action="" accept-charset="utf-8">
+		<form name="chmod" method="post" action="" accept-charset="utf-8">
+			<input type='hidden' name='frm_token' value='<?= $gbl->c_session->ssession_vars['__tmp_csrf_token'] ?>'>
+
             <table cellpadding="0" cellspacing="0" border="0" width="325">
 	            <tr style="background:url(<?= $tablerow_head ?>)">
 		            <td width="100" class="col"></td>
@@ -3933,8 +3934,7 @@ class HtmlLib
 			$method = "get";
 ?>
 
-					<form name="form<?= $colcount ?>" method="<?= $method ?>" action="<?= $path ?>" <?= $target ?>
-					      accept-charset="utf-8">
+					<form name="form<?= $colcount ?>" method="<?= $method ?>" action="<?= $path ?>" <?= $target ?> accept-charset="utf-8">
 <?php
 			if ($this->frm_action === 'selectshow') {
 				$post['frm_action'] = 'selectshow';
@@ -8565,7 +8565,8 @@ function print_curvy_table_end($width = "100")
 				</td>
 			</tr>
 		</table>
-		<form name=__treeForm id=__treeForm method="get" action="/display.php" accept-charset="utf-8">
+		<form name=__treeForm id=__treeForm method="post" action="/display.php" accept-charset="utf-8">
+			<input type='hidden' name='frm_token' value='<?= $gbl->c_session->ssession_vars['__tmp_csrf_token'] ?>'>
 			<input type=hidden name=frm_accountselect value="">
 <?php
     $this->print_current_input_vars(array('frm_action', 'frm_subaction'));
@@ -9413,7 +9414,6 @@ function print_end()
 ?>
 
 		<form name='<?= $formname ?>' method="get" action='<?= $url ?>' accept-charset="utf-8">
-
 			<?=$this->print_current_input_vars(array('frm_hpfilter'))?>
  		      <input name=frm_hpfilter[<?= $filtername ?>][sortby] type=hidden value="<?= $sortby ?>">
   		      <input name=frm_hpfilter[<?= $filtername ?>][sortdir] type=hidden value="<?= $sortdir ?>">
@@ -9465,7 +9465,7 @@ function print_end()
 									<tr>
 										<td width=10 height=22></td>
 										<td height=22>
-											<form name='lpform_search' method='get'  action='<?= $url ?>' onsubmit="return checksearch(this,1);" accept-charset="utf-8">
+											<form name='lpform_search' method='get' action='<?= $url ?>' onsubmit="return checksearch(this,1);" accept-charset="utf-8">
 
 												<?= $this->print_current_input_var_unset_filter($filtername, array('sortby', 'sortdir', 'pagenum')) ?>
 												<?= $this->print_current_input_vars(array("frm_hpfilter")) ?>

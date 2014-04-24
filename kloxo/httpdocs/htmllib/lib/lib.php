@@ -7650,11 +7650,13 @@ function isTokenMatch()
 			$ret = false;
 		}
 	} else {
+	/*
 		$action = $_GET['frm_action'];
 
 		if (($action === 'add') || ($action === 'update') || ($action === 'delete')) {
 			$ret = false;
 		}
+	*/
 	}
 
 	return $ret;
