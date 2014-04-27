@@ -2,17 +2,6 @@
 
 chkconfig kloxo on
 
-if [ "$(rpm -qa mratwork-release)" == "" ] ; then
-    cd /tmp
-    wget https://github.com/mustafaramadhan/kloxo/raw/rpms/release/neutral/noarch/mratwork-release-0.0.1-1.noarch.rpm --no-check-certificate >/dev/null 2>&1
-    rpm -ivh mratwork-release-0.0.1-1.noarch.rpm
-    yum update mratwork-release -y >/dev/null 2>&1
-	
-    rm -rf /etc/yum.repos.d/kloxo-mr.repo
-else
-    yum update mratwork-release -y >/dev/null 2>&1
-fi
-
 checktmpfs=$(cat /etc/fstab|grep '/tmp'|grep 'tmpfs')
 
 if [ "${checktmpfs}" != "" ] ; then

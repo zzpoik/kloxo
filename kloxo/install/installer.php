@@ -710,22 +710,19 @@ function install_yum_repo()
 		return;
 	}
 
-	if (!file_exists("/etc/yum.repos.d/kloxo-mr.repo")) {
-		system("cp -rf ./kloxo-mr.repo /etc/yum.repos.d/kloxo-mr.repo");
-	}
-	
 	// MR -- just to know @ exist or not because centos 6 change 'installed' to '@'
 	exec("yum list *yum*|grep @", $out, $ret);
 
 	// MR -- need for OS (like fedora) where os version not the same with redhat/centos
 	if ($out) {
-		system("sed -i 's/\$releasever/6/' /etc/yum.repos.d/kloxo-mr.repo");
+		system("sed -i 's/\$releasever/6/' /etc/yum.repos.d/mratwork.repo");
 	} else {
-		system("sed -i 's/\$releasever/5/' /etc/yum.repos.d/kloxo-mr.repo");
+		system("sed -i 's/\$releasever/5/' /etc/yum.repos.d/mratwork.repo");
 	}
 
 	// MR -- remove all old repos
 	system("rm -f /etc/yum.repos.d/kloxo.repo");
+	system("rm -f /etc/yum.repos.d/kloxo-mr.repo");
 	system("rm -f /etc/yum.repos.d/kloxo-custom.repo");
 	system("rm -f /etc/yum.repos.d/lxcenter.repo");
 

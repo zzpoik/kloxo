@@ -1,5 +1,7 @@
 #!/bin/sh
 
+sh /script/fixrepo
+
 if [ ! -f /script/programname ] ; then
 	echo 'kloxo' > /script/programname
 fi
