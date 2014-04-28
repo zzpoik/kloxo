@@ -153,9 +153,9 @@ function lxins_main()
 */
 
 	kloxo_install_step1();
+	install_main();
 
 	if ($kloxostate === 'none') {
-		install_main();
 		kloxo_install_step2();
 	}
 
@@ -348,6 +348,9 @@ function kloxo_install_step1()
 		// MR -- force remove old lxphp (from lxcenter.repo)
 	//	system("rpm -e lxphp-5.2.1-400.i386 --nodeps > /dev/null 2>&1");
 
+		// MR -- force remove postfix and their user
+		system("userdel postfix > /dev/null 2>&1");
+
 		if (isRpmInstalled('qmail-toaster')) {
 			// MR -- force remove spamassassin, qmail and vpopmail (because using toaster)
 			system("userdel lxpopuser > /dev/null 2>&1");
@@ -364,9 +367,6 @@ function kloxo_install_step1()
 				system("rm -rf /home/{$d} > /dev/null 2>&1");
 			}
 		}
-
-		// MR -- force remove postfix and their user
-		system("userdel postfix > /dev/null 2>&1");
 
 		// MR -- remove lxphp, lxlighttpd and lxzend
 		system("yum remove -y lxphp lxlighttpd lxzend");
