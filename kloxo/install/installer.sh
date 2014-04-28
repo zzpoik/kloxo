@@ -123,9 +123,15 @@ yum clean all
 
 yum -y install wget zip unzip yum-utils yum-priorities vim-minimal subversion curl
 
-yum remove bind* mysql* mariadb* MariaDB* php* httpd* mod_* -y
+yum remove bind* mysql* mariadb* MariaDB* php* httpd* mod_* *-toaster postfix exim -y
+rpm -e vpopmail-toaster --noscripts
 
-#if [ ! -f /opt/php52s/bin/php ] ; then
+## MR -- qmail-toaster will be fail to installed if this user exists
+if id -u postfix >/dev/null 2>&1 ; then
+	userdel postfix
+fi
+
+#	if [ ! -f /opt/php52s/bin/php ] ; then
 #	if [ -f /usr/bin/php ] ; then
 #		yum -y remove php*
 #	fi
@@ -143,6 +149,8 @@ yum remove bind* mysql* mariadb* MariaDB* php* httpd* mod_* -y
 	sh /script/disable-mysql-aio
 
 	yum -y install php53u php53u-mysql
+	## MR -- protect to lxphp.exe show missing .so. it's must /etc/php.ini exist extension_dir
+	cp -f ${ppath}/init/php.ini /etc/php.ini
 
 	## install after mysql55 and php53u because if mysql not exist will install 'old' mysql
 	yum -y install net-snmp php52s
