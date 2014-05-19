@@ -2439,7 +2439,7 @@ class HtmlLib
 		</script>
 
 		<form name="frmsendchmod" method="post" action="/display.php" accept-charset="utf-8">
-			<input type='hidden' name='frm_token' value='<?= $gbl->c_session->ssession_vars['__tmp_csrf_token'] ?>'>
+			<input type='hidden' name='frm_token' value='<?= getCRFToken(); ?>'>
 			<input type="hidden" name="frm_ffile_c_file_permission_f">
 <?php
 			$post['frm_o_o'] = $this->__http_vars['frm_o_o'];
@@ -2478,7 +2478,7 @@ class HtmlLib
 		</table>
 
 		<form name="chmod" method="post" action="" accept-charset="utf-8">
-			<input type='hidden' name='frm_token' value='<?= $gbl->c_session->ssession_vars['__tmp_csrf_token'] ?>'>
+			<input type='hidden' name='frm_token' value='<?= getCRFToken(); ?>'>
 
             <table cellpadding="0" cellspacing="0" border="0" width="325">
 	            <tr style="background:url(<?= $tablerow_head ?>)">
@@ -5114,7 +5114,7 @@ class HtmlLib
 				<tr>
 					<td>
 						<form method="post" action="<?= $_SERVER["PHP_SELF"] ?>" accept-charset="utf-8">
-							<input type='hidden' name='frm_token' value='<?= $gbl->c_session->ssession_vars['__tmp_csrf_token'] ?>'>
+							<input type='hidden' name='frm_token' value='<?= getCRFToken(); ?>'>
 <?php
 							$ghtml->print_current_input_vars(array("frm_confirmed"));
 							$ghtml->print_input("hidden", "frm_confirmed", "yes");
@@ -5347,7 +5347,7 @@ class HtmlLib
 
 ?>
 		<form name="form<?= $form_name ?>" method="post" action="<?= $path ?>">
-			<input type='hidden' name='frm_token' value='<?= $gbl->c_session->ssession_vars['__tmp_csrf_token'] ?>'>
+			<input type='hidden' name='frm_token' value='<?= getCRFToken(); ?>'>
 
 <?php
 
@@ -6871,7 +6871,7 @@ class HtmlLib
 						<tr height=20 valign=middle>
 
 							<form name="<?= $form ?>" method="post" action="/display.php" accept-charset="utf-8">
-								<input type='hidden' name='frm_token' value='<?= $gbl->c_session->ssession_vars['__tmp_csrf_token'] ?>'>
+								<input type='hidden' name='frm_token' value='<?= getCRFToken(); ?>'>
 								<input type=hidden name="<?= trim($variablename) ?>">
 								<input type=hidden name=frm_action value="update">
 								<input type=hidden name=frm_subaction value="update">
@@ -7253,7 +7253,7 @@ class HtmlLib
 ?>
 
 		<form name="<?= $block->form ?>" id="<?= $block->form ?>" action="<?= $block->url ?>" <?= $block->formtype ?> method="<?= $method ?>" <?= $onsubmit ?> accept-charset="utf-8">
-			<input type='hidden' name='frm_token' value='<?= $gbl->c_session->ssession_vars['__tmp_csrf_token'] ?>'>
+			<input type='hidden' name='frm_token' value='<?= getCRFToken(); ?>'>
 
 <?php
 			dprint($block->form);
@@ -8565,8 +8565,8 @@ function print_curvy_table_end($width = "100")
 				</td>
 			</tr>
 		</table>
-		<form name=__treeForm id=__treeForm method="post" action="/display.php" accept-charset="utf-8">
-			<input type='hidden' name='frm_token' value='<?= $gbl->c_session->ssession_vars['__tmp_csrf_token'] ?>'>
+		<form name='__treeForm' id='__treeForm' method="post" action="/display.php" accept-charset="utf-8">
+			<input type='hidden' name='frm_token' value='<?= getCRFToken(); ?>'>
 			<input type=hidden name=frm_accountselect value="">
 <?php
     $this->print_current_input_vars(array('frm_action', 'frm_subaction'));

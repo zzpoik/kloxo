@@ -7634,7 +7634,70 @@ function validate_docroot($docroot) {
 	}
 }
 
-function isTokenMatch()
+/*
+// taken from ...
+function getCSRFToken($length = 8) {
+	$nonce = randomString($length);
+
+	if (empty($_SESSION['csrf_tokens'])) {
+		$_SESSION['csrf_tokens'] = array();
+	}
+
+	$_SESSION['csrf_tokens'][$nonce] = true;
+
+	return $nonce;
+}
+
+function validateCSRFToken($token) {
+
+	if (isset($_SESSION['csrf_tokens'][$token])) {
+	//	unset($_SESSION['csrf_tokens'][$token]);
+
+		return true;
+	}
+
+	return false;
+}
+*/
+
+// taken from http://snipplr.com/view/11410/prevent-remote-form-submit/
+function isRemotePost()
+{
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		// or possibly, count($_POST) > 0
+		$host = preg_replace('#^www\.#', '', $_SERVER['HTTP_HOST']);
+
+		if ($host AND $_SERVER['HTTP_REFERER']) {
+			$refparts = @parse_url($_SERVER['HTTP_REFERER']);
+			$refhost = $refparts['host'] . ((int)$refparts['port'] ? ':' . (int)$refparts['port'] : '');
+
+			if (strpos($refhost, $host) === false) {
+			//	die('POST requests are not permitted from "foreign" domains.');
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+function getCRFToken()
+{
+	global $gbl;
+
+	if (isset($gbl->c_session->ssession_vars['__tmp_csrf_token'])) {
+		$token = $gbl->c_session->ssession_vars['__tmp_csrf_token'];
+	} else {
+		$token = randomString(64);
+	//	$gbl->c_session->ssession_vars['__tmp_csrf_token'] = $token;
+		$gbl->setSessionV('__tmp_csrf_token', $token);
+		$gbl->c_session->write();
+	}
+
+	return $token;
+}
+
+function isCRFTokenMatch()
 {
 	global $gbl;
 
@@ -7651,10 +7714,16 @@ function isTokenMatch()
 		}
 	} else {
 	/*
+		// MR -- disable for implementation because too much exception and include less of less risk
 		$action = $_GET['frm_action'];
-
+		$subaction = $_GET['frm_subaction'];
 		if (($action === 'add') || ($action === 'update') || ($action === 'delete')) {
-			$ret = false;
+			if (($subaction !== 'toggle_state') && ($subaction !== 'toggle_boot_state') &&
+				($subaction !== 'start') && ($subaction !== 'stop') && ($subaction !== 'restart') &&
+				($subaction !== 'readipaddress')) {
+
+				$ret = false;
+			}
 		}
 	*/
 	}
