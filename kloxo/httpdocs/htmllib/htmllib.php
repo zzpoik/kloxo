@@ -7777,13 +7777,23 @@ class HtmlLib
 							}
 						}
 
-						include("htmllib/fckeditor/fckeditor_php5.php");
+						if (file_exists("/usr/local/lxlabs/kloxo/httpdocs/editor/ckeditor/ckeditor.js")) {
+
+?>
+
+<script type="text/javascript" src="/editor/ckeditor/ckeditor.js"></script>
+<textarea class="ckeditor" name="<?=$variable->name;?>"><?php echo $value; ?></textarea>
+<?php
+						} else {
+
+							include("editor/fckeditor/fckeditor.php");
 
 
-						$oFCKeditor = new FCKeditor($variable->name);
-						$oFCKeditor->BasePath = '/htmllib/fckeditor/';
-						$oFCKeditor->Value = $value;
-						$oFCKeditor->Create();
+							$oFCKeditor = new FCKeditor($variable->name);
+							$oFCKeditor->BasePath = '/editor/fckeditor/';
+							$oFCKeditor->Value = $value;
+							$oFCKeditor->Create();
+						}
 ?>
 
 					</td>
