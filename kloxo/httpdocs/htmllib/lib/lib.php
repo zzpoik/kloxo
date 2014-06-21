@@ -6270,7 +6270,7 @@ function setInitialServer($nolog = null)
 	exec("yum -y remove $list >/dev/null 2>&1");
 
 	// MR -- install new Kloxo-MR component; not including php52s because used by this script!
-	$packages = array("kloxomr-webmail-*.noarch", "kloxomr-addon-*.noarch",
+	$packages = array("kloxomr-webmail-*.noarch", "kloxomr-addon-*.noarch", "kloxomr-editor-*.noarch",
 		"kloxomr-thirdparty-*.noarch", "kloxomr-stats-*.noarch", "hiawatha"
 	);
 

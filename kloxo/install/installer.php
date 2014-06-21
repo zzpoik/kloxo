@@ -416,7 +416,7 @@ function kloxo_install_step1()
 		}
 		
 		// MR -- install kloxomr specific rpms
-		$packages = array("kloxomr-webmail-*.noarch", "kloxomr-addon-*.noarch",
+		$packages = array("kloxomr-webmail-*.noarch", "kloxomr-addon-*.noarch", "kloxomr-editor-*.noarch",
 			"kloxomr-thirdparty-*.noarch", "kloxomr-stats-*.noarch"
 		);
 		
