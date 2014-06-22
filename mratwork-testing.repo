@@ -7,14 +7,14 @@ gpgcheck=0
 
 #[mratwork-release-neutral-arch]
 #name=MRatWork - release-neutral-arch
-#baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/neutral/$basearch/
-##mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-release-neutral-$basearch-mirrors.txt
+#baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/neutral/\$basearch/
+##mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-release-neutral-\$basearch-mirrors.txt
 #enabled=0
 #gpgcheck=0
 
 #[mratwork-release-version-noarch]
 #name=MRatWork - release-version-noarch
-#baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos$releasever/noarch/
+#baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos\$releasever/noarch/
 ##mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-release-centos$releasever-noarch-mirrors.txt
 #enabled=0
 #gpgcheck=0
@@ -30,7 +30,7 @@ gpgcheck=0
 name=MRatWork - testing-neutral-noarch
 baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/neutral/noarch/
 #mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-testing-neutral-noarch-mirrors.txt
-enabled=0
+enabled=1
 gpgcheck=0
 
 #[mratwork-testing-neutral-arch]
@@ -120,6 +120,7 @@ mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-$releasever&arch
 enabled=1
 gpgcheck=0
 exclude=postfix* exim* ssmtp*
+
 
 # ==================================
 
