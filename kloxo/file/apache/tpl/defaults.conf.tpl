@@ -81,6 +81,8 @@ Listen <?php echo $ip; ?>:<?php echo $ports[1]; ?>
 ### '<?php echo $setdefaults; ?>' config
 <VirtualHost <?php echo $ip; ?>:<?php echo $port; ?>>
 
+    SetEnvIf X-Forwarded-Proto https HTTPS=1
+
     ServerName <?php echo $setdefaults; ?>
 
 

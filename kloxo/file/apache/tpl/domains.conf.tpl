@@ -127,6 +127,8 @@ foreach ($certnamelist as $ip => $certname) {
 ## webmail for '<?php echo $domainname; ?>'
 <VirtualHost <?php echo $ip; ?>:<?php echo $port; ?>>
 
+    SetEnvIf X-Forwarded-Proto https HTTPS=1
+
     ServerName webmail.<?php echo $domainname; ?>
 
 
@@ -215,6 +217,8 @@ foreach ($certnamelist as $ip => $certname) {
 ## webmail for '<?php echo $domainname; ?>'
 <VirtualHost <?php echo $ip; ?>:<?php echo $port; ?>>
 
+    SetEnvIf X-Forwarded-Proto https HTTPS=1
+
     ServerName webmail.<?php echo $domainname; ?>
 
 
@@ -241,6 +245,8 @@ foreach ($certnamelist as $ip => $certname) {
 
 ## webmail for '<?php echo $domainname; ?>'
 <VirtualHost <?php echo $ip; ?>:<?php echo $port; ?>>
+
+    SetEnvIf X-Forwarded-Proto https HTTPS=1
 
     ServerName webmail.<?php echo $domainname; ?>
 
@@ -334,6 +340,8 @@ foreach ($certnamelist as $ip => $certname) {
 
 ## web for '<?php echo $domainname; ?>'
 <VirtualHost <?php echo $ip; ?>:<?php echo $port; ?>>
+
+    SetEnvIf X-Forwarded-Proto https HTTPS=1
 
     ServerAdmin webmaster@<?php echo $domainname; ?>
 
@@ -627,6 +635,8 @@ foreach ($certnamelist as $ip => $certname) {
 ## web for redirect '<?php echo $redirdomainname; ?>'
 <VirtualHost <?php echo $ip; ?>:<?php echo $port; ?>>
 
+    SetEnvIf X-Forwarded-Proto https HTTPS=1
+
     ServerName <?php echo $redirdomainname; ?>
 
 
@@ -732,6 +742,8 @@ foreach ($certnamelist as $ip => $certname) {
 ## web for redirect '<?php echo $redirdomainname; ?>'
 <VirtualHost <?php echo $ip; ?>:<?php echo $port; ?>>
 
+    SetEnvIf X-Forwarded-Proto https HTTPS=1
+
     ServerName <?php echo $redirdomainname; ?>
 
 
@@ -770,6 +782,8 @@ foreach ($certnamelist as $ip => $certname) {
 
 ## webmail for parked '<?php echo $parkdomainname; ?>'
 <VirtualHost <?php echo $ip; ?>:<?php echo $port; ?>>
+
+    SetEnvIf X-Forwarded-Proto https HTTPS=1
 
     ServerName webmail.<?php echo $parkdomainname; ?>
 
@@ -858,6 +872,8 @@ foreach ($certnamelist as $ip => $certname) {
 ## webmail for parked '<?php echo $parkdomainname; ?>'
 <VirtualHost <?php echo $ip; ?>:<?php echo $port; ?>>
 
+    SetEnvIf X-Forwarded-Proto https HTTPS=1
+
     ServerName webmail.<?php echo $parkdomainname; ?>
 
 
@@ -885,6 +901,8 @@ foreach ($certnamelist as $ip => $certname) {
 
 ## webmail for parked '<?php echo $parkdomainname; ?>'
 <VirtualHost <?php echo $ip; ?>:<?php echo $port; ?>>
+
+    SetEnvIf X-Forwarded-Proto https HTTPS=1
 
     ServerName webmail.<?php echo $parkdomainname; ?>
 
@@ -995,6 +1013,8 @@ foreach ($certnamelist as $ip => $certname) {
 ## webmail for redirect '<?php echo $redirdomainname; ?>'
 <VirtualHost <?php echo $ip; ?>:<?php echo $port; ?>>
 
+    SetEnvIf X-Forwarded-Proto https HTTPS=1
+
     ServerName webmail.<?php echo $redirdomainname; ?>
 
 
@@ -1082,6 +1102,8 @@ foreach ($certnamelist as $ip => $certname) {
 ## webmail for redirect '<?php echo $redirdomainname; ?>'
 <VirtualHost <?php echo $ip; ?>:<?php echo $port; ?>>
 
+    SetEnvIf X-Forwarded-Proto https HTTPS=1
+
     ServerName webmail.<?php echo $redirdomainname; ?>
 
 
@@ -1109,6 +1131,8 @@ foreach ($certnamelist as $ip => $certname) {
 
 ## webmail for redirect '<?php echo $redirdomainname; ?>'
 <VirtualHost <?php echo $ip; ?>:<?php echo $port; ?>>
+
+    SetEnvIf X-Forwarded-Proto https HTTPS=1
 
     ServerName webmail.<?php echo $redirdomainname; ?>
 
