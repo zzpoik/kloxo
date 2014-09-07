@@ -123,8 +123,8 @@ exclude=cairo*
 [mratwork-nginx]
 name=MRatWork - nginx repo
 baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
-gpgcheck=0
 enabled=0
+gpgcheck=0
 
 # ==================================
 
@@ -141,8 +141,8 @@ gpgcheck=0
 [mratwork-atrpms]
 name=MRatWork - Fedora Core $releasever -  - ATrpms
 baseurl=http://dl.atrpms.net/el$releasever-$basearch/atrpms/stable
+enabled=1
 gpgcheck=0
-enabled=0
 
 # ==================================
 
