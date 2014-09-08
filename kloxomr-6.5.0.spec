@@ -1,6 +1,6 @@
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2014011001
+%define timestamp 2014070901
 
 Name: %{productname}
 Summary: Kloxo-MR web panel
@@ -96,6 +96,102 @@ elif [ "$1" = "2" ]; then
 fi
 
 %changelog
+* Wed Jul 09 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014070901.mr
+- expand domain tld until 16 chars (as the same as Kloxo-MR 6.5.1)
+
+* Tue Jul 08 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014070801.mr
+- fix update ssh script
+
+* Sat Jul 04 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014070401.mr
+- fix lighttpd conf.tpl
+
+* Fri Jun 27 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014062701.mr
+- fix logrotate
+- fix ssl reloop for nginx-proxy
+- fix ckeditor for only save body content
+
+* Thu Jun 21 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014062103.mr
+-  fix nginx when update (with overwrite /etc/nginx/etc/conf.d/default.conf)
+
+* Thu Jun 21 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014062102.mr
+- change addon-ckeditor/fckeditor to editor-ckeditor/fckeditor
+- change addon-fckeditor to editor-*
+
+* Thu Jun 21 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014062101.mr
+- move fckeditor/ckeditor to /editor path
+
+* Mon May 19 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014051901.mr
+- fix hiawatha.conf.base for MaxUploadSize
+- fix crf_token
+
+* Sat May 10 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014051002.mr
+- change listen.mode from 0660 to 0666 in php-fpm pool
+
+* Sat May 10 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014051001.mr
+- fix php-fpm related to php53/php54 release -28 (add listen.owner, .group and .mode)
+
+* Mon Apr 28 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014042802.mr
+- overwrite /etc/php.ini in upcp (prevent missing .so in lxphp.exe)
+- remove postfix user before re-/install qmail-toaster in upcp
+- add install yum-plugin-replace in upcp
+- fixmail-all also remove postfix user and install qmail-toaster if not exists
+
+* Sun Apr 27 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014042701.mr
+- move process update mratwork.repo to fixrepo and then execute in upcp (including change $releasever to OS version)
+
+* Tue Apr 22 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014042201.mr
+- like 6.5.1, no need validate 'csrf token' for add/delete/update if using 'get' method
+- fix delete action (change 'get' to 'post' and add 'csrf token' validate)
+
+* Fri Apr 18 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014041803.mr
+- add no permit for add/delete/update with get instead post
+- fix delete in list related to 'csrf token' 
+
+* Fri Apr 18 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014041801.mr
+- set to make sure all add/delte/update in form must be under post and add csrf_token
+
+* Thu Apr 17 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014041701.mr
+- mod/fix upcp and cleanup for smooth update from previous (still using old php52s and mysql)
+
+* Wed Apr 16 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014041602.mr
+- implementing csrf token (like 6.5.1 do)
+- fix/mod 'nice' params
+- add missing logic for csrf_token 
+
+* Mon Apr 7 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014040701.mr
+- mod using mysql55 from ius instead mysql from centalt because centalt delete their mysql 5.5
+
+* Mon Feb 3 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014020301.mr
+- update cron_task (make client only able to list and delete their cron)
+
+* Sun Feb 2 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014020201.mr
+- fix install process (add looping to make sure kloxo database created)
+
+* Fri Jan 31 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014013101.mr
+- kloxo service using spawncgi (make kloxo-phpcgi under lxlabs user like kloxo-hiawatha)
+- disable perl until fix hardlinks issue related to perl
+- mod permissions update display
+
+* Thu Jan 30 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014013001.mr
+-  fix security issue (add sanity for '../' in filemanager; cron task only enable for admin)
+
+* Wed Jan 29 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014012901.mr
+- fix some issues to make better update from Kloxo official 
+
+* Tue Jan 28 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014012802.mr
+- fix kloxo sql
+
+* Tue Jan 28 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014012801.mr
+- mod kloxo sql to using myisam as storage-engine
+- fix ownership in filemanager
+
+* Mon Jan 27 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014012701.mr
+- fix select-all in dns/mysql list
+- fix docroot
+- update skeleton.zip (because no image with transparent background)
+- fix fastcgi (add ide-timeout)
+- fix clearcache; make update script as the same as cleanup
+
 * Fri Jan 10 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014011001.mr
 - fix mysql-aio issue in openvz; add disable-mysql-aio script
 - fix mod_rpaf issue when select web proxy

@@ -1,10 +1,10 @@
 %define debug_package %{nil}
 %define kloxo /usr/local/lxlabs/kloxo
 %define productname kloxomr
-%define timestamp 2014021901
+%define timestamp 2014072901
 Name: %{productname}
 Summary: Kloxo-MR web panel
-Version: 6.5.1.a
+Version: 6.5.1.b
 Release: %{timestamp}%{?dist}
 License: GPL
 Group: Applications/Internet
@@ -15,7 +15,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
 Obsoletes: kloxomr-addon-extjs, kloxomr-addon-yui-dragdrop
-Obsoletes: kloxomr-addon-fckeditor, kloxomr-addon-ckeditor
+#Provides: kloxomr-editor-fckeditor, kloxomr-editor-ckeditor
 
 %description
 This is special edition (fork) of Kloxo with many features not existing on 
@@ -34,11 +34,11 @@ This fork named as Kloxo-MR (meaning 'Kloxo fork by Mustafa Ramadhan').
 %{__cp} -rp * $RPM_BUILD_ROOT%{kloxo}/
 %{__mkdir} -p $RPM_BUILD_ROOT/script/
 %{__cp} -rp $RPM_BUILD_ROOT%{kloxo}/pscript/* $RPM_BUILD_ROOT/script/
-## disable because move to pscript
+# disable because move to pscript
 #%{__cp} -rp $RPM_BUILD_ROOT%{kloxo}/httpdocs/htmllib/script/* $RPM_BUILD_ROOT/script/
 
 %clean
-#%{__rm} -rf $RPM_BUILD_ROOT
+%{__rm} -rf $RPM_BUILD_ROOT
 
 %pre
 /usr/sbin/useradd -s /sbin/nologin -M -r -d /home/lxlabs/ \
@@ -49,11 +49,10 @@ This fork named as Kloxo-MR (meaning 'Kloxo fork by Mustafa Ramadhan').
 %{kloxo}
 %defattr(644,root,root,755)
 /script
+%defattr(755,root,root,755)
+%{kloxo}/init/php*/*.sh
 
 %post
-chmod 755 %{kloxo}/init/php*.sh
-
-
 # this is for fresh install
 if [ "$1" = "1" ]; then
 	if [ -f /var/lib/mysql/kloxo ] ; then
@@ -101,13 +100,679 @@ elif [ "$1" = "2" ]; then
 	echo " _/  Run 'sh /script/cleanup' for to make sure running well                  _/"
 	echo " _/  or 'sh /script/cleanup-simple' (cleanup without fix services configs)   _/"
 	echo " _/                                                                          _/"
+	echo " _/  Run 'sh /script/upcp' if update from Kloxo-MR 6.5.0                     _/"
+	echo " _/                                                                          _/"
 	echo " _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/"
 	echo
 fi
 
 %changelog
+* Tue Jul 29 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014072901.mr
+- fix installing process related to phpm-installer
+
+* Mon Jul 28 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014072801.mr
+- change system() to exec() in fixvpop.php
+- fix hiawatha service when running cleanup if hiawatha as active webserver
+
+* Sun Jul 27 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014072701.mr
+- just using phpm-installer for install all phpXYm/s
+- mod/fix all php bin for general path
+- change session path based on user
+- validate username and password for add ftp user
+
+* Wed Jul 09 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014070901.mr
+- auto chown 755 for pl/cgi/py/rb if upload or fix-chownchmod 
+
+* Tue Jul 08 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014070801.mr
+- fix update ssh script
+- disable .htaccess fix in fixweb 
+
+* Mon Jul 07 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014070704.mr
+- check mod_perl in cleanup process
+- back to use previous reverseproxy for nginx and hiawatha
+- add keep-alive and reduce timeout to 90 in hiawatha-proxy
+- change reverseproxy passing from all to except pl/cgi/py/rb/shmtl (because handle by cgi-wrapper)
+- reduce timeout value in nginx
+
+* Sun Jul 06 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014070601.mr
+- use hiawatha's cgi-wrapper instead apache's cgi in hiawatha-proxy
+- mod/add index order (accept index.cgi also)
+- using mod_perl instead mod_cgi for apache
+- enable taint in perl for security reason
+
+* Fri Jul 04 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014070402.mr
+- fix enable-cgi (also warning 'not implementing yet' in nginx)
+
+* Fri Jul 04 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014070401.mr
+- fix/mod certain throw messages
+- mod htmltextarea space
+- enable/disable cgi for webserver
+- use cgi-wrapper for hiawatha
+- change openbasedir for 'apache' user
+- use directly cgi-assign to perl instead perlsuexec for lighttpd
+- fix lighttpd conf.tpl
+
+* Mon Jun 30 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014063001.mr
+- remove 'output_buffering = 4096' and stay with '= off' in php.ini 
+- change throw value from array to string
+
+* Fri Jun 27 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014062702.mr
+- fix throw for mailing list
+- convert to string if message as array (related to getThrow)
+- mod certain throw messages
+
+* Fri Jun 27 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014062701.mr
+- use phpXYm for suphp in secondary php
+- fix ssl reloop for nginx-proxy
+- fix ckeditor for only save body content
+- enable phar, intl, geoip, fileinfo and tidy module in php fix logrotate
+
+* Tue Jun 24 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014062401.mr
+- add getThrow() for translate throw message
+- update all throw message with getThrow; fix logrotate config
+
+* Sat Jun 21 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014062102.mr
+- change addon-ckeditor/fckeditor to editor-ckeditor/fckeditor
+- change addon-fckeditor to editor-*
+
+* Sat Jun 21 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014062101.mr
+- remove obsolete for fckeditor and ckeditor
+- remove fckeditor/ckeditor from core code
+- install ckeditor if not exists when running cleanup
+- add provide for fckeditor and ckeditor
+
+* Fri Jun 20 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014062001.mr
+- add $this->write in postUpdate to make sure db write before next process
+- prepare 'multiple php' (but still in progrss)
+
+* Thu Jun 19 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014061903.mr
+- add try-catch in default_index.php
+- fix fixlxphpexe 
+- also run rkhunter update in install process
+- use ckeditor instead fckeditor if installed
+- include ckeditor
+
+* Tue Jun 17 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014061701.mr
+- fix 'phptype_not_set' alert
+- increasing connection in nginx and hiawatha until 10x (for high-traffic)
+- use 'new' permalink for lighttpd
+- prepare 'new' ip validate
+
+* Sun Jun 15 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014061502.mr
+- use callInBackground for lx_mail
+- possible disable send notify for quota with flag
+- add 'disable notify' for 'disable policy'
+- add 'enable cron for all' in 'general settings'
+- fix change 'webmail system default' (no need 2x click update again)
+- increase types_hash_bucket_size in nginx for long domain name issue
+
+* Sat Jun 14 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014061403.mr
+- add default.conf for nginx for prevent when using webcache in front of nginx
+- prevent delete main ftpuser
+- fix 'server alias' for wildcard
+- fix web_lib.php related to nginx
+
+* Wed Jun 11 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014061101.mr
+- mod scavenge send mail with Y/m/d format; mod djbdns tpl
+- add some env to php53-fpm-pool.conf.tpl
+- prepare phpm-fpm template
+- mod kloxo.init to accept custom sh/conf/ini
+- upload 'new' phpm-fpm template
+- mod php-fpm-part.conf.tpl
+- use symlink instead copy from pscript to /script
+- mod php-fpm tpl to change php_value to php_flag for on/off
+- change php_active to kloxo_php_active and adjustment for kloxo.init and fixlxphpexe
+
+* Sun Jun 08 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014060802.mr
+- add enable gzip in hiawatha
+- change X-Forwarded-For in nginx
+- mod php-fpm.conf.tpl (fpm for php52)
+- enable send mail for scavenge
+- fix loqout in feather skin
+- add expire in hiawatha for panel
+- add php-fpm conf/init/sh in php52m/php52s
+- fix scavenge.php
+
+* Wed Jun 04 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014060401.mr
+- change CGIHandler from php to pl in hiawatha
+- enable alias to cgi-bin in hiawatha; fix cron for client
+- change root@ to admin@
+- fix 'go' button in list
+- set cursor to certain css tag
+- mod htmllib related to cursor 
+- change 'idle-timeout' for 'FastCGIExternalServer' of mod_fastcgi from 180 to 90
+
+* Fri May 30 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014053003.mr
+- fix header in lx_mail()
+- mod to possible stmprelay/smarthost to outside smtp server
+- mod to enable cron for users if exists '/usr/local/lxlabs/kloxo/etc/flag/enablecronforall.flg' file
+- mod apache disable dirlist
+- mod message for cron list
+- fix nginx config (inactivate for 'disable_symlinks') because troube with static file path
+- change sender from kloxo@ to root@
+
+* Sat May 24 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014052401.mr
+- mod/fix lx_mail() to accept utf8 and html and remove pre from message
+
+* Mon May 21 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014052103.mr
+- set /tmp dir as upload and save dir for phpmyadmin
+- add 'max_input_vars' in php.ini and php-fpm config (set '3000' as default)
+- add 'max input vars' in 'advanced php configure'
+- send message as html and with utf8 charset
+
+* Mon May 19 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014051901.mr
+- add www.conf (blank) for php-fpm because latest php always create this file
+- fix crf_token
+- delete unused certain php files
+
+* Tue May 13 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014051301.mr
+- add '-pass-header Authorization' in domains.conf.tpl of apache
+- fix syncserver in web__lib.php
+- prettier php code in certain files
+
+* Mon May 12 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014051201.mr
+- separate warning for php.ini to client and pserver
+- feather skin also appear background image (but still not use)
+- no convert for '\n' to '<br />\n' (fix ticket list appear)
+
+* Sat May 10 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2014051004.mr
+- change listen.mode from 0660 to 0666 in php-fpm pool
+- mod fixmail-all 
+
+* Sat May 10 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014051002.mr
+- mod/fix phpm-installer
+- mod installatron-install
+- fixmail-all also fix chown and chmod of /home/lxadmin/mail
+- fixmail-all also checking postfix user and change to vpopmail if exists
+- fix/mod installer related to postfix user
+- fix php-fpm related to php53/php54 release -28 (add listen.owner, .group and .mode);
+- fix/mod installer (related to fix process) and fix-all
+
+* Mon May 5 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014050502.mr
+- fix 'php used' in 'webserver configure' in master-slave environment
+
+* Mon May 5 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014050501.mr
+- fix default_index.php for using login page
+- add syncserver for input array (importance for pdns in master-slave environment)
+- fix dns class lib (add __construct like web class lib do)
+- fix php.ini warning if not set (server and admin level)
+- fix 'switch program' fpr master-slave environment
+- fix 'webcache' input array in web lib
+- fix click in php.ini warning
+- change restart httpd in latest step in restart-all/restart-web
+
+* Wed Apr 30 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014043002.mr
+- set/enable phprc in php-cli (fix issue for missing .so in lxphp.exe)
+
+* Wed Apr 30 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014043001.mr
+- set mywebsql as 'sql manager' if exists in 'httpdocs/thirdparty'
+- fix installatron-install if webmin exists
+- fix php53m-extension-installer (also remove full path of extension)
+- fix phpm-config-setup with remove full path of extension
+
+* Tue Apr 29 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014042902.mr
+- increasing MaxUploadSize to 2000 in hiawatha and MaxClients to 1000 in httpd
+- fix custombutton not show icon in client
+- make possible php54s beside php53s (resolve mariadb 10.0 issue; compile with mysqlnd for '--with-mysqli')
+
+* Mon Apr 28 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014042803.mr
+- overwrite /etc/php.ini in upcp (prevent missing .so in lxphp.exe)
+- remove postfix user before re-/install qmail-toaster in upcp
+- add install yum-plugin-replace in upcp
+- mod phpm-config-setup
+- fixmail-all also remove postfix user and install qmail-toaster if not exists
+- move 'default' php.ini (because wrong place)
+
+* Sun Apr 27 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014042702.mr
+- move process update mratwork.repo to fixrepo and then execute in upcp (including change $releasever to OS version)
+
+* Sun Apr 27 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014042701.mr
+- fix web config template (forgot open bracket for .ca logic)
+- fix upcp for 'mratwork-' execute
+
+* Sat Apr 26 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014042601.mr
+- still trouble with php for openssl (not perfect for SAN) and then mod to minimize problem
+- little fix lighttpd config (still problem with ssl)
+
+* Thu Apr 24 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014042401.mr
+- external apps access via post (like phpmyadmin)
+- fix to mariadb may not work if /var/lib/mysqltmp not exists
+- implementing SAN for domain-based ssl cert
+- cleanup will be copy openssl.cnf.tpl to /home/openssl
+- fix button appear for client login
+
+* Tue Apr 22 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014042202.mr
+- fix reset-mysql-kloxo-password.php
+- fix lighttpd conf.tpl related to .ca ssl
+- change all lpform method to 'get'
+
+* Mon Apr 21 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014042101.mr
+- disable implementing update/add/delete in get for 'csrf token' because too much exception
+
+* Sun Apr 20 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014042008.mr
+- set 'cgi.rfc2616_headers = 0' in phpm series (because problem with mod_fastcgi)
+- mod mysql-to-mariadb.php and mariadb-to-mysql.php
+- change extension from mysql to mysqli in phpmyadmin_config.inc.php
+- fix issue related to csrf for service action
+- fix restore process for 'csrf token' (change 'get' to 'post')
+
+* Sun Apr 20 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014042004.mr
+- add/delete domain-based cert also fixweb and restart-web
+- disable php module flag and update in phpinilib.php
+- disable setInstallPhpFpm when switch web (aka install web driver) 
+
+* Sun Apr 20 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014042001.mr
+- add no permit for add/delete/update with get instead post 
+- prepare domain-based ssl without assign to IP address
+- fix delete in list related to 'csrf token'
+- fix/change kloxo-php-fpm as root
+- fix topbar_right (remove undefined param)
+- fix certain form to post (related to 'csrf_token')
+- implementing domain-based ssl certificate (delete still not remove files)
+- mod web config related to domain-based ssl cert
+- change using .crt to .pem in all web config
+- fix delete cert also delete cert files
+- change is__table to getClass (because the same purpose)
+- fix sshconfig ini in show
+- mod messagelib.php related to domain-based cert
+
+* Fri Apr 18 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014041802.mr
+- set to make sure all add/delte/update in form must be under post and add csrf_token
+
+* Fri Apr 18 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014041801.mr
+- mod property for 'limit' and 'custombutton'
+- fix phpm-config-setup (related to php55m for symlink)
+
+* Thu Apr 17 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014041704.mr
+- disable fix_self_ssl in update process
+- enable for disable_functions in phpXYm php.ini
+- add mysql56u in set.mysql.lst
+- fix ftpuser if docroot not exists
+- add/mod message in messagelib
+- mod/fix phpini initialValue
+- fix frame_left for client level (disable quickaction logic)
+- mod/fix for handle update situation for mysql and php53s
+- 'yum remove' for php53s also 'rpm -e --noscripts' for php53s-fpm
+
+* Wed Apr 16 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014041602.mr
+- separate delete warning for customer and admin/reseller
+- fix/mod for detect use yum and rpm in sh script
+
+* Wed Apr 16 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014041601.mr
+- fix/mod 'nice' params
+- mod csrf_token logic
+- update and phpm install not work in panel (found yum problem in centos 6 64bit)
+
+* Tue Apr 15 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014041504.mr
+- fix display issue related to token validate where only add/update/delete with 'post' method
+- fix phpini because getlist for pserver only work under admin and then change to parent
+- add warning in deletion list
+- move deletion warning to top because possible not appear in long list
+
+* Tue Apr 15 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014041501.mr
+- validate token able to disable
+- fix add cron job (update still not work) 
+
+* Mon Apr 14 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014041402.mr
+- recompile with fix wrong domainlib.php file
+
+* Mon Apr 14 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014041401.mr
+- remove mysql from mysql.lst and for only mysql55 beside mariadb
+- mariadb-to-mysql will be convert to mysql55
+- disable installapp reference in ddatabaselib
+- set initPhpIni() only use values from setUpINitialValues()
+- add missing 'selected' keyword
+- update 'limit' will be update will execute fixphp
+- fix domainlib issue (isOn change to '=== 'on') in client domain
+- to make sure quota value in 'float' format
+- fix preAdd() with add params
+- fix 'checked' in display
+
+* Sun Apr 13 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014041303.mr
+- fix php53s.ini for using special setting for panel
+
+* Sun Apr 13 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014041301.mr
+- add isTokenMatch() for 'csrf token'
+- change protect from 'remote post' to 'csrf token'
+- fix htaccess.tpl and php.ini.tpl (add 'default value')
+- fix issue if select 'multiple php' and user click 'php configure' in domain
+- mod phpm-instaler/-config-setup
+- to make sure '/tmp/multiple_php_install.tmp' owned by root 
+
+* Sat Apr 12 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014041203.mr
+- mod/fix langkeyword/message data
+- mod multiselect list able to use keyword for title
+- change redirect for 'change owner' from 'a=resource' to 'new client'
+
+* Sat Apr 12 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014041201.mr
+- add ftpChangeOwner() because call by web__lib
+- add db_set_value()
+- fix do_remote_exec() with create remote object if not set (effect for 'change owner')
+- fix ftpuser owner for 'change owner'
+
+* Fri Apr 11 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014041104.mr
+- mod/update phpm-installer/-config-setup (all config parts move to -config-setup)
+- mod 'searchall' button
+- set 'php configure' not appear if not enable 'multiple php'
+- fix preUpdate in objectactionlib.php
+- add fix-yum-cache
+- change from 300 to 30 for timeout in /etc/yum.conf
+
+* Fri Apr 11 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014041101.mr
+- add more disable modules for phpm-installer (minimize trouble when using php52 as php-branch)
+
+* Thu Apr 10 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014041003.mr
+- forgot submit mod lxclass.php (related to preAdd()/preUpdate())
+- mod preUpdate in serverweblib.php (consistence with declare preUpdate in lxclass)
+
+* Thu Apr 10 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014041001.mr
+- add new preAdd()/preUpdate() function to process before add()/update()
+- install 'multiple php' runnind well now from panel and in background process (need a trick)
+- mod lxa.js related to multiselct
+
+* Wed Apr 9 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014040901.mr
+- move mratwork-* detect from cleanup to upcp
+
+* Tue Apr 8 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014040801.mr
+- fix directory protect for hiawatha (forgot add 'basic' in 'passwordfile' param)
+- add log for phpm install process
+- mod php5.fcgi 
+- prepare install 'multiple php' via panel
+- fix switch-php-fpm
+- add option in 'webserver configure' for switch-php-fpm ('multiple php install' still not work)
+- add 'Fix - PHP' in 'command center'
+- change form color
+
+* Sun Apr 6 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014040601.mr
+- also disable magic_quotes, register_long_arraya and register_globalsin htaccess
+- disable allow_call_time_pass_reference in php
+- prepare add token in add/delete/update form
+- add validate for 'server alias'
+- better 'die' display
+- mod xprint for display data of object, array or string
+- implementing protect from 'remote post' instead using 'csrf token' (need more investigate)
+- back to declare all php module in apache because selected module need fixweb every php-type changed
+- fix mod_rewrite issue in apache
+- fix chmod for php5.fcgi
+- fix isRemotePost (change 'SERVER_NAME' to 'HTTP_HOST')
+- fix directory declare in hiawatha related to directory protect
+- fix phpm-installer (wrong declare for redis)
+
+* Fri Apr 4 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014040405.mr
+- fix php53s-installer
+
+* Fri Apr 4 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014040404.mr
+- enable unzip in docroot (no warning)
+- back to set 'cgi.rfc2616_headers = 0' because trouble in wordpress in apache/-proxy
+- back to not use ' -pass-header Authorization' in mod_fastcgi because must be 'cgi.rfc2616_headers = 0'
+
+* Fri Apr 4 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014040403.mr
+- now install with php53s by default
+
+* Fri Apr 4 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014040402.mr
+- remove pear channel update
+
+* Fri Apr 4 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014040401.mr
+- back to use 'cgi.fix_pathinfo = 1' because many apps not work if 0
+- magic_quotes, register_globals and safe_mode always disable (make simple for multiple php)
+- remove double post_max_size
+- php*-enchant also not enable (bug issue)
+- set no options for magic_quotes, register_globals and safe_mode in panel
+- mod kloxo.init
+- mod sh script for php
+- php52s and php53s only for panel and use m version for general purpose (use switch-php-fpm)
+- symlink /usr/lib64/php to /usr/lib/php (make simple for 64bit)
+- mod fixlxphpexe, cleanup, cleanup-simple and cleanup-nokloxorestart
+- mod packer.sh
+
+* Wed Apr 2 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014040201.mr
+- fix php.ini.tpl
+- fixlxphpexe (better rm for symlink to make sure)
+- when install in 64bit, phpm-installer only install 64bit dependencies
+
+* Tue Apr 1 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014040109.mr
+- fix php.ini.tpl
+- php52s/php53s install using 'standard' php52/php53u
+
+* Tue Apr 1 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014040108.mr
+- fix run cleanup after update Kloxo-MR
+- fix packer.sh
+
+* Tue Apr 1 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014040106.mr
+- running fixphp include fix extension_dir path (crucial for multiple php system)
+
+* Tue Apr 1 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014040105.mr
+- run fixlxphpexe include copy kloxo.init (guarantee always new)
+- add missing kloxo-php-fpm.conf (special)
+
+* Tue Apr 1 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014040104.mr
+- fix typo in php53-fpm-pool.conf.tpl
+- disable 'customemode' option in 'appearance'
+- fix php.conf to inactive if switch to php-fpm in httpd
+- disable 'export PHPRC=' in all php script (not needed)
+- change php-error.log name depend on multiple php-type
+- always use 'extension_dir' in all php.ini to mininize wrong php modules loaded
+- add switch-php-fpm to make possible one of 'multiple php' for single purpose
+- add reset-mysql-kloxo-password (alternative for fix-program-mysql)
+- correct double param in php53-fpm-pool.conf.tpl
+- correct/mod extension_dir in php.ini.tpl/php.ini.tpl
+- fix php52s-installer
+- also fix php-fpm-pool.conf.tpl in future phpcfg for typo and double param
+
+* Sun Mar 30 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014033004.mr
+- fix fix-qmail-assign
+- running 'fix-qmail-assign' also create '.qmail-default' if not exists
+
+* Sun Mar 30 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014033003.mr
+- disable 'PATH_TRANSLATED' in nginx config because set 'cgi.fix_pathinfo = 0' in php.ini
+- fix url for 'driver' list
+- mod related to 'createListAddForm' and 'addListForm' function
+- fix related to 'click here to add' in 'printListAddForm'
+- change color for active tab and breadcumb
+- fix/mod fix-qmail-assign to more info
+- add 'help' in 'feather' (simple skin already exists)
+- fix-chownchmod also fix mail dirs/files
+
+* Sat Mar 29 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014032907.mr
+- back to previous idea for phpXYm script
+- fix extension_dir for phpXYm
+- separated config-setup to file from phpm-installer
+- add run phpm-config-setup to cleanup
+
+* Sat Mar 29 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014032905.mr
+- fix/mod sshauthorizedkey
+- fix appear for 'selectshow'
+- set to 'no disabled' for 'admin'
+- mod/fix script for phpXYm and phpXYm
+- already appear 'multiple php' options but unfinished yet
+- fix/mod 'StW' type display (using textarea instead table)
+- make simple sshauthorizedkey code
+- change 'multiple php enable' to 'multiple php ready'
+- prepare for 'multiple php' template script
+- back to php.ini under web but only for 'php selected' and enable 'multiple php'
+- add/change 'alert' if php.ini not set under 'pserver'
+
+* Tue Mar 25 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014032502.mr
+- fix detect php 5.4/5.5 which 'php -v' not work if using php 5.2/5.3 ini
+- add 'try again' in 'alert' for fail to add domain
+- remove 'disable installapp' in 'general'
+- fix to setup roundcube 1.0.rc
+- fix copy php-fpm.conf
+
+* Tue Mar 25 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014032501.mr
+- fix image/font appear depend on button type
+- change to lxguardhit appear different column for fail and success
+- fix permissions (from 0600 to 644) for user-logo
+- fix version check
+- fix restart if hiawatha status as not running
+- gen-hashed.sh (for qmail user assign (based on 'real' bash)
+
+* Sun Mar 23 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014032301.mr
+- mod how-to-install.txt
+- mod/change phpXY-installer
+- create log file for escape segfault in install
+- php.ini now based on user-level
+- able setting php max children in resource plan
+- mod fixweb/fixphp to adopt user-level php.ini
+- install process with more info/message
+- move php.ini/php5.fcgi from /home/httpd/<domain> to /home/kloxo/client/<client>
+- fix fcgid to config adopt user-level php.ini
+- max children appear 'unlimited' but intepret as '6'
+- fix dns serial
+- fix wrong text for load-wrapper calling
+- php-fpm config include php configure from panel as 'php_admin_value'
+- no admin/domain mode for admin (just appear admin mode)
+- fix detect phpversion
+- delete client also delete php-fpm config
+- fix issue if dnssyncserver not array
+- add is_cli() for debug purpose (different appear in cli and cgi mode)
+- fix issue in sqlite.php if object not exist
+- modified simplicity skin where breadcumb move from top to bottom of tab
+- fix mailinglist where wrong url because as object
+- fixweb and fixphp is separate process now
+- fix fixlxphpexe script
+- 2 type of multi-php (phpXYm and phpXYs)
+- mod upcp and install scripts
+- add options for install (-y/-force, --with-php53s/-53s and --remove-kloxo-database/-r)
+
+* Mon Mar 17 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014031701.mr
+- fix cleanup (no need restart phpXs)
+- change to use php52 instead php53 for install step
+- fix kloxo.inits
+- fix phpXs-installer
+- installer have options with '--force'/'-y', '--remove-kloxo-database' and '--use-php53s'
+- delete disable-mysql-aio and add set-mysql-default (with more options)
+
+* Sun Mar 16 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014031602.mr
+- add missing default driver content
+- phpXs-installer will be detect target php
+
+* Sun Mar 16 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014031601.mr
+- fix dependencies for phpXs-installer
+- cleanup also convert special php53s to php53s based on php53u
+- fix and also convert php52s in cleanup
+
+* Sat Mar 15 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014031501.mr
+- fix detect phpversion
+- mod status appear in simplicity skin
+- panel using php53u (via php53s-installer) instead special php53s
+- add php*s-installer (prepare for multi-php)
+- disable register_long_arrays in php 5.3+ (problem for 5.4+)
+- possible execure php-cli with softlimit
+- increase listen.backlog in nginx
+- install able with '--force' and '--use-php52s' (default using php53s)
+
+* Wed Mar 12 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014031203.mr
+- rename softlimit to softlimit.sample because something wrong under centos 6 64bit (bug?)
+
+* Wed Mar 12 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014031202.mr
+- add 'proxy_set_header X-Forwarded-Protocol $scheme;' to nginx proxy.conf
+- change menu file/dir for simplicity skin
+- add soflimit in php*-cli.sh (automatically for lxphp.exe)
+- change 'vm.vfs_cache_pressure' value 100 (tend to slow cached memory created)
+- pending select php.ini from menu for client in simplicity skin 
+
+* Mon Mar 10 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014031002.mr
+- disable dtree for delete client
+- fix for delete database username 
+
+* Mon Mar 10 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014031001.mr
+- make enable clientname as database username
+- fix/mod image to font icon if select 'button_type' as font
+- fix initial roundcube
+- fix spamdyke config
+- add -pass-header Authorization in mod_fastcgi of httpd
+- fix for double userdir rule in nginx
+- back to user 'default' restart for services
+- delete domain also delete docroot if no other domain use the same docroot
+
+* Sat Mar 1 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014030101.mr
+- disable UserDirectory in hiawatha (to purpose userdir but not work)
+- disable 'enable_php_fastcgi' in resourceplan
+- move php logic for topbar to their php
+- add 'wait' in 'status' top bar when click add/update
+
+* Fri Feb 28 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014022801.mr
+- fix tab bar for 'Client Processed Logs' page
+- fix tab bar for 'lxguard' page
+- fix font-icons in lxguard pages
+- move left/right top bar of 'simplicity' to include_one with 'custom rule'
+- fix icons in list if using 'image' as 'button type'
+
+* Thu Feb 27 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014022701.mr
+- mod packer.sh with also remove .pid files
+- make already appear tab bar
+- mod dprint/dprint_r with 'pre'
+- add xprint (like dprint without debug mode)
+- add database without prefix name and also database username for admin
+- fix userdir in httpd with make declare userdir outside 'default' virtualhost
+
+* Sun Feb 24 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014022404.mr
+- add fixftp-all
+- add 'standard command' like fixdns in 'command center'
+- remove installapp
+- fix quota/normal view with more detail
+- add more detil in login history but bug still unreseolvced
+- remove livesupport (unfinish work original Ligesh)
+- fix list pagesize/pagenum
+- use * instead *.lxlabs.com certificate
+- upload new certificate
+
+* Sat Feb 23 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014022305.mr
+- fix userdir in httpd
+- add fixftp-all
+- add 'standard command' like fixdns in 'command center'
+
+* Sat Feb 23 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014022303.mr
+- resubmit certain restart scripts because wrong files 
+
+* Sat Feb 23 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.b-2014022302.mr
+- mod clock also hour with 2 digit format
+- fix all restart and cleanup scripts
+- move clock js code to clock.js file
+- all include, js and css ready for 'custom rule'
+- set Kloxo-MR 6.5.1 as b (beta)
+
+* Sat Feb 22 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014022204.mr
+- fix validate for new client
+- set smaller menu, tab-bar and link-path in 'simplicity' skin
+- more detail message and validate for add client and database 
+
+* Sat Feb 22 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014022202.mr
+- fix fix-userlogo (related to domainroot)
+- fix all cleanups
+- fix message and ticket (related to send mail) with add <pre>
+- fix list if data is array (date in cron list still not fix)
+- add clock in 'simplicity' top bar
+
+* Fri Feb 21 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014022102.mr
+- fix userlogo and default_index.php
+- add left-side userlogo in panel
+- add 'ticket' in 'simplicity' top bar
+- fix non-admin send ticket
+- reduce menu text width
+
+* Fri Feb 21 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014022101.mr
+- add alert when click status in 'simplicity' top bar
+- change clientname length to 31 (according to centos and pure-ftpd)
+- spawn-fcgi only auto-install under php52s in kloxo.init
+
+* Thu Feb 20 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014022002.mr
+- fix display_init
+- better status title display in 'simplicity' skin
+- restore css for default because wrong css
+
+* Thu Feb 20 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014022002.mr
+- remove double php53s-snmp in php53s-install
+- add 'message' and 'status' in 'simplicity' top bar
+- add db_get_count() in lib.php
+- change "#" to "javascript://" for href in 'simplicity' index.php
+- reduce menu container with (800 to 700px) to accept width 1024px display
+- move 'status' bar from top-left to top-right
+
 * Wed Feb 19 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014021901.mr
-- fix sysinfo.php; add squid in webcache list
+- fix sysinfo.php
+- add squid in webcache list
 - change client/database name to 64 chsrs and database username to 16 chars
 - vslidate for client/database name and database username
 - warning if 'switch program' and 'php-type' not set
@@ -187,7 +852,8 @@ fi
 - use sock instead tcp/ip to access mysql in panel
 
 * Fri Jan 10 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014011001.mr
-- fix mysql-aio issue in openvz; add disable-mysql-aio script
+- fix mysql-aio issue in openvz
+- add disable-mysql-aio script
 - mod how-to-install.txt for additional step when update from Kloxo 6.1.12
 - no add certain param in sysctl.conf if openvz
 
@@ -203,7 +869,8 @@ fi
 * Wed Jan 01 2014 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2014010101.mr
 - change ionice value
 - detect hiawatha as web server when running restart-web/-all
-- fix try-cache process in appear; fix logic for nowrap in list table
+- fix try-cache process in appear
+- fix logic for nowrap in list table
 
 * Thu Dec 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013122602.mr
 - fix hiawatha service after hiawatha update
@@ -221,7 +888,8 @@ fi
 - add keyword text for updateall message and adjusment updateallWarningfunction js
 - fix/mod certain infomsg
 - change submit naming from frm_change to frm_button/frm_button_all and add frm_change hidden input
-- add id for hidden input tags beside name; fix all_client appear
+- add id for hidden input tags beside name
+- fix all_client appear
 - add warning to need add 'innodb_use_native_aio=0' in /etc/my.cnf to update to mysql to 5.5 if running cleanup
 - cleanup process also fix if lxphp exist
 - reupload abstract_012.jpg
@@ -251,7 +919,8 @@ fi
 * Sat Dec 14 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013121402.mr
 - fix tree appear in feather skin 
 - fix infomsg in 'Feather' skin
-- fix certain infomsg; remove useless code in display
+- fix certain infomsg
+- remove useless code in display
 - fix appear if no infomsg
 - fix link in show
 - split %client% to %client% and %loginas% in infomsg
@@ -293,7 +962,8 @@ fi
 - change 'maxuploadsize' in kloxo-hiawatha from 100 to 2000 (MB)
 - fix/mod 'simplicity' menu
 - help/infomsg now able to use full html tags (like ul/ol/p)
-- fix/mod space in certain list; fix dbadmin and skeleton reference
+- fix/mod space in certain list
+- fix dbadmin and skeleton reference
 - mod certain infomsg with rich html (unfinish jobs)
 - mod width to wrap percentage (from 100 to 25)
 - finishing reformat help messages (some messages still 'No information')
@@ -351,7 +1021,7 @@ fi
 - remove all '__m_message_pre' in add/update form and infomsg appear depend on variable in messagelib.php
 - remove commonmessagelib.php because useless
 - fix getRpmVersionViaYum
-- mod toggleVisibility to make possible display all infomsg in 1 page;
+- mod toggleVisibility to make possible display all infomsg in 1 page
 
 * Tue Nov 19 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013111901.mr
 - fix related to forcedeletedserver
@@ -387,7 +1057,8 @@ fi
 - fix set_login_skin_to_feather()
 - remove unwanted files
 - after running upcp always restart-all
-- fix/mod install process (no need 'yes' answer; auto restart-all) 
+- fix/mod install process (no need 'yes' answer
+- auto restart-all) 
 - 
 
 * Sat Nov 9 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013110902.mr
@@ -508,7 +1179,8 @@ fi
 - remove 'default' skin but add color to feather
 - move certain functions from lib.php to htmllib.php
 - change default color from 'b1c0f0' to 'EFE8E0'
-- restructure skin dirs; reduce background image with to 1600 px
+- restructure skin dirs
+- reduce background image with to 1600 px
 
 * Mon Oct 21 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013102103.mr
 - disable web and dns installed by default
@@ -521,7 +1193,8 @@ fi
 - fix js script for show/hide toggle
 
 * Mon Oct 21 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013102101.mr
-- 'simplicity' near final; adjustment for 'default' and 'feather' skin
+- 'simplicity' near final
+- adjustment for 'default' and 'feather' skin
 - convert some table-base to div-base html codes (not final work)
 - add base extjs script (importance for frame-based skin)
 
@@ -548,12 +1221,14 @@ fi
 - fix many bugs in interface
 
 * Sat Oct 12 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013101203.mr
-- rename all .phps to .php; move htmllib to panel dir
+- rename all .phps to .php
+- move htmllib to panel dir
 - integrate extjs, yui-dropdown and fckeditor without source, example and docs files
 - disable install kloxomr-addon 
 
 * Sat Oct 12 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013101201.mr
-- fix tmpfs detect logic; fix program appear in 'switch programs'
+- fix tmpfs detect logic
+- fix program appear in 'switch programs'
 - add cache grace in varnish
 - mod comment in hiawatha config
 - add squid driver
@@ -583,11 +1258,13 @@ fi
 
 * Thu Oct 2 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013100302.mr
 - back to add .db_schema which importance for panel display
-- all web server include 'generic' permalink; change user as 'ats' instead 'root' for trafficserver
+- all web server include 'generic' permalink
+- change user as 'ats' instead 'root' for trafficserver
 - enable 'debug' for trafficserver
 - no include php imagick for install
 - fix copy config for 'nsd' dns server
-- restart qmail with 'stop; sleep 2 start' instead 'restart'
+- restart qmail with 'stop
+- sleep 2 start' instead 'restart'
 - add missing file (db_schema)
 
 * Wed Oct 2 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013100204.mr
@@ -595,7 +1272,7 @@ fi
 - fix web cache for 'none'
 - fix 'userdir' logic in template of httpd 
 - fix dns and weh config
-- change ats to root for minimize permissions issue for trafficserver; 
+- change ats to root for minimize permissions issue for trafficserver
 - remove 'debug' file
 - fix 'default' web server in installing process
 - fix 'default' configs copy for webcache server
@@ -646,7 +1323,8 @@ fi
 - add for 'lost' replace_between function
 - change to better dnsnotify.pl and mod dnsnotify
 - mod dnsnotify.pl for detail info
-- add replace for maradns; add backend-bind for pdns
+- add replace for maradns
+- add backend-bind for pdns
 - add error log for php.ini.tpl
 - use faatcgi+php-fpm instead ruid2 as default httpd in install process
 
@@ -660,7 +1338,8 @@ fi
 - add 'notify=yes' in bind
 - mod to small dns config because using 'origin' based
 - fix action login in update dns config process
-- remove 'srv record' in djbdns; mod mararc for accept modified for xfr and zone list
+- remove 'srv record' in djbdns
+- mod mararc for accept modified for xfr and zone list
 - fix issue in dns switch (need stop server before unistall; found issue in maradns)
 - back to use read db instead call var for__var_mmaillist in web__lib.php
 - fix missing parameter in createListNlist
@@ -686,7 +1365,7 @@ fi
 - prepare for NSD dns server
 - convert all 'cname record' to 'a record' in dns server config
 - mod watchdog list
-- add 'nsd' in 'reserved', 'dns' and 'driver' list;
+- add 'nsd' in 'reserved', 'dns' and 'driver' list
 - set for 'nsd' dns server
 - fix latest nginx (cache dir)
 - still using '0.0.0.0' for 'nsd' notify/provide-xfr 
@@ -699,7 +1378,8 @@ fi
 
 * Tue Sep 17 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.1.a-2013091702.mr
 - fix detect primary ip for hostname
-- disable dnssec for powerdns because still not work; add 'create database' in pdns.sql
+- disable dnssec for powerdns because still not work
+- add 'create database' in pdns.sql
 - install pdns also install pdns-backend-mysql
 - fix calling from powerdns to pdns
 
@@ -724,7 +1404,8 @@ fi
 - fix link in langfunctionlib.php
 
 * Mon Sep 9 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013090904.mr
-- fix some display/theme; add testing for reset-mysql-root-password
+- fix some display/theme
+- add testing for reset-mysql-root-password
 - fix insert 'universal' hostname
 - install mariadb if exist instead mysql55
 - fix installer (because php52s must install after mysql55 and php53u)
@@ -749,7 +1430,8 @@ fi
 - add another var to sysctl.conf (for minimize buffers and cached memory)
 
 * Sat Sep 7 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013090704.mr
-- fix install process (especially in centos 5); fix qmail-toaster initial
+- fix install process (especially in centos 5)
+- fix qmail-toaster initial
 - fix/better update process
 - chkconfig off for php-fpm when install (because using ruid2 as 'default' php-type)
 
@@ -767,7 +1449,8 @@ fi
 - remove libmhash to checking
 - no need check old.program.pem
 - fix/better lxphp.exe checking when running upcp
-- add '-y' to force to 'reinstall'; fix setup.sh/installer.sh/upcp script for install process
+- add '-y' to force to 'reinstall'
+- fix setup.sh/installer.sh/upcp script for install process
 
 * Fri Sep 6 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013090603.mr
 - add parse_ini.inc (prepare for kloxo config in ini format)
@@ -799,7 +1482,8 @@ fi
 - convert cname to a record for djbdns (because cname work work)
 - fix error/warning for debug panel
 - fix htmllib
-- fix hiawatha service not execute after cleanup; fix old link to /script
+- fix hiawatha service not execute after cleanup
+- fix old link to /script
 - fix web drivers list
 - add hiawatha, maradns and powerdns in update services in cleanup
 
@@ -953,7 +1637,8 @@ fi
 * Thu Jun 20 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031823.mr
 - based on until 6.5.1.a-2013062301
 - restart kloxo if found 'server 7779' not connected
-- move maillog from /var/log/kloxo to /var/log; remove smtp.log and courier.log
+- move maillog from /var/log/kloxo to /var/log
+- remove smtp.log and courier.log
 - dual log (multilog and splogger) for qmail-toaster
 - remove unwanted files (espacially related to qmail-toaster)
 - bug fix for reset-mysql-root-password script
@@ -978,7 +1663,8 @@ fi
 - based on until 6.5.1.a-2013061101
 - install without asking 'master/slave' (always as 'master'; run make-slave for change to slave)
 - more info backup/restore
-- mod smtp-ssl_run for rblsmtpd/blacklist; remove double process for softlimit change
+- mod smtp-ssl_run for rblsmtpd/blacklist
+- remove double process for softlimit change
 - fix issue when install on openvz host
 - enable gateway when add ip
 - modified nginx config for dualstack ip (ipv4+ipv6)
@@ -1016,8 +1702,11 @@ fi
 - based on until 6.5.1.a-2013051804
 
 * Thu May 16 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031813.mr
-- fix sh permission to 755; fix www redirect; make simple awstats link
-- add mariadb in mysql branch; disable mariadb from centalt repo (conflict when install)
+- fix sh permission to 755
+- fix www redirect
+- make simple awstats link
+- add mariadb in mysql branch
+- disable mariadb from centalt repo (conflict when install)
 - based on 6.5.1.a-2013050502 and 6.5.1.a-2013051601
 
 * Sun May 5 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031812.mr
@@ -1025,7 +1714,8 @@ fi
 - based on 6.5.1.a-2013050501 and 6.5.1.a-2013050502
 
 * Fri Apr 26 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031811.mr
-- fix packer.sh (remove lang except en-us); use ionice for du
+- fix packer.sh (remove lang except en-us)
+- use ionice for du
 - based on 6.5.1.a-2013042601 and 6.5.1.a-2013042602
 
 * Sun Apr 21 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031810.mr
@@ -1038,7 +1728,8 @@ fi
 - fix install issue on openvz
 
 * Wed Mar 27 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031807.mr
-- fix traffic issue and installer.sh/installer.php; add some scripts
+- fix traffic issue and installer.sh/installer.php
+- add some scripts
 
 * Mon Mar 25 2013 Mustafa Ramadhan <mustafa@bigraf.com> - 6.5.0.f-2013031806.mr
 - no need cleanup on installer/setup also change mysqli to mysql on reset password
