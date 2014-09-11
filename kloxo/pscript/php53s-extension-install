@@ -31,7 +31,7 @@ for a in lib lib64 ; do
 	b="/tmp/php53s-module/usr/$a/php/modules"
 	if [ -d $b ] ; then
 		echo "- copy extension .so to /opt/php53s/lib"
-		cp -rf $b/* /opt/php53s/lib
+		'cp' -rf $b/* /opt/php53s/lib
 	fi
 done
 
@@ -39,14 +39,14 @@ for a in lib lib64 ; do
 	b="/tmp/php53s-module/usr/$a/php/zend"
 	if [ -d $b ] ; then
 		echo "- copy zend extension .so to /opt/php53s/zend"
-		cp -rf $b/* /opt/php53s/zend
+		'cp' -rf $b/* /opt/php53s/zend
 	fi
 done
 
 b="/tmp/php53s-module/etc/php.d"
 if [ -d $b ] ; then
 	echo "- copy extension .ini to /opt/php53s/etc/php.d"
-	cp -rf $b/* /opt/php53s/etc/php.d
+	'cp' -rf $b/* /opt/php53s/etc/php.d
 fi
 
-rm -rf /tmp/php53s-module/*
+'rm' -rf /tmp/php53s-module/*

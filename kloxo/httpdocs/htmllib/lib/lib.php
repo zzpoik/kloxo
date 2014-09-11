@@ -5361,7 +5361,7 @@ function setDefaultPages($nolog = null)
 	if (file_exists($sourcezip)) {
 		if (!checkIdenticalFile($sourcezip, $targetzip)) {
 			log_cleanup("- Copy  $sourcezip to $targetzip", $nolog);
-			exec("cp -rf $sourcezip $targetzip");
+			exec("'cp' -rf $sourcezip $targetzip");
 			$newer = true;
 		}
 	}
@@ -5410,7 +5410,7 @@ function setDefaultPages($nolog = null)
 	if (lxfile_exists($usersourcezip)) {
 		if (!checkIdenticalFile($usersourcezip, $usertargetzip)) {
 			log_cleanup("- Copy $usersourcezip to $usertargetzip", $nolog);
-			exec("cp -rf $usersourcezip $usertargetzip");
+			exec("'cp' -rf $usersourcezip $usertargetzip");
 		} else {
 			log_cleanup("- No new user-skeleton", $nolog);
 		}
@@ -5756,7 +5756,7 @@ function setInitialPhpFpmConfig($nolog = null)
 	$fpath = "/usr/local/lxlabs/kloxo/file";
 	$fpmpath = "/home/php-fpm/etc";
 
-	exec("cp -rf {$fpath}/php-fpm /home");
+	exec("'cp' -rf {$fpath}/php-fpm /home");
 
 	$sockpath = "/home/php-fpm/sock";
 
@@ -6171,7 +6171,7 @@ function setInitialBinary($nolog = null)
 	log_cleanup("Initialize Some Binary files", $nolog);
 
 	// MR -- because no need lxrestart (also lxsuexec) so remove if exist
-	exec("rm -rf /usr/sbin/lxrestart");
+	exec("'rm' -rf /usr/sbin/lxrestart");
 
 	if (!lxfile_exists("/usr/bin/php-cgi")) {
 		log_cleanup("- Install php-cgi binary", $nolog);
@@ -6540,7 +6540,7 @@ function installChooser($nolog = null)
 	lxfile_mkdir("/home/kloxo/httpd/webmail/img");
 
 	// MR -- make webmail redirect to 'universal'
-	exec("rm -f {$path}/redirect-to-*.php");
+	exec("'rm' -f {$path}/redirect-to-*.php");
 	$dirs = glob("{$path}/*");
 
 	foreach ($dirs as $dir) {
@@ -6702,7 +6702,7 @@ function fix_suexec($nolog = null)
 	log_cleanup("- Fix process", $nolog);
 
 	// MR -- because no need lxsuexec (also lxrestart) so remove if exist
-	exec("rm -rf /usr/bin/lxsuexec");
+	exec("'rm' -rf /usr/bin/lxsuexec");
 }
 
 function enable_xinetd($nolog = null)
@@ -7282,7 +7282,7 @@ function setCopyDnsConfFiles($dnsdriver)
 	log_cleanup("Copy all contents of $dnsdriver", $nolog);
 
 	log_cleanup("- Copy {$pathsrc} to {$pathdrv}", $nolog);
-	exec("cp -rf {$pathsrc} /home");
+	exec("'cp' -rf {$pathsrc} /home");
 
 	if ($aliasdriver === 'named') {
 		$t = getLinkCustomfile($pathdrv . "/etc/conf", "{$aliasdriver}.conf");
@@ -7311,7 +7311,7 @@ function setCopyWebConfFiles($webdriver)
 	log_cleanup("Copy all contents of $webdriver", $nolog);
 
 	log_cleanup("- Copy {$pathsrc} to {$pathdrv}", $nolog);
-	exec("cp -rf {$pathsrc} /home");
+	exec("'cp' -rf {$pathsrc} /home");
 
 	$dirs = array($pathconf, $pathconfd);
 

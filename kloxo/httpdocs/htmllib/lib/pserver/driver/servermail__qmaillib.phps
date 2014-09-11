@@ -69,8 +69,8 @@ function save_xinetd_qmail()
 		exec("echo '/usr/bin/rblsmtpd' > /var/qmail/control/rblsmtpd");
 		exec("echo '/usr/bin/spamdyke -f /etc/spamdyke.conf' > /var/qmail/control/spamdyke");
 	} else {
-		exec("rm -rf /var/qmail/control/rblsmtpd");
-		exec("rm -rf  /var/qmail/control/spamdyke");
+		exec("'rm' -rf /var/qmail/control/rblsmtpd");
+		exec("'rm' -rf  /var/qmail/control/spamdyke");
 	}
 		
 	if ($this->main->smtp_instance > 0) {

@@ -29,8 +29,8 @@ if [ "$(rpm -qa mratwork-release)" == "" ] ; then
     rpm -ivh mratwork-release-0.0.1-1.noarch.rpm
     yum update mratwork-release -y
 
-    mv -f /etc/yum.repos.d/lxcenter.repo /etc/yum.repos.d/lxcenter.nonrepo
-    mv -f /etc/yum.repos.d/kloxo-mr.repo /etc/yum.repos.d/kloxo-mr.nonrepo
+    'mv' -f /etc/yum.repos.d/lxcenter.repo /etc/yum.repos.d/lxcenter.nonrepo
+    'mv' -f /etc/yum.repos.d/kloxo-mr.repo /etc/yum.repos.d/kloxo-mr.nonrepo
 else
     yum update mratwork-release -y
 fi
@@ -150,7 +150,7 @@ fi
 	
 	yum -y install php53u php53u-mysql
 	## MR -- protect to lxphp.exe show missing .so. it's must /etc/php.ini exist extension_dir
-	cp -f ${ppath}/init/php.ini /etc/php.ini
+	'cp' -f ${ppath}/init/php.ini /etc/php.ini
 
 	## install after mysql55 and php53u because if mysql not exist will install 'old' mysql
 	yum -y install net-snmp php52s

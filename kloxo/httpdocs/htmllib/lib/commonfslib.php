@@ -389,7 +389,7 @@ function lxfile_cp($src, $dst)
 	}
 
 	log_filesys("Copying $src $dst");
-	system("cp $src $dst", $ret);
+	system("'cp' $src $dst", $ret);
 	return $ret == 0;
 }
 

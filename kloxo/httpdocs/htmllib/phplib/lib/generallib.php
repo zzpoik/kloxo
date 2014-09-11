@@ -261,7 +261,7 @@ class General extends Lxdb
 			if ($this->generalmisc_b->isOn('disableinstallapp')) {
 				system("echo 1 > /usr/local/lxlabs/kloxo/etc/flag/disableinstallapp.flg");
 			} else {
-				system("rm -rf /usr/local/lxlabs/kloxo/etc/flag/disableinstallapp.flg");
+				system("'rm' -rf /usr/local/lxlabs/kloxo/etc/flag/disableinstallapp.flg");
 			}
 		}
 	}

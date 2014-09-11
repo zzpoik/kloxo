@@ -453,7 +453,7 @@ function new_process_mv_rec($user, $src, $dst)
 {
 	$src = expand_real_root($src);
 	$dst = expand_real_root($dst);
-	new_process_cmd($user, null, "mv $src $dst");
+	new_process_cmd($user, null, "'mv' $src $dst");
 }
 
 function new_process_chmod_rec($user, $file, $perm)
@@ -467,7 +467,7 @@ function new_process_cp_rec($user, $src, $dst)
 {
 	$src = expand_real_root($src);
 	$dst = expand_real_root($dst);
-	$cmd = "cp -a '$src' '$dst'";
+	$cmd = "'cp' -a '$src' '$dst'";
 	new_process_cmd($user, null, $cmd);
 }
 

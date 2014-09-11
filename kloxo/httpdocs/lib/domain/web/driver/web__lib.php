@@ -386,7 +386,7 @@ class web__ extends lxDriverClass
 
 			// MR -- make simple, delete all .conf files first
 		//	lxshell_return("rm", "-rf", "/etc/php-fpm.d/*.conf");
-			exec("rm -rf /etc/php-fpm.d/*.conf");
+			exec("'rm' -rf /etc/php-fpm.d/*.conf");
 
 			// MR -- that mean 'ini' type config
 			$cfgmain = getLinkCustomfile("/home/php-fpm/etc", "php53-fpm.conf");

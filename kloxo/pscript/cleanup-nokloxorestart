@@ -26,9 +26,9 @@ fi
 if $(ls -al /usr/bin/lxphp.exe|grep /usr/local/lxlabs >/dev/null 2>&1) ; then
 	yum remove lxphp lxlighttpd lxzend >/dev/null 2>&1
 	
-	rm -rf /usr/local/lxlabs/ext >/dev/null 2>&1
+	'rm' -rf /usr/local/lxlabs/ext >/dev/null 2>&1
 	
-	rm -rf /usr/bin/lxphp.exe
+	'rm' -rf /usr/bin/lxphp.exe
 	
 	yum install php52s hiawatha -y >/dev/null 2>&1
 fi

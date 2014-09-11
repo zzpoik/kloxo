@@ -55,18 +55,18 @@ yum install zip unzip -y
 
 if [ ! -d ./kloxo/httpdocs ] ; then
 	echo "Download git from "${kloxo_path}
-	rm -rf ${kloxo_branch}* > /dev/null 2>&1
+	'rm' -rf ${kloxo_branch}* > /dev/null 2>&1
 	wget https://github.com/${kloxo_fork}/kloxo/archive/${kloxo_branch}.zip -O kloxo-mr-${kloxo_branch}.zip
 
 	unzip -oq kloxo-mr-${kloxo_branch}.zip > /dev/null 2>&1
-	rm -rf kloxo-mr-${kloxo_branch}.zip > /dev/null 2>&1
-	mv -f ./kloxo*-${kloxo_branch}/kloxo ./
-	rm -rf ./kloxo*-${kloxo_branch}
+	'rm' -rf kloxo-mr-${kloxo_branch}.zip > /dev/null 2>&1
+	'mv' -f ./kloxo*-${kloxo_branch}/kloxo ./
+	'rm' -rf ./kloxo*-${kloxo_branch}
 else
 	echo "No download and use local copy already exist"
 fi
 
-cp -rf ./kloxo/install/installer.sh ./
+'cp' -rf ./kloxo/install/installer.sh ./
 
 #cd ./kloxo/cexe
 #yum -y install which cpp gcc gcc-c++ glibc* openssl-devel automake autoconf libtool make
@@ -76,10 +76,10 @@ cp -rf ./kloxo/install/installer.sh ./
 
 ver=`cat ./kloxo/bin/kloxoversion`
 
-mv ./kloxo ./kloxomr-$ver
+'mv' ./kloxo ./kloxomr-$ver
 
 # delete dirs except en-us
-find ./kloxomr-$ver/httpdocs/lang/* -type d ! -name 'en-us' -exec rm -R {} \;
+find ./kloxomr-$ver/httpdocs/lang/* -type d ! -name 'en-us' -exec 'rm' -R {} \;
 
 ### 4. zipped process
 tar -czf kloxomr-$ver.tar.gz "./kloxomr-$ver/bin" "./kloxomr-$ver/cexe" "./kloxomr-$ver/file" \
@@ -110,9 +110,9 @@ tar -czf kloxomr-$ver.tar.gz "./kloxomr-$ver/bin" "./kloxomr-$ver/cexe" "./kloxo
 	--exclude "./kloxomr-$ver/install/kloxo-mr_install.log"
 
 
-rm -rf ./kloxomr-$ver > /dev/null 2>&1
-rm -rf ./kloxo-install > /dev/null 2>&1
-rm -rf ./install > /dev/null 2>&1
+'rm' -rf ./kloxomr-$ver > /dev/null 2>&1
+'rm' -rf ./kloxo-install > /dev/null 2>&1
+'rm' -rf ./install > /dev/null 2>&1
 
 echo
 echo "Now you can run 'sh ./installer.sh' for installing"

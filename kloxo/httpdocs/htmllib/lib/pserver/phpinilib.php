@@ -363,7 +363,7 @@ class phpini extends lxdb
 		//	exec("echo '' > /usr/local/lxlabs/kloxo/etc/flag/{$t}");
 		} else {
 			$this->phpini_flag_b->$var = 'off';
-		//	exec("rm -rf /usr/local/lxlabs/kloxo/etc/flag/{$t}");
+		//	exec("'rm' -rf /usr/local/lxlabs/kloxo/etc/flag/{$t}");
 		}
 	}
 }

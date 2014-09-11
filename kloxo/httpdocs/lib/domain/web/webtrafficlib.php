@@ -45,7 +45,7 @@ static function run_awstats($statsprog, $list)
 				continue;
 			}
 			log_log("run_stats", "Execing $statsprog");
-			//system("rm /home/httpd/$p->nname/webstats/*");
+			//system("'rm' /home/httpd/$p->nname/webstats/*");
 			if ($statsprog === 'webalizer') {
 				print("webalizer: $p->nname\n");
 
