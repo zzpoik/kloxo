@@ -5,19 +5,19 @@ baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/neutral/noarch
 enabled=1
 gpgcheck=0
 
-[mratwork-release-neutral-arch]
-name=MRatWork - release-neutral-arch
-baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/neutral/$basearch/
-#mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-release-neutral-$basearch-mirrors.txt
-enabled=1
-gpgcheck=0
+#[mratwork-release-neutral-arch]
+#name=MRatWork - release-neutral-arch
+#baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/neutral/$basearch/
+##mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-release-neutral-$basearch-mirrors.txt
+#enabled=0
+#gpgcheck=0
 
-[mratwork-release-version-noarch]
-name=MRatWork - release-version-noarch
-baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos$releasever/noarch/
-#mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-release-centos$releasever-noarch-mirrors.txt
-enabled=1
-gpgcheck=0
+#[mratwork-release-version-noarch]
+#name=MRatWork - release-version-noarch
+#baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/release/centos$releasever/noarch/
+##mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-release-centos$releasever-noarch-mirrors.txt
+#enabled=0
+#gpgcheck=0
 
 [mratwork-release-version-arch]
 name=MRatWork - release-version-arch
@@ -33,19 +33,19 @@ baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/neutral/noarch
 enabled=0
 gpgcheck=0
 
-[mratwork-testing-neutral-arch]
-name=MRatWork - testing-neutral-arch
-baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/neutral/$basearch/
-#mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-testing-neutral-$basearch-mirrors.txt
-enabled=0
-gpgcheck=0
+#[mratwork-testing-neutral-arch]
+#name=MRatWork - testing-neutral-arch
+#baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/neutral/$basearch/
+##mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-testing-neutral-$basearch-mirrors.txt
+#enabled=0
+#gpgcheck=0
 
-[mratwork-testing-version-noarch]
-name=MRatWork - testing-version-noarch
-baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/centos$releasever/noarch/
-#mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-testing-centos$releasever-noarch-mirrors.txt
-enabled=0
-gpgcheck=0
+#[mratwork-testing-version-noarch]
+#name=MRatWork - testing-version-noarch
+#baseurl=https://github.com/mustafaramadhan/kloxo/raw/rpms/testing/centos$releasever/noarch/
+##mirrorlist=http://rpms.mratwork.com/repo/mirrors/mratwork-testing-centos$releasever-noarch-mirrors.txt
+#enabled=0
+#gpgcheck=0
 
 [mratwork-testing-version-arch]
 name=MRatWork - testing-version-arch
@@ -67,36 +67,59 @@ gpgcheck=0
 name=MRatWork - centalt - arch
 baseurl=http://centos.alt.ru/repository/centos/$releasever/$basearch/
 #mirrorlist=http://rpms.mratwork.com/repo/mirrors/centalt-centos-$releasever-$basearch-mirrors.txt
-enabled=1
+enabled=0
 gpgcheck=0
-exclude=openssh* perl* mariadb*
+exclude=openssh* perl* mariadb* php* postfix* exim* ssmtp*
 
 # ==================================
 
-[mratwork-ius]
-name=MRatWork - IUS Community Packages for EL $releasever - arch
+[mratwork-ius-stable]
+name=MRatWork - IUS Community Packages for EL $releasever (stable) - arch
 baseurl=http://dl.iuscommunity.org/pub/ius/stable/Redhat/$releasever/$basearch
 mirrorlist=http://dmirr.iuscommunity.org/mirrorlist/?repo=ius-el$releasever&arch=$basearch
 enabled=1
 gpgcheck=0
-exclude=php52* mysql51*
+exclude=mysql51*
 
-[mratwork-ius-c5]
-name=MRatWork - IUS Community Packages for EL 5 (special) - arch
-baseurl=http://dl.iuscommunity.org/pub/ius/archive/CentOS/5/$basearch
-#mirrorlist=http://rpms.mratwork.com/repo/mirrors/ius-centos-5-$basearch-mirrors.txt
+[mratwork-ius-archive]
+name=MRatWork - IUS Community Packages for EL $releasever (archive) - arch
+baseurl=http://dl.iuscommunity.org/pub/ius/archive/Redhat/$releasever/$basearch
 enabled=1
 gpgcheck=0
-includepkgs=php52*
+exclude=mysql51*
+
+# ==================================
+
+[mratwork-remi]
+name=MRatWork - Les RPM de remi pour Enterprise Linux $releasever - arch
+baseurl=http://rpms.famillecollet.com/enterprise/$releasever/remi/$basearch/
+mirrorlist=http://rpms.famillecollet.com/enterprise/$releasever/remi/mirror
+enabled=0
+gpgcheck=0
+
+[mratwork-remi-php55]
+name=MRatWork - Les RPM de remi de PHP 5.5 pour Enterprise Linux $releasever - arch
+baseurl=http://rpms.famillecollet.com/enterprise/$releasever/php55/$basearch/
+mirrorlist=http://rpms.famillecollet.com/enterprise/$releasever/php55/mirror
+enabled=0
+gpgcheck=0
+
+[mratwork-remi-php56]
+name=MRatWork - Les RPM de remi de PHP 5.6 pour Enterprise Linux 6 - arch
+#baseurl=http://rpms.famillecollet.com/enterprise/$releasever/php56/$basearch/
+mirrorlist=http://rpms.famillecollet.com/enterprise/$releasever/php56/mirror
+enabled=0
+gpgcheck=0
 
 # ==================================
 
 [mratwork-epel]
 name=MRatWork - Extra Packages for EL $releasever - arch
 baseurl=http://download.fedoraproject.org/pub/epel/$releasever/$basearch
-mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel-$releasever&arch=$basearch
+mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-$releasever&arch=$basearch
 enabled=1
 gpgcheck=0
+exclude=postfix* exim* ssmtp* pdns*
 
 # ==================================
 
@@ -119,19 +142,32 @@ exclude=cairo*
 
 # ==================================
 
-# for nginx-stable
+# for nginx
 [mratwork-nginx]
-name=MRatWork - nginx repo
+name=Kloxo-MR - nginx repo
+baseurl=http://nginx.org/packages/mainline/centos/$releasever/$basearch/
+enabled=1
+gpgcheck=0
+
+# for nginx-stable
+[mratwork-nginx-stable]
+name=Kloxo-MR - nginx-stable repo
 baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
-enabled=0
+enabled=1
 gpgcheck=0
 
 # ==================================
 
 # for mariadb
-[mratwork-mariadb]
-name=MRatWork - mariadb repo
-baseurl=http://yum.mariadb.org/5.5/centos$releasever-x86
+[mratwork-mariadb-32]
+name=Kloxo-MR - mariadb 32bit repo
+baseurl=http://yum.mariadb.org/10.0/centos$releasever-x86
+enabled=0
+gpgcheck=0
+
+[mratwork-mariadb-64]
+name=Kloxo-MR - mariadb 64bit repo
+baseurl=http://yum.mariadb.org/10.0/centos$releasever-amd64
 enabled=0
 gpgcheck=0
 
@@ -139,25 +175,34 @@ gpgcheck=0
 
 # for atrpms
 [mratwork-atrpms]
-name=MRatWork - Fedora Core $releasever -  - ATrpms
+name=Kloxo-MR - Fedora Core $releasever -  - ATrpms
 baseurl=http://dl.atrpms.net/el$releasever-$basearch/atrpms/stable
-enabled=1
+enabled=0
 gpgcheck=0
 
 # ==================================
 
-# for openlitespeed
+# for litespeed
 [mratwork-litespeed]
 name=MRatWork - LiteSpeed Tech Repository for CentOS $releasever - $basearch
 baseurl=http://rpms.litespeedtech.com/centos/$releasever/$basearch/
-failovermethod=priority
+#failovermethod=priority
 enabled=1
 gpgcheck=0
 
 [mratwork-litespeed-update]
 name=MRatWork - LiteSpeed Tech Repository for CentOS $releasever - $basearch
 baseurl=http://rpms.litespeedtech.com/centos/$releasever/update/$basearch/
-failovermethod=priority
+#failovermethod=priority
+enabled=1
+gpgcheck=0
+
+# ==================================
+
+# for mod-pagespeed
+[mratwork-google-mod-pagespeed]
+name=MRatWork - google-mod-pagespeed
+baseurl=http://dl.google.com/linux/mod-pagespeed/rpm/stable/$basearch
 enabled=1
 gpgcheck=0
 
