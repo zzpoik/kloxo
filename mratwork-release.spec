@@ -233,6 +233,24 @@ baseurl=http://dl.google.com/linux/mod-pagespeed/rpm/stable/\$basearch
 enabled=1
 gpgcheck=0
 
+# ==================================
+
+# for mod_mono
+[mratwork-mod-mono]
+name=MRatWork - mod_mono
+baseurl=http://download.mono-project.com/repo/centos/
+enabled=1
+gpgcheck=0
+
+# ==================================
+
+# for CentOS kernel
+[mratwork-centos-kernel]
+name=MRatWork - CentOS kernel
+baseurl=http://elrepo.org/linux/kernel/el\$releasever/\$basearch
+enabled=0
+gpgcheck=0
+
 _EOF_
 
 %{__rm} -rf %{_sysconfdir}/yum.repos.d/kloxo.repo
