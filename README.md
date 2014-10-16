@@ -62,7 +62,7 @@ This fork named as Kloxo-MR (meaning 'Kloxo fork by Mustafa Ramadhan').
 - Version 6.5.1 change to 7.0.0 since 20 Aug 2014 (beta step)
 - Web: Hiawatha (since 28 Sep 2013) and Httpd 2.4
 - Web cache: Squid, Varnish and ATS (Apache Traffic Server) (since 3 Oct 2013)
-- DNS: Powerdns, MaraDNS and NSD (since 16 Sep 2013)
+- DNS: Powerdns, NSD, MyDNS and Yadifa (since 16 Sep 2013)
 - Mail: Dovecot
 - Php: multiple Php versions running together (php-fpm/spawning base)
 
