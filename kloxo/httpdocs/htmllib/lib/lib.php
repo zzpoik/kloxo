@@ -6062,6 +6062,10 @@ function setInitialPureftpConfig($nolog = null)
 	log_cleanup("Initialize PureFtp service", $nolog);
 	log_cleanup("- Initialize process", $nolog);
 
+	if (!isRpmInstalled("xinetd")) {
+		exec("yum install xinetd -y");
+	}
+
 	if (lxfile_exists("/etc/xinetd.d/pure-ftpd")) {
 		log_cleanup("- Remove /etc/xinetd.d/pure-ftpd service file", $nolog);
 		@lxfile_rm("/etc/xinetd.d/pure-ftpd");
@@ -7443,21 +7447,28 @@ function resetQmailAssign()
 
 	$n = array();
 
-	while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+	while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 		$n[$row['pw_domain']] = str_replace("/" . $row['pw_name'], '', $row['pw_dir']);
 	}
 
 	$con->close();
 
-	$t = '';
+	$ua = '';
+	$rh = '';
+	$vd = '';
 
-	log_cleanup("Reset Qmail Assign for domains");
+	log_cleanup("Reset Qmail Assign for domains (also rcpthosts and virtualdomains)", $nolog);
+
+	$cpath = "/var/qmail/control";
+	$upath = "/var/qmail/users";
+
+	exec("'rm' -f {$upath}/assign {$cpath}/rcpthosts {$cpath}/morercpthosts* {$cpath}/virtualdomains");
 
 	foreach ($n as $k => $v) {
-		log_cleanup("- assign for '{$k}'");
+		log_cleanup("- assign for '{$k}'", $nolog);
 
 		$o = fileowner($v);
-		$t .= "+{$k}-:{$k}:{$o}:{$o}:{$v}:-::\n";
+		$ua .= "+{$k}-:{$k}:{$o}:{$o}:{$v}:-::\n";
 
 		if (isRpmInstalled('qmail-toaster')) {
 			// MR -- also fix /home/lxadmin/mail/bin to /home/vpopmail/bin
@@ -7467,11 +7478,18 @@ function resetQmailAssign()
 		}
 
 		file_put_contents($d, $x);
+
+		log_cleanup("- virtualdomains for '{$k}'", $nolog);
+		$rh .= "{$k}\n";
+		log_cleanup("- virtualdomains for '{$k}'", $nolog);
+		$vd .= "{$k}:{$k}\n";
 	}
 
-	$t .= ".";
+	$ua .= ".";
 
-	exec("echo '{$t}' > /var/qmail/users/assign");
+	exec("echo '{$ua}' > {$upath}/assign");
+	exec("echo '{$rh}' > {$cpath}/rcpthosts");
+	exec("echo '{$vd}' > {$cpath}/virtualdomains");
 
 	exec("/var/qmail/bin/qmail-newu");
 }
