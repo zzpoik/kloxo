@@ -3,20 +3,20 @@
 <?php
 
 if ($setdefaults === 'webmail') {
-    if ($webmailappdefault) {
-        $docroot = "/home/kloxo/httpd/webmail/{$webmailappdefault}";
-    } else {
-        $docroot = "/home/kloxo/httpd/webmail";
-    }
+	if ($webmailappdefault) {
+		$docroot = "/home/kloxo/httpd/webmail/{$webmailappdefault}";
+	} else {
+		$docroot = "/home/kloxo/httpd/webmail";
+	}
 } else {
-    $docroot = "/home/kloxo/httpd/{$setdefaults}";
+	$docroot = "/home/kloxo/httpd/{$setdefaults}";
 }
 
 $ports[] = '80';
 $ports[] = '443';
 
 if ($indexorder) {
-    $indexorder = implode(' ', $indexorder);
+	$indexorder = implode(' ', $indexorder);
 }
 
 $indexorder = '"' . $indexorder . '"';
@@ -25,21 +25,21 @@ $indexorder = str_replace(' ', '", "', $indexorder);
 $globalspath = "/home/lighttpd/conf/globals";
 
 if (file_exists("{$globalspath}/custom.proxy.conf")) {
-    $proxyconf = 'custom.proxy.conf';
+	$proxyconf = 'custom.proxy.conf';
 } else {
-    $proxyconf = 'proxy.conf';
+	$proxyconf = 'proxy.conf';
 }
 
 if (file_exists("{$globalspath}/custom.php-fpm.conf")) {
-    $phpfpmconf = 'custom.php-fpm.conf';
+	$phpfpmconf = 'custom.php-fpm.conf';
 } else {
-    $phpfpmconf = 'php-fpm.conf';
+	$phpfpmconf = 'php-fpm.conf';
 }
 
 if (file_exists("{$globalspath}/custom.nobody.conf")) {
-    $nobodyconf = 'custom.nobody.conf';
+	$nobodyconf = 'custom.nobody.conf';
 } else {
-    $nobodyconf = 'nobody.conf';
+	$nobodyconf = 'nobody.conf';
 }
 
 // MR -- for future purpose, apache user have uid 50000
@@ -51,20 +51,26 @@ $fpmportapache = 50000;
 
 <?php
 if ($setdefaults === 'ssl') {
-    foreach ($certnamelist as $ip => $certname) {
+	foreach ($certnamelist as $ip => $certname) {
 ?>
 
 $SERVER["socket"] == "<?php echo $ip; ?>:<?php echo $ports[1]; ?>" {
 
-    ssl.engine = "enable"
+	ssl.engine = "enable"
 
-    ssl.pemfile = "/home/kloxo/httpd/ssl/<?php echo $certname; ?>.pem"
-    ssl.ca-file = "/home/kloxo/httpd/ssl/<?php echo $certname; ?>.ca"
-    ssl.use-sslv2 = "disable"
+	ssl.pemfile = "/home/kloxo/httpd/ssl/<?php echo $certname; ?>.pem"
+<?php
+	if (file_exists("/home/kloxo/httpd/ssl/{$certname}.ca")) {
+?>
+	ssl.ca-file = "/home/kloxo/httpd/ssl/<?php echo $certname; ?>.ca"
+<?php
+	}
+?>
+	ssl.use-sslv2 = "disable"
 
 }
 <?php
-    }
+	}
 } elseif ($setdefaults === 'init') {
 ?>
 
@@ -76,28 +82,28 @@ $SERVER["socket"] == "<?php echo $ip; ?>:<?php echo $ports[1]; ?>" {
 
 $HTTP["host"] =~ "^<?php echo $setdefaults; ?>\.*" { 
 
-    var.rootdir = "/home/kloxo/httpd/<?php echo $setdefaults; ?>/"
+	var.rootdir = "/home/kloxo/httpd/<?php echo $setdefaults; ?>/"
 
-    server.document-root = var.rootdir
+	server.document-root = var.rootdir
 
-    index-file.names = ( <?php echo $indexorder; ?> )
+	index-file.names = ( <?php echo $indexorder; ?> )
 <?php
-    if ($reverseproxy) {
+	if ($reverseproxy) {
 ?>
 
-    include "<?php echo $globalspath; ?>/<?php echo $proxyconf; ?>"
+	include "<?php echo $globalspath; ?>/<?php echo $proxyconf; ?>"
 <?php
-    } else {
+	} else {
 ?>
 
-    var.user = "apache"
-    var.fpmport = "<?php echo $fpmportapache; ?>"
+	var.user = "apache"
+	var.fpmport = "<?php echo $fpmportapache; ?>"
 
-    include "<?php echo $globalspath; ?>/<?php echo $phpfpmconf; ?>"
+	include "<?php echo $globalspath; ?>/<?php echo $phpfpmconf; ?>"
 
-#    include "<?php echo $globalspath; ?>/<?php echo $nobodyconf; ?>"
+#	include "<?php echo $globalspath; ?>/<?php echo $nobodyconf; ?>"
 <?php
-    }
+	}
 ?>
 
 }

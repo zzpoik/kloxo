@@ -8,17 +8,17 @@ $ports[] = '443';
 $iplist = array('*');
 
 if ($setdefaults === 'webmail') {
-    if ($webmailappdefault) {
-        $rootpath = "/home/kloxo/httpd/webmail/{$webmailappdeffault}";
-    } else {
-        $rootpath = "/home/kloxo/httpd/webmail";
-    }
+	if ($webmailappdefault) {
+		$rootpath = "/home/kloxo/httpd/webmail/{$webmailappdeffault}";
+	} else {
+		$rootpath = "/home/kloxo/httpd/webmail";
+	}
 } else {
-    $rootpath = "/home/kloxo/httpd/{$setdefaults}";
+	$rootpath = "/home/kloxo/httpd/{$setdefaults}";
 }
 
 if ($indexorder) {
-    $indexorder = implode(' ', $indexorder);
+	$indexorder = implode(' ', $indexorder);
 }
 
 $disablepath = "/home/kloxo/httpd/disable";
@@ -26,21 +26,21 @@ $disablepath = "/home/kloxo/httpd/disable";
 $globalspath = "/home/nginx/conf/globals";
 
 if (file_exists("{$globalspath}/custom.proxy.conf")) {
-    $proxyconf = 'custom.proxy.conf';
+	$proxyconf = 'custom.proxy.conf';
 } else {
-    $proxyconf = 'proxy.conf';
+	$proxyconf = 'proxy.conf';
 }
 
 if (file_exists("{$globalspath}/custom.php-fpm.conf")) {
-    $phpfpmconf = 'custom.php-fpm.conf';
+	$phpfpmconf = 'custom.php-fpm.conf';
 } else {
-    $phpfpmconf = 'php-fpm.conf';
+	$phpfpmconf = 'php-fpm.conf';
 }
 
 if (file_exists("{$globalspath}/custom.perl.conf")) {
-    $perlconf = 'custom.perl.conf';
+	$perlconf = 'custom.perl.conf';
 } else {
-    $perlconf = 'perl.conf';
+	$perlconf = 'perl.conf';
 }
 
 // MR -- for future purpose, apache user have uid 50000
@@ -71,100 +71,107 @@ if ($setdefaults === 'ssl') {
 
 <?php
 } else {
-    foreach ($certnamelist as $ip => $certname) {
-        $count = 0;
+	foreach ($certnamelist as $ip => $certname) {
+		$count = 0;
 
-        foreach ($ports as &$port) {
+		foreach ($ports as &$port) {
 ?>
 
 ## '<?php echo $setdefaults; ?>' config
 server {
 <?php
 
-            if ($setdefaults === 'default') {
-                $asdefault = ' default';
-            } else {
-                $asdefault = '';
-            }
+			if ($setdefaults === 'default') {
+				$asdefault = ' default';
+			} else {
+				$asdefault = '';
+			}
 
-            if ($ip === '*') {
-                if ($IPv6Enable) {
+			if ($ip === '*') {
+				if ($IPv6Enable) {
 ?>
-    listen 0.0.0.0:<?php echo $port; ?><?php echo $asdefault; ?>;
-    listen [::]:<?php echo $port; ?><?php echo $asdefault; ?>;
+	listen 0.0.0.0:<?php echo $port; ?><?php echo $asdefault; ?>;
+	listen [::]:<?php echo $port; ?><?php echo $asdefault; ?>;
 <?php
-                } else {
+				} else {
 ?>
-    listen <?php echo $ip; ?>:<?php echo $port; ?><?php echo $asdefault; ?>;
+	listen <?php echo $ip; ?>:<?php echo $port; ?><?php echo $asdefault; ?>;
 <?php
-                }
-            } else {
+				}
+			} else {
 ?>
-    listen <?php echo $ip; ?>:<?php echo $port; ?><?php echo $asdefault; ?>;
+	listen <?php echo $ip; ?>:<?php echo $port; ?><?php echo $asdefault; ?>;
 <?php
-            }
+			}
 
-            if ($count !== 0) {
-?>
-
-    ssl on;
-    ssl_certificate /home/kloxo/httpd/ssl/<?php echo $certname; ?>.crt;
-    ssl_certificate_key /home/kloxo/httpd/ssl/<?php echo $certname; ?>.key;
-    ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
-    ssl_ciphers HIGH:!aNULL:!MD5;
-<?php
-            }
-
-
-            if ($setdefaults === 'default') {
+			if ($count !== 0) {
 ?>
 
-    server_name _;
-
-    set $domain '';
-
-    index <?php echo $indexorder; ?>;
+	ssl on;
+	ssl_certificate /home/kloxo/httpd/ssl/<?php echo $certname; ?>.crt;
+	ssl_certificate_key /home/kloxo/httpd/ssl/<?php echo $certname; ?>.key;
 <?php
-            } else {
+				if (file_exists("/home/kloxo/httpd/ssl/{$certname}.ca")) {
+?>
+	ssl_trusted_certificate /home/kloxo/httpd/ssl/<?php echo $certname; ?>.ca;
+<?php
+				}
+?>
+	ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+	ssl_ciphers HIGH:!aNULL:!MD5;
+<?php
+			}
+
+
+			if ($setdefaults === 'default') {
 ?>
 
-    server_name <?php echo $setdefaults; ?>.*;
+	server_name _;
 
-    index <?php echo $indexorder; ?>;
+	set $domain '';
 
-    set $rootdir '<?php echo $rootpath; ?>';
-
-    root $rootdir;
-
-    set $domain '';
-
-    set $user 'apache';
+	index <?php echo $indexorder; ?>;
 <?php
-            }
-
-            if ($reverseproxy) {
+			} else {
 ?>
 
-    include '<?php echo $globalspath; ?>/<?php echo $proxyconf; ?>';
+	server_name <?php echo $setdefaults; ?>.*;
+
+	index <?php echo $indexorder; ?>;
+
+	set $rootdir '<?php echo $rootpath; ?>';
+
+	root $rootdir;
+
+	set $domain '';
+
+	set $user 'apache';
 <?php
-            } else {
+			}
+
+			if ($reverseproxy) {
 ?>
 
-    include '<?php echo $globalspath; ?>/<?php echo $perlconf; ?>';
+	include '<?php echo $globalspath; ?>/<?php echo $proxyconf; ?>';
+<?php
+			} else {
+?>
 
-    set $fpmport '<?php echo $fpmportapache; ?>';
+	include '<?php echo $globalspath; ?>/<?php echo $perlconf; ?>';
 
-    include '<?php echo $globalspath; ?>/<?php echo $phpfpmconf; ?>';
+	set $fpmport '<?php echo $fpmportapache; ?>';
+
+	include '<?php echo $globalspath; ?>/<?php echo $phpfpmconf; ?>';
 <?php
 
-            }
-            $count++;
+			}
+			$count++;
 ?>
 }
 
 <?php
-        }
-    }
+		}
+	}
 }
 ?>
 

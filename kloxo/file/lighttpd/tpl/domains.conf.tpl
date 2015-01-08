@@ -540,6 +540,13 @@ $SERVER["socket"] == ":<?php echo $port; ?>" {
 	ssl.engine = "enable"
 
 	ssl.pemfile = "<?php echo $certname; ?>.pem"
+<?php
+					if (file_exists("{$certname}.ca")) {
+?>
+	ssl.ca-file = "<?php echo $certname; ?>.ca"
+<?php
+					}
+?>
 
 	ssl.use-sslv2 = "disable"
 <?php
@@ -608,7 +615,7 @@ $SERVER["socket"] == ":<?php echo $port; ?>" {
 ?>
 
 	accesslog.filename = "/home/httpd/<?php echo $domainname; ?>/stats/<?php echo $domainname; ?>-custom_log"
-	server.errorlog    = "/home/httpd/<?php echo $domainname; ?>/stats/<?php echo $domainname; ?>-error_log"
+	server.errorlog = "/home/httpd/<?php echo $domainname; ?>/stats/<?php echo $domainname; ?>-error_log"
 <?php
 			if ($statsapp === 'awstats') {
 ?>
