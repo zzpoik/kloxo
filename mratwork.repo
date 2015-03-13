@@ -118,9 +118,9 @@ gpgcheck=0
 name=MRatWork - Webtatic for CentOS $releasever - $basearch
 baseurl=http://repo.webtatic.com/yum/el$releasever/$basearch
 mirrorlist=https://mirror.webtatic.com/yum/el$releasever/$basearch/mirrorlist
-enabled=1
+enabled=0
 gpgcheck=0
-exclude=mysql* libmysqlclient*
+exclude=mysql*
 
 
 # ==================================
