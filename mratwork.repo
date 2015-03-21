@@ -174,13 +174,13 @@ gpgcheck=0
 [mratwork-mariadb-32]
 name=Kloxo-MR - mariadb 32bit repo
 baseurl=http://yum.mariadb.org/10.0/centos$releasever-x86
-enabled=0
+enabled=1
 gpgcheck=0
 
 [mratwork-mariadb-64]
 name=Kloxo-MR - mariadb 64bit repo
 baseurl=http://yum.mariadb.org/10.0/centos$releasever-amd64
-enabled=0
+enabled=1
 gpgcheck=0
 
 # ==================================
@@ -234,5 +234,20 @@ gpgcheck=0
 name=MRatWork - CentOS kernel
 baseurl=http://elrepo.org/linux/kernel/el$releasever/$basearch
 enabled=0
+gpgcheck=0
+
+# ==================================
+
+# for RSysLog
+[mratwork-rsyslog-v8-devel]
+name=MRatWork - Adiscon Rsyslog v8-devel for CentOS-$releasever-$basearch
+baseurl=http://rpms.adiscon.com/v8-devel/epel-$releasever/$basearch
+enabled=0
+gpgcheck=0
+
+[mratwork-rsyslog-v8-stable]
+name=MRatWork - Adiscon Rsyslog v8-stable for CentOS-$releasever-$basearch
+baseurl=http://rpms.adiscon.com/v8-stable/epel-$releasever/$basearch
+enabled=1
 gpgcheck=0
 
