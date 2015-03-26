@@ -90,29 +90,6 @@ exclude=mysql51*
 
 # ==================================
 
-[mratwork-remi]
-name=MRatWork - Les RPM de remi pour Enterprise Linux $releasever - arch
-baseurl=http://rpms.famillecollet.com/enterprise/$releasever/remi/$basearch/
-mirrorlist=http://rpms.famillecollet.com/enterprise/$releasever/remi/mirror
-enabled=0
-gpgcheck=0
-
-[mratwork-remi-php55]
-name=MRatWork - Les RPM de remi de PHP 5.5 pour Enterprise Linux $releasever - arch
-baseurl=http://rpms.famillecollet.com/enterprise/$releasever/php55/$basearch/
-mirrorlist=http://rpms.famillecollet.com/enterprise/$releasever/php55/mirror
-enabled=0
-gpgcheck=0
-
-[mratwork-remi-php56]
-name=MRatWork - Les RPM de remi de PHP 5.6 pour Enterprise Linux 6 - arch
-#baseurl=http://rpms.famillecollet.com/enterprise/$releasever/php56/$basearch/
-mirrorlist=http://rpms.famillecollet.com/enterprise/$releasever/php56/mirror
-enabled=0
-gpgcheck=0
-
-# ==================================
-
 # for Webtatic
 [mratwork-webtatic]
 name=MRatWork - Webtatic for CentOS $releasever - $basearch
@@ -122,6 +99,31 @@ enabled=0
 gpgcheck=0
 exclude=mysql*
 
+# ==================================
+
+[mratwork-remi]
+name=MRatWork - Les RPM de remi pour Enterprise Linux $releasever - arch
+baseurl=http://rpms.famillecollet.com/enterprise/$releasever/remi/$basearch/
+mirrorlist=http://rpms.famillecollet.com/enterprise/$releasever/remi/mirror
+enabled=0
+gpgcheck=0
+includepkgs=php-ffmpeg
+
+[mratwork-remi-php55]
+name=MRatWork - Les RPM de remi de PHP 5.5 pour Enterprise Linux $releasever - arch
+baseurl=http://rpms.famillecollet.com/enterprise/$releasever/php55/$basearch/
+mirrorlist=http://rpms.famillecollet.com/enterprise/$releasever/php55/mirror
+enabled=0
+gpgcheck=0
+includepkgs=php-ffmpeg
+
+[mratwork-remi-php56]
+name=MRatWork - Les RPM de remi de PHP 5.6 pour Enterprise Linux 6 - arch
+#baseurl=http://rpms.famillecollet.com/enterprise/$releasever/php56/$basearch/
+mirrorlist=http://rpms.famillecollet.com/enterprise/$releasever/php56/mirror
+enabled=0
+gpgcheck=0
+includepkgs=php-ffmpeg
 
 # ==================================
 
@@ -189,7 +191,7 @@ gpgcheck=0
 [mratwork-atrpms]
 name=Kloxo-MR - Fedora Core $releasever -  - ATrpms
 baseurl=http://dl.atrpms.net/el$releasever-$basearch/atrpms/stable
-enabled=0
+enabled=1
 gpgcheck=0
 
 # ==================================
