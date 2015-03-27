@@ -1,5 +1,7 @@
 #!/bin/sh
 
+rm -rf rpms-*-repodataonly.zip
+
 rpm --quiet -q createrepo
 
 if [ $? != 0 ] ; then
