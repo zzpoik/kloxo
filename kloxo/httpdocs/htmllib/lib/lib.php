@@ -4878,44 +4878,66 @@ function lxguard_clear($list)
 
 }
 
-function lxguard_main($clearflag = false)
+function lxguard_main($clearflag = false, $since = false)
 {
 	include_once "htmllib/lib/lxguardincludelib.php";
 
 	lxfile_mkdir("__path_home_root/lxguard");
 	$lxgpath = "__path_home_root/lxguard";
 
-	$file = "/var/log/secure";
-
-	if (!file_exists($file)) { return; }
-
-	$fp = fopen($file, "r");
-	$fsize = filesize($file);
 	$newtime = time();
-	$oldtime = time() - 60 * 10;
+
+	if ($since !== false) {
+		$oldtime = time() - intval($since);
+	} else {
+		if (file_exists("$lxgpath/hitlist.info")) {
+			// MR -- since 10 minutes
+			$oldtime = time() - (60 * 10);
+		} else {
+			// MR -- 3 months
+			$oldtime = time() - (60 * 60 * 24 * 30 * 3);
+		}
+	}
+
 	$rmt = lfile_get_unserialize("$lxgpath/hitlist.info");
 
 	if ($rmt) {
 		$oldtime = max((int)$oldtime, (int)$rmt->ddate);
 	}
 
-	$ret = FindRightPosition($fp, $fsize, $oldtime, $newtime, "getTimeFromSysLogString");
-
 	$list = lfile_get_unserialize("$lxgpath/access.info");
 
-	if ($ret) {
-		parse_sshd_and_ftpd($fp, $list);
-		lfile_put_serialize("$lxgpath/access.info", $list);
+	$type = array('sshd' => '/var/log/secure', 'pure-ftpd' => '/var/log/messages');
+
+	foreach ($type as $key => $file) {
+		if (file_exists($file)) {
+			$fp = fopen($file, "r");
+			$fsize = filesize($file);
+
+			$ret = FindRightPosition($fp, $fsize, $oldtime, $newtime, "getTimeFromSysLogString");
+
+			if ($ret) {
+				if ($key === 'sshd') {
+					parse_ssh_log($fp, $list);
+				} elseif ($key === 'pure-ftpd') {
+					parse_ftp_log($fp, $list);
+				}
+
+				lfile_put_serialize("$lxgpath/access.info", $list);
+			}
+		}
 	}
 
 	get_total($list, $total);
 
 //	dprintr($list['192.168.1.11']);
 
-	dprint_r("Debug: Total: " . $total . "\n");
+	dprint_r("Debug: Total: " . count($total) . "\n");
+
 	$deny = get_deny_list($total);
 	$hdn = lfile_get_unserialize("$lxgpath/hostdeny.info");
 	$deny = lx_array_merge(array($deny, $hdn));
+
 	$string = null;
 
 	foreach ($deny as $k => $v) {
@@ -4925,6 +4947,8 @@ function lxguard_main($clearflag = false)
 
 		$string .= "ALL : $k\n";
 	}
+
+//	if (!$string) { return; }
 
 	dprint("Debug: \$string is:\n" . $string . "\n");
 

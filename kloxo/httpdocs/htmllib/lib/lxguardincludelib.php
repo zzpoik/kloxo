@@ -57,24 +57,55 @@ function count_fail($v)
 function parse_sshd_and_ftpd($fp, &$list)
 {
 	$count = 0;
+
 	while(!feof($fp)) {
 		$count++;
-		if ($count > 10000) { break; }
-		$string = fgets($fp);
-		sshLogString($string, $list);
-		ftpLogString($string, $list);
-	}
 
+	//	if ($count > 10000) { break; }
+
+		$string = fgets($fp);
+
+		if (strpos($string, 'sshd') !== false) {
+			sshLogString($string, $list);
+		} elseif (strpos($string, 'pure-ftpd') !== false) {
+			ftpLogString($string, $list);
+		}
+	}
 }
 
+function parse_ssh_log($fp, &$list)
+{
+	$count = 0;
+	$string = '';
+
+	while(!feof($fp)) {
+		$count++;
+
+	//	if ($count > 10000) { break; }
+
+		$string = fgets($fp);
+
+		if (strpos($string, 'sshd') !== false) {
+			sshLogString($string, $list);
+		}
+	}
+}
 
 function parse_ftp_log($fp, &$list)
 {
 	$count = 0;
+	$string = '';
+
 	while(!feof($fp)) {
 		$count++;
-		if ($count > 10000) { break; }
+
+	//	if ($count > 10000) { break; }
+
 		$string = fgets($fp);
+
+		if (strpos($string, 'pure-ftpd') !== false) {
+			ftpLogString($string, $list);
+		}
 	}
 }
 
@@ -83,46 +114,64 @@ function sshLogString($string, &$list)
 	//'refuse' => "refused connection",
 	$str = array('success' => "Accepted password",  'fail' => "Failed password");
 	$match = false;
+
 	foreach($str as $k => $v) {
-		if (!csa($string, "sshd")) { continue; }
-		if (csa($string, $v)) {
+		if (strpos($string, $v) !== false) {
 			$match = true;
 			$access = $k;
+
 			break;
 		}
 	}
+
 	if (!$match) { return; }
+
 	$time = getTimeFromSysLogString($string);
 
+	if ($access === 'fail') {
+		preg_match("/.*Failed password for( invalid user)? (.*) from ([^ ]*).*/", $string, $match);
 
-	preg_match("/.*Failed password for( invalid user)? (.*) from ([^ ]*).*/", $string, $match);
-	if (!$match) { return; }
-	$ip = $match[3];
+		$ip = $match[3];
+		$user = $match[2];
+	} else {
+		preg_match("/.*Accepted password for (.*) from ([^ ]*).*/", $string, $match);
+
+		$ip = $match[2];
+		$user = $match[1];
+	}
+
 	if (csb($ip, "::ffff:")) {
 		$ip = strfrom($ip, "::ffff:");
 	}
-	$user = $match[2];
+
+	if (!$match) { return; }
+
+	if (csb($ip, "::ffff:")) {
+		$ip = strfrom($ip, "::ffff:");
+	}
+
 	if (csb($ip, "127")) { return; }
 
 	$list[$ip][$time] = array('service' => 'ssh', 'user' => $user, 'access' => $access);
-
 }
 
 function ftpLogString($string, &$list)
 {
 	$str = array('fail' => "Authentication failed",  'success' => "is now logged in");
 	$match = false;
+
 	foreach($str as $k => $v) {
-		if (!csa($string, "pure-ftpd")) { continue; }
-		if (csa($string, $v)) {
+		if (strpos($string, $v) !== false) {
 			$match = true;
 			$access = $k;
+
 			break;
 		}
 	}
-	if (!$match) { return; }
-	$time = getTimeFromSysLogString($string);
 
+	if (!$match) { return; }
+
+	$time = getTimeFromSysLogString($string);
 
 	if ($access === 'fail') {
 		preg_match("/.*\(?@([^\)]*)\) \[WARNING\] Authentication failed for user \[([^\]]*)\].*/", $string, $match);
@@ -131,10 +180,12 @@ function ftpLogString($string, &$list)
 	}
 
 	if (!$match) { return; }
+
 	$ip = $match[1];
 	$user = $match[2];
 
 	if (csb($ip, "127")) { return; }
+
 	$list[$ip][$time] = array('service' => 'ftp', 'user' => $user, 'access' => $access);
 }
 
