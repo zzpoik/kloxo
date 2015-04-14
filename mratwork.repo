@@ -255,3 +255,12 @@ baseurl=http://rpms.adiscon.com/v8-stable/epel-$releasever/$basearch
 enabled=1
 gpgcheck=0
 
+# ==================================
+
+# for zfs
+[mratwork - zfs]
+name=MRatWork - ZFS on Linux for EL $releasever
+baseurl=http://archive.zfsonlinux.org/epel/$releasever/$basearch/
+enabled=0
+gpgcheck=0
+
