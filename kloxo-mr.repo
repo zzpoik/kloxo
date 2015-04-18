@@ -88,7 +88,6 @@ enabled=1
 gpgcheck=0
 exclude=mysql51*
 
-
 # ==================================
 
 # for Webtatic
@@ -122,7 +121,7 @@ includepkgs=php-ffmpeg php-ioncube-loader
 name=MRatWork - Les RPM de remi de PHP 5.6 pour Enterprise Linux $releasever - arch
 #baseurl=http://rpms.famillecollet.com/enterprise/$releasever/php56/$basearch/
 mirrorlist=http://rpms.famillecollet.com/enterprise/$releasever/php56/mirror
-enabled=1
+enabled=0
 gpgcheck=0
 includepkgs=php-ffmpeg php-ioncube-loader
 
@@ -176,13 +175,13 @@ gpgcheck=0
 # for mariadb
 [mratwork-mariadb-32]
 name=Kloxo-MR - mariadb 32bit repo
-baseurl=http://yum.mariadb.org/10.0/centos$releasever-x86
+baseurl=http://yum.mariadb.org/10.0/centos$releasever-x8$releasever
 enabled=1
 gpgcheck=0
 
-[mratwork-mariadb-64]
-name=Kloxo-MR - mariadb 64bit repo
-baseurl=http://yum.mariadb.org/10.0/centos$releasever-amd64
+[mratwork-mariadb-$releasever4]
+name=Kloxo-MR - mariadb $releasever4bit repo
+baseurl=http://yum.mariadb.org/10.0/centos$releasever-amd$releasever4
 enabled=1
 gpgcheck=0
 
@@ -194,6 +193,7 @@ name=Kloxo-MR - Fedora Core $releasever -  - ATrpms
 baseurl=http://dl.atrpms.net/el$releasever-$basearch/atrpms/stable
 enabled=1
 gpgcheck=0
+exclude=clam*
 
 # ==================================
 
@@ -235,8 +235,8 @@ gpgcheck=0
 # for CentOS kernel
 [mratwork-centos-kernel]
 name=MRatWork - CentOS kernel
-baseurl=http://elrepo.org/linux/kernel/el$releasever/$basearch/
-enabled=1
+baseurl=http://elrepo.org/linux/kernel/el$releasever/$basearch
+enabled=0
 gpgcheck=0
 
 # ==================================
@@ -251,6 +251,15 @@ gpgcheck=0
 [mratwork-rsyslog-v8-stable]
 name=MRatWork - Adiscon Rsyslog v8-stable for CentOS-$releasever-$basearch
 baseurl=http://rpms.adiscon.com/v8-stable/epel-$releasever/$basearch
-enabled=1
+enabled=0
+gpgcheck=0
+
+# ==================================
+
+# for vserver
+[mratwork-dhozac-vserver]
+name=MRatWork - Linux-VServer related packages for CentOS $releasever - $basearch
+baseurl=http://rpm.hozac.com/dhozac/rhel/$releasever/vserver/$basearch
+enabled=0
 gpgcheck=0
 
