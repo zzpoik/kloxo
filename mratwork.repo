@@ -84,7 +84,7 @@ exclude=mysql51*
 [mratwork-ius-archive]
 name=MRatWork - IUS Community Packages for EL $releasever (archive) - arch
 baseurl=http://dl.iuscommunity.org/pub/ius/archive/Redhat/$releasever/$basearch
-enabled=1
+enabled=0
 gpgcheck=0
 exclude=mysql51*
 
@@ -137,6 +137,26 @@ exclude=postfix* exim* ssmtp* pdns*
 
 # ==================================
 
+# for atrpms
+[mratwork-atrpms]
+name=Kloxo-MR - Fedora Core $releasever -  - ATrpms
+baseurl=http://dl.atrpms.net/el$releasever-$basearch/atrpms/stable
+enabled=0
+gpgcheck=0
+exclude=clam*
+
+# ==================================
+
+# for rpmfusion
+[mratwork-rpmfusion-free-updates]
+name=MRatWork - RPM Fusion for EL $releasever - Free - Updates
+baseurl=http://download1.rpmfusion.org/free/el/updates/$releasever/$basearch/
+mirrorlist=http://mirrors.rpmfusion.org/mirrorlist?repo=free-el-updates-released-$releasever&arch=$basearch
+enabled=1
+gpgcheck=0
+
+# ==================================
+
 # for varnish
 [mratwork-varnish-3.0]
 name=MRatWork - Varnish 3.0 for EL $releasever - arch
@@ -175,25 +195,15 @@ gpgcheck=0
 # for mariadb
 [mratwork-mariadb-32]
 name=Kloxo-MR - mariadb 32bit repo
-baseurl=http://yum.mariadb.org/10.0/centos$releasever-x8$releasever
+baseurl=http://yum.mariadb.org/10.0/centos$releasever-x86
 enabled=1
 gpgcheck=0
 
-[mratwork-mariadb-$releasever4]
-name=Kloxo-MR - mariadb $releasever4bit repo
-baseurl=http://yum.mariadb.org/10.0/centos$releasever-amd$releasever4
+[mratwork-mariadb-64]
+name=Kloxo-MR - mariadb 64bit repo
+baseurl=http://yum.mariadb.org/10.0/centos$releasever-amd64
 enabled=1
 gpgcheck=0
-
-# ==================================
-
-# for atrpms
-[mratwork-atrpms]
-name=Kloxo-MR - Fedora Core $releasever -  - ATrpms
-baseurl=http://dl.atrpms.net/el$releasever-$basearch/atrpms/stable
-enabled=1
-gpgcheck=0
-exclude=clam*
 
 # ==================================
 
@@ -218,7 +228,7 @@ gpgcheck=0
 [mratwork-google-mod-pagespeed]
 name=MRatWork - google-mod-pagespeed
 baseurl=http://dl.google.com/linux/mod-pagespeed/rpm/stable/$basearch
-enabled=0
+enabled=1
 gpgcheck=0
 
 # ==================================
@@ -251,15 +261,7 @@ gpgcheck=0
 [mratwork-rsyslog-v8-stable]
 name=MRatWork - Adiscon Rsyslog v8-stable for CentOS-$releasever-$basearch
 baseurl=http://rpms.adiscon.com/v8-stable/epel-$releasever/$basearch
-enabled=0
+enabled=1
 gpgcheck=0
 
-# ==================================
-
-# for vserver
-[mratwork-dhozac-vserver]
-name=MRatWork - Linux-VServer related packages for CentOS $releasever - $basearch
-baseurl=http://rpm.hozac.com/dhozac/rhel/$releasever/vserver/$basearch
-enabled=0
-gpgcheck=0
 
