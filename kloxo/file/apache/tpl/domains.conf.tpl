@@ -2,6 +2,8 @@
 
 <?php
 
+$hkhpath = "/home/kloxo/httpd";
+
 if ($reverseproxy) {
 	$ports[] = '30080';
 	$ports[] = '30443';
@@ -46,7 +48,7 @@ if ($parkdomains) {
 }
 
 if ($webmailapp === $webmailappdefault) {
-	$webmaildocroot = "/home/kloxo/httpd/webmail/{$webmailapp}";
+	$webmaildocroot = "{$hkhpath}/webmail/{$webmailapp}";
 
 	if ($wildcards) {
 		$webmailapp = "*";
@@ -56,12 +58,12 @@ if ($webmailapp === $webmailappdefault) {
 } else {
 	if ($webmailapp) {
 		if ($webmailapp === '--Disabled--') {
-			$webmaildocroot = "/home/kloxo/httpd/disable";
+			$webmaildocroot = "{$hkhpath}/disable";
 		} else {
-			$webmaildocroot = "/home/kloxo/httpd/webmail/{$webmailapp}";
+			$webmaildocroot = "{$hkhpath}/webmail/{$webmailapp}";
 		}
 	} else {
-		$webmaildocroot = "/home/kloxo/httpd/webmail";
+		$webmaildocroot = "{$hkhpath}/webmail";
 	}
 }
 
@@ -98,7 +100,7 @@ if ($userinfo) {
 // $fpmportapache = (50000 + $userinfoapache['uid']);
 $fpmportapache = 50000;
 
-$disablepath = "/home/kloxo/httpd/disable";
+$disablepath = "{$hkhpath}/disable";
 
 if (!$reverseproxy) {
 	foreach ($certnamelist as $ip => $certname) {
@@ -142,12 +144,12 @@ foreach ($certnamelist as $ip => $certname) {
 
 	<IfModule mod_ssl.c>
 		SSLEngine On
-		SSLCertificateFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.crt
-		SSLCertificateKeyFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.key
+		SSLCertificateFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.crt
+		SSLCertificateKeyFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.key
 <?php
-				if (file_exists("/home/kloxo/httpd/ssl/{$certname}.ca")) {
+				if (file_exists("<?php echo $hkhpath; ?>/ssl/{$certname}.ca")) {
 ?>
-		SSLCACertificatefile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.ca
+		SSLCACertificateFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.ca
 <?php
 				}
 ?>
@@ -235,12 +237,12 @@ foreach ($certnamelist as $ip => $certname) {
 
 	<IfModule mod_ssl.c>
 		SSLEngine On
-		SSLCertificateFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.crt
-		SSLCertificateKeyFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.key
+		SSLCertificateFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.crt
+		SSLCertificateKeyFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.key
 <?php
-					if (file_exists("/home/kloxo/httpd/ssl/{$certname}.ca")) {
+					if (file_exists("{$hkhpath}/ssl/{$certname}.ca")) {
 ?>
-		SSLCACertificatefile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.ca
+		SSLCACertificatefile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.ca
 <?php
 					}
 ?>
@@ -273,12 +275,12 @@ foreach ($certnamelist as $ip => $certname) {
 
 	<IfModule mod_ssl.c>
 		SSLEngine On
-		SSLCertificateFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.crt
-		SSLCertificateKeyFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.key
+		SSLCertificateFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.crt
+		SSLCertificateKeyFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.key
 <?php
-					if (file_exists("/home/kloxo/httpd/ssl/{$certname}.ca")) {
+					if (file_exists("{$hkhpath}/ssl/{$certname}.ca")) {
 ?>
-		SSLCACertificatefile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.ca
+		SSLCACertificatefile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.ca
 <?php
 					}
 ?>
@@ -375,12 +377,12 @@ foreach ($certnamelist as $ip => $certname) {
 
 	<IfModule mod_ssl.c>
 		SSLEngine On
-		SSLCertificateFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.crt
-		SSLCertificateKeyFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.key
+		SSLCertificateFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.crt
+		SSLCertificateKeyFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.key
 <?php
-			if (file_exists("/home/kloxo/httpd/ssl/{$certname}.ca")) {
+			if (file_exists("{$hkhpath}/ssl/{$certname}.ca")) {
 ?>
-		SSLCACertificatefile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.ca
+		SSLCACertificatefile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.ca
 <?php
 			}
 ?>
@@ -528,7 +530,7 @@ foreach ($certnamelist as $ip => $certname) {
 
 	<Location />
 		<IfModule mod_php5.c>
-			php_admin_value open_basedir "/home/<?php echo $user; ?>:/tmp:/usr/share/pear:/var/lib/php/session/:/home/kloxo/httpd/script:/home/kloxo/httpd/disable/:<?php echo $extrabasedir; ?>"
+			php_admin_value open_basedir "/home/<?php echo $user; ?>:/tmp:/usr/share/pear:/var/lib/php/session/:<?php echo $hkhpath; ?>/script:<?php echo $hkhpath; ?>/disable/:<?php echo $extrabasedir; ?>"
 		</IfModule>
 	</Location>
 <?php
@@ -541,10 +543,10 @@ foreach ($certnamelist as $ip => $certname) {
 			if ($statsapp === 'awstats') {
 ?>
 
-	ScriptAlias /awstats/ "/home/kloxo/httpd/awstats/wwwroot/cgi-bin/"
+	ScriptAlias /awstats/ "<?php echo $hkhpath; ?>/awstats/wwwroot/cgi-bin/"
 
-	Alias /awstatscss "/home/kloxo/httpd/awstats/wwwroot/css/"
-	Alias /awstatsicons "/home/kloxo/httpd/awstats/wwwroot/icon/"
+	Alias /awstatscss "<?php echo $hkhpath; ?>/awstats/wwwroot/css/"
+	Alias /awstatsicons "<?php echo $hkhpath; ?>/awstats/wwwroot/icon/"
 
 #	Redirect /stats "<?php echo $protocol; ?><?php echo $domainname; ?>/awstats/awstats.pl?config=<?php echo $domainname; ?>"
 #	Redirect /stats/ "<?php echo $protocol; ?><?php echo $domainname; ?>/awstats/awstats.pl?config=<?php echo $domainname; ?>"
@@ -677,12 +679,12 @@ foreach ($certnamelist as $ip => $certname) {
 
 	<IfModule mod_ssl.c>
 		SSLEngine On
-		SSLCertificateFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.crt
-		SSLCertificateKeyFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.key
+		SSLCertificateFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.crt
+		SSLCertificateKeyFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.key
 <?php
-						if (file_exists("/home/kloxo/httpd/ssl/{$certname}.ca")) {
+						if (file_exists("{$hkhpath}/ssl/{$certname}.ca")) {
 ?>
-		SSLCACertificatefile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.ca
+		SSLCACertificatefile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.ca
 <?php
 						}
 ?>
@@ -787,12 +789,12 @@ foreach ($certnamelist as $ip => $certname) {
 
 	<IfModule mod_ssl.c>
 		SSLEngine On
-		SSLCertificateFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.crt
-		SSLCertificateKeyFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.key
+		SSLCertificateFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.crt
+		SSLCertificateKeyFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.key
 <?php
-						if (file_exists("/home/kloxo/httpd/ssl/{$certname}.ca")) {
+						if (file_exists("{$hkhpath}/ssl/{$certname}.ca")) {
 ?>
-		SSLCACertificatefile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.ca
+		SSLCACertificatefile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.ca
 <?php
 						}
 ?>
@@ -834,12 +836,12 @@ foreach ($certnamelist as $ip => $certname) {
 
 	<IfModule mod_ssl.c>
 		SSLEngine On
-		SSLCertificateFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.crt
-		SSLCertificateKeyFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.key
+		SSLCertificateFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.crt
+		SSLCertificateKeyFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.key
 <?php
-						if (file_exists("/home/kloxo/httpd/ssl/{$certname}.ca")) {
+						if (file_exists("{$hkhpath}/ssl/{$certname}.ca")) {
 ?>
-		SSLCACertificatefile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.ca
+		SSLCACertificatefile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.ca
 <?php
 						}
 ?>
@@ -926,12 +928,12 @@ foreach ($certnamelist as $ip => $certname) {
 
 	<IfModule mod_ssl.c>
 		SSLEngine On
-		SSLCertificateFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.crt
-		SSLCertificateKeyFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.key
+		SSLCertificateFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.crt
+		SSLCertificateKeyFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.key
 <?php
-							if (file_exists("/home/kloxo/httpd/ssl/{$certname}.ca")) {
+							if (file_exists("{$hkhpath}/ssl/{$certname}.ca")) {
 ?>
-		SSLCACertificatefile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.ca
+		SSLCACertificatefile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.ca
 <?php
 							}
 ?>
@@ -965,12 +967,12 @@ foreach ($certnamelist as $ip => $certname) {
 
 	<IfModule mod_ssl.c>
 		SSLEngine On
-		SSLCertificateFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.crt
-		SSLCertificateKeyFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.key
+		SSLCertificateFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.crt
+		SSLCertificateKeyFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.key
 <?php
-								if (file_exists("/home/kloxo/httpd/ssl/{$certname}.ca")) {
+								if (file_exists("{$hkhpath}/ssl/{$certname}.ca")) {
 ?>
-		SSLCACertificatefile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.ca
+		SSLCACertificatefile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.ca
 <?php
 								}
 ?>
@@ -1082,12 +1084,12 @@ foreach ($certnamelist as $ip => $certname) {
 
 	<IfModule mod_ssl.c>
 		SSLEngine On
-		SSLCertificateFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.crt
-		SSLCertificateKeyFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.key
+		SSLCertificateFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.crt
+		SSLCertificateKeyFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.key
  <?php
-						if (file_exists("/home/kloxo/httpd/ssl/{$certname}.ca")) {
+						if (file_exists("{$hkhpath}/ssl/{$certname}.ca")) {
 ?>
-		SSLCACertificatefile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.ca
+		SSLCACertificatefile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.ca
 <?php
 						}
 ?>
@@ -1174,12 +1176,12 @@ foreach ($certnamelist as $ip => $certname) {
 
 	<IfModule mod_ssl.c>
 		SSLEngine On
-		SSLCertificateFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.crt
-		SSLCertificateKeyFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.key
+		SSLCertificateFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.crt
+		SSLCertificateKeyFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.key
 <?php
-							if (file_exists("/home/kloxo/httpd/ssl/{$certname}.ca")) {
+							if (file_exists("{$hkhpath}/ssl/{$certname}.ca")) {
 ?>
-		SSLCACertificatefile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.ca
+		SSLCACertificatefile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.ca
 <?php
 							}
 ?>
@@ -1213,12 +1215,12 @@ foreach ($certnamelist as $ip => $certname) {
 
 	<IfModule mod_ssl.c>
 		SSLEngine On
-		SSLCertificateFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.crt
-		SSLCertificateKeyFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.key
+		SSLCertificateFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.crt
+		SSLCertificateKeyFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.key
 <?php
-								if (file_exists("/home/kloxo/httpd/ssl/{$certname}.ca")) {
+								if (file_exists("{$hkhpath}/ssl/{$certname}.ca")) {
 ?>
-		SSLCACertificatefile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.ca
+		SSLCACertificatefile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.ca
 <?php
 								}
 ?>

@@ -826,7 +826,7 @@ function getPhpBranch()
 // MR -- taken from lib.php
 function getApacheBranch()
 {
-	$a = array('httpd', 'httpd24');
+	$a = array('httpd', 'httpd24', 'httpd24u');
 
 	foreach ($a as &$e) {
 		if (isRpmInstalled($e)) {

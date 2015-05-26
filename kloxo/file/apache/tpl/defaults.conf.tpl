@@ -1,6 +1,23 @@
 ### begin - web of '<?php echo $setdefaults; ?>.*' - do not remove/modify this line
 
 <?php
+
+$hkhpath = "/home/kloxo/httpd";
+
+$trgtconfdpath = "/etc/httpd/conf.d";
+
+// MR -- mod_ruid2 from epel use mod_ruid2.conf
+foreach (glob("{$trgtconfdpath}/mod_*.conf") as $file)
+{
+	$newfile = str_replace('.conf', '.nonconf', $file);
+	
+	if (file_exists($newfile)) {
+		unlink($newfile);
+	}
+	
+	rename($file, $newfile);
+}
+
 if ($reverseproxy) {
 	$ports[] = '30080';
 	$ports[] = '30443';
@@ -11,12 +28,12 @@ if ($reverseproxy) {
 
 if ($setdefaults === 'webmail') {
 	if ($webmailappdefault) {
-		$docroot = "/home/kloxo/httpd/webmail/{$webmailappdefault}";
+		$docroot = "{$hkhpath}/webmail/{$webmailappdefault}";
 	} else {
-		$docroot = "/home/kloxo/httpd/webmail";
+		$docroot = "{$hkhpath}/webmail";
 	}
 } else {
-	$docroot = "/home/kloxo/httpd/{$setdefaults}";
+	$docroot = "{$hkhpath}/{$setdefaults}";
 }
 
 if ($indexorder) {
@@ -38,12 +55,12 @@ if ($setdefaults === 'ssl') {
 <Virtualhost <?php echo $ip; ?>:<?php echo $ports[1]; ?>>
 
 	SSLEngine On
-	SSLCertificateFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.crt
-	SSLCertificateKeyFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.key
+	SSLCertificateFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.crt
+	SSLCertificateKeyFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.key
 <?php
-		if (file_exists("/home/kloxo/httpd/ssl/{$certname}.ca")) {
+		if (file_exists("{$hkhpath}/ssl/{$certname}.ca")) {
 ?>
-	SSLCACertificatefile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.ca
+	SSLCACertificatefile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.ca
 <?php
 		}
 ?>
@@ -104,12 +121,12 @@ Listen <?php echo $ip; ?>:<?php echo $ports[1]; ?>
 
 	<IfModule mod_ssl.c>
 		SSLEngine On
-		SSLCertificateFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.crt
-		SSLCertificateKeyFile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.key
+		SSLCertificateFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.crt
+		SSLCertificateKeyFile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.key
 <?php
-					if (file_exists("/home/kloxo/httpd/ssl/{$certname}.ca")) {
+					if (file_exists("{$hkhpath}/ssl/{$certname}.ca")) {
 ?>
-	SSLCACertificatefile /home/kloxo/httpd/ssl/<?php echo $certname; ?>.ca
+	SSLCACertificatefile <?php echo $hkhpath; ?>/ssl/<?php echo $certname; ?>.ca
 <?php
 					}
 ?>

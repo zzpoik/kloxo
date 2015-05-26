@@ -897,7 +897,13 @@ function PrepareAfterlogicDb($nolog = null)
 
 	lxfile_cp("{$afterlogicpath}/data/settings/afterlogic_settings.xml", "{$afterlogicpath}/data/settings/settings.xml");
 
-	$cfgfile = "{$afterlogicpath}/data/settings/settings.xml";
+	if (file_exists("{$path}/data/settings/afterlogic_settings.xml.php")) {
+		lxfile_cp("{$path}/data/settings/afterlogic_settings.xml.php", "{$path}/data/settings/settings.xml.php");
+		$cfgfile = "{$path}/data/settings/settings.xml.php";
+	} else {
+		lxfile_cp("{$path}/data/settings/afterlogic_settings.xml", "{$path}/data/settings/settings.xml");
+		$cfgfile = "{$path}/data/settings/settings.xml";
+	}
 
 	log_cleanup("- Generating password", $nolog);
 	$pass = randomString(8);

@@ -83,6 +83,8 @@ VirtualHost {
 	AccessLogfile = /usr/local/lxlabs/kloxo/log/hiawatha-access.log
 	ErrorLogfile = /usr/local/lxlabs/kloxo/log/hiawatha-error.log
 
+	## MR -- disable this UseFastCGI with # in front and create blank '/usr/local/lxlabs/kloxo/init/kloxo_use_php-cgi' file
+	## if want use php-cgi without spawn-fcgi (less memory usage)
 	UseFastCGI = PHP5
 
 	TimeForCGI = 3600
