@@ -156,9 +156,9 @@ exclude=cairo*
 
 # ==================================
 
-# for nginx
-[mratwork-nginx]
-name=Kloxo-MR - nginx repo
+# for nginx-mainline
+[mratwork-nginx-mainline]
+name=Kloxo-MR - nginx-mainline repo
 baseurl=http://nginx.org/packages/mainline/centos/$releasever/$basearch/
 enabled=1
 gpgcheck=0
@@ -167,6 +167,13 @@ gpgcheck=0
 [mratwork-nginx-stable]
 name=Kloxo-MR - nginx-stable repo
 baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+enabled=1
+gpgcheck=0
+
+# for nginx-old
+[mratwork-nginx-old]
+name=Kloxo-MR - nginx-old repo
+baseurl=http://nginx.org/packages/old/centos/$releasever/$basearch/
 enabled=1
 gpgcheck=0
 
