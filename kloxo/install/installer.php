@@ -210,12 +210,13 @@ function installcomp_mail()
 	global $lxlabspath, $kloxopath, $currentstamp, $kloxostate;
 	global $installtype, $installfrom, $installstep;
 	global $currentpath, $dbroot, $dbpass, $mypass, $osversion;
-
+/*
 	system('pear channel-update "pear.php.net"'); // to remove old channel warning
 	system("pear upgrade --force pear"); // force is needed
 	system("pear upgrade --force Archive_Tar"); // force is needed
 	system("pear upgrade --force structures_graph"); // force is needed
 	system("pear install log");
+*/
 }
 
 function install_main()
@@ -269,7 +270,7 @@ function install_main()
 		flush();
 
 		if (array_search($c, $serverlist) !== false) {
-			print("Installing $c Components....");
+			print("Installing $c Components....\n");
 			$req = $installcomp[$c];
 			$func = "installcomp_$c";
 
@@ -380,28 +381,12 @@ function kloxo_install_step1()
 			"libtool", "openssl-devel", "xinetd", "pure-ftpd", "yum-protectbase", "yum-plugin-replace", "crontabs",
 			"make", "glibc-static", "net-snmp", "tmpwatch", "rkhunter", "quota",
 			"{$phpbranch}", "{$phpbranch}-mbstring", "{$phpbranch}-mysql", "{$phpbranch}-pear",
-			"{$phpbranch}-pecl-geoip", "{$phpbranch}-pecl-imagick",
+			"{$phpbranch}-pecl-geoip",
 			"{$phpbranch}-mcrypt", "{$phpbranch}-xml", "hiawatha", "php52s"
 		);
 
 		$list = implode(" ", $packages);
 
-	/*
-		while (true) {
-			print("Installing generic packages $list...\n");
-			system("yum -y install $list", $return_value);
-
-			if (file_exists("/opt/php52s/bin/php")) {
-				break;
-			} else {
-				print("YUM Gave Error... Trying Again...\n");
-				if (get_yes_no("Try again?") == 'n') {
-					print("- EXIT: Fix the problem and install Kloxo-MR again.\n");
-					exit;
-				}
-			}
-		}
-	*/
 		system("yum -y install $list");
 
 		$php52modinst = "/usr/local/lxlabs/kloxo/pscript/php52s-extension-install";

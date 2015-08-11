@@ -53,7 +53,9 @@ echo
 echo "- When it's finished, you will be presented with a welcome message and"
 echo "  further instructions."
 echo
-read -n 1 -p "Press any key to continue ..."
+if [ "${1}" != "-y" ] ; then
+	read -n 1 -p "Press any key to continue ..."
+fi
 echo
 
 APP_NAME='Kloxo-MR'
@@ -121,7 +123,7 @@ fi
 
 yum clean all
 
-yum -y install wget zip unzip yum-utils yum-priorities vim-minimal subversion curl
+yum -y install wget zip unzip yum-utils yum-priorities vim-minimal subversion curl which hiawatha
 
 yum remove bind* mysql* mariadb* MariaDB* php* httpd* mod_* *-toaster postfix exim -y
 rpm -e vpopmail-toaster --noscripts
