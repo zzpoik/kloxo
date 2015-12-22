@@ -102,7 +102,7 @@ exclude=mysql51*
 name=MRatWork - Webtatic for CentOS $releasever - $basearch
 baseurl=http://repo.webtatic.com/yum/el$releasever/$basearch
 mirrorlist=https://mirror.webtatic.com/yum/el$releasever/$basearch/mirrorlist
-enabled=0
+enabled=1
 gpgcheck=0
 exclude=mysql*
 
@@ -128,6 +128,14 @@ includepkgs=php-ffmpeg php-ioncube-loader
 name=MRatWork - Les RPM de remi de PHP 5.6 pour Enterprise Linux $releasever - arch
 #baseurl=http://rpms.famillecollet.com/enterprise/$releasever/php56/$basearch/
 mirrorlist=http://rpms.famillecollet.com/enterprise/$releasever/php56/mirror
+enabled=0
+gpgcheck=0
+includepkgs=php-ffmpeg php-ioncube-loader
+
+[mratwork-remi-php70]
+name=MRatWork - Les RPM de remi de PHP 7.0 pour Enterprise Linux $releasever - arch
+#baseurl=http://rpms.famillecollet.com/enterprise/$releasever/php70/$basearch/
+mirrorlist=http://rpms.famillecollet.com/enterprise/$releasever/php70/mirror
 enabled=0
 gpgcheck=0
 includepkgs=php-ffmpeg php-ioncube-loader
