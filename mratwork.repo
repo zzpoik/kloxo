@@ -304,3 +304,12 @@ name=MRatWork - ZFS on Linux for EL $releasever
 baseurl=http://archive.zfsonlinux.org/epel/$releasever/$basearch/
 enabled=1
 gpgcheck=0
+
+# ==================================
+
+[mratwork-gleez]
+name=MRatWork - Gleez repo for CentOS-$releasever-$basearch
+baseurl=https://yum.gleez.com/$releasever/$basearch/
+enabled=0
+gpgcheck=0
+includepkgs=hhvm*
