@@ -313,3 +313,12 @@ baseurl=https://yum.gleez.com/$releasever/$basearch/
 enabled=0
 gpgcheck=0
 includepkgs=hhvm*
+
+# ==================================
+
+[mratwork-ulyaoth]
+name=MRatWork - Ulyaoth Repository
+baseurl=https://repos.ulyaoth.net/CentOS/$releasever/$basearch/os/
+enabled=0
+gpgcheck=0
+
