@@ -12,12 +12,9 @@ CURRPATH=$(cd $(dirname $0); pwd)
 
 cd $CURRPATH
 
-for type in release testing
-do
-	for ver in centos5 centos6 neutral
-	do
-		for item in i386 x86_64 noarch
-		do
+for type in release testing ; do
+	for ver in centos5 centos6 centos7 neutral ; do
+		for item in i386 x86_64 noarch ; do
 			mkdir -p $CURRPATH/repo/mratwork/$type/$ver/$item
 		done
 	done
@@ -33,12 +30,9 @@ find $CURRPATH/repo/mratwork/ -type d -name "repodata" -exec rm -rf {} \; >/dev/
 echo "*** Process for SRPMS..."
 createrepo $CURRPATH/repo/mratwork/SRPMS
 
-for type in release testing
-do
-	for ver in centos5 centos6 neutral
-	do
-		for item in i386 x86_64 noarch
-		do
+for type in release testing ; do
+	for ver in centos5 centos6 centos7 neutral ; do
+		for item in i386 x86_64 noarch ; do
 			echo "*** Process for '$type-$ver-$item'..."
 			createrepo $CURRPATH/repo/mratwork/$type/$ver/$item
 		done
