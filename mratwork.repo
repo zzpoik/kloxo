@@ -322,3 +322,16 @@ baseurl=https://repos.ulyaoth.net/CentOS/$releasever/$basearch/os/
 enabled=0
 gpgcheck=0
 
+[mratwork-cloudlinux]
+name=MRatWork - CloudLinux Repository
+baseurl=http://repo.cloudlinux.com/cloudlinux/$releasever/updates-testing/$basearch/
+enabled=0
+gpgcheck=0
+
+# ==================================
+[mratwork-gf]
+name=MRatWork - Ghettoforge packages that won't overwrite core distro packages.
+baseurl=http://mirror.symnds.com/distributions/gf/el/$releasever/gf/$basearch/
+enabled=0
+gpgcheck=0
+
