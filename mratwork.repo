@@ -84,14 +84,14 @@ exclude=mysql51*
 [mratwork-ius-archive]
 name=MRatWork - IUS Community Packages for EL $releasever (archive) - arch
 baseurl=http://dl.iuscommunity.org/pub/ius/archive/Redhat/$releasever/$basearch
-enabled=0
+enabled=1
 gpgcheck=0
 exclude=mysql51*
 
 [mratwork-ius-testing]
 name=MRatWork - IUS Community Packages for EL $releasever (stable) - arch
 baseurl=http://dl.iuscommunity.org/pub/ius/testing/Redhat/$releasever/$basearch
-enabled=0
+enabled=1
 gpgcheck=0
 exclude=mysql51*
 
