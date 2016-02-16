@@ -603,7 +603,7 @@ foreach ($certnamelist as $ip => $certname) {
 <?php
 		}
 
-		if (!$enablephp) {
+		if ($disablephp) {
 ?>
 	AddType application/x-httpd-php-source .php
 <?php
