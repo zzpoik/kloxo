@@ -84,14 +84,14 @@ exclude=mysql51*
 [mratwork-ius-archive]
 name=MRatWork - IUS Community Packages for EL $releasever (archive) - arch
 baseurl=http://dl.iuscommunity.org/pub/ius/archive/Redhat/$releasever/$basearch
-enabled=0
+enabled=1
 gpgcheck=0
 exclude=mysql51*
 
 [mratwork-ius-testing]
 name=MRatWork - IUS Community Packages for EL $releasever (stable) - arch
 baseurl=http://dl.iuscommunity.org/pub/ius/testing/Redhat/$releasever/$basearch
-enabled=0
+enabled=1
 gpgcheck=0
 exclude=mysql51*
 
@@ -104,7 +104,7 @@ baseurl=http://repo.webtatic.com/yum/el$releasever/$basearch
 mirrorlist=https://mirror.webtatic.com/yum/el$releasever/$basearch/mirrorlist
 enabled=1
 gpgcheck=0
-exclude=mysql*
+exclude=mysql* nginx*
 
 # ==================================
 
@@ -319,6 +319,19 @@ includepkgs=hhvm*
 [mratwork-ulyaoth]
 name=MRatWork - Ulyaoth Repository
 baseurl=https://repos.ulyaoth.net/CentOS/$releasever/$basearch/os/
+enabled=0
+gpgcheck=0
+
+[mratwork-cloudlinux]
+name=MRatWork - CloudLinux Repository
+baseurl=http://repo.cloudlinux.com/cloudlinux/$releasever/updates-testing/$basearch/
+enabled=0
+gpgcheck=0
+
+# ==================================
+[mratwork-gf]
+name=MRatWork - Ghettoforge packages that won't overwrite core distro packages.
+baseurl=http://mirror.symnds.com/distributions/gf/el/$releasever/gf/$basearch/
 enabled=0
 gpgcheck=0
 
