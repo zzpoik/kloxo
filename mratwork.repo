@@ -335,7 +335,7 @@ baseurl=http://mirror.symnds.com/distributions/gf/el/$releasever/gf/$basearch/
 enabled=0
 gpgcheck=0
 
-====================================
+# ==================================
 
 [mratwork-rpmforge]
 name=MRatWork - RHEL $releasever - RPMforge.net - dag
