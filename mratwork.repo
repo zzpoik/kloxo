@@ -335,3 +335,18 @@ baseurl=http://mirror.symnds.com/distributions/gf/el/$releasever/gf/$basearch/
 enabled=0
 gpgcheck=0
 
+====================================
+
+[mratwork-rpmforge]
+name=MRatWork - RHEL $releasever - RPMforge.net - dag
+baseurl=http://apt.sw.be/redhat/el6/en/$basearch/rpmforge
+mirrorlist=http://apt.sw.be/redhat/el6/en/mirrors-rpmforge
+enabled=0
+gpgcheck=0
+
+[mratwork-rpmforge-extras]
+name=MRatWork - RHEL $releasever - RPMforge.net - extras
+baseurl=http://apt.sw.be/redhat/el6/en/$basearch/extras
+mirrorlist=http://apt.sw.be/redhat/el6/en/mirrors-rpmforge-extras
+enabled=0
+gpgcheck=0
